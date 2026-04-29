@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Order Payment Confirm Batch</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { background: #0b63ce; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Order Payment Confirm Batch</h1>
+      <p><a href="./index.html">Về module Order</a> | <a href="./PartnerOrder_PaymentConfirmBatch.md">Mở bản MD</a></p>
+      <button id="copyCurlBtn">Copy cURL Happy Case</button>
+      <button id="downloadMdBtn">Tải file MD</button>
+    </div>
+
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL</th><td>/PartnerAPI/Order/paymentConfirmBatch</td></tr>
+        <tr><th>Method</th><td>POST</td></tr>
+        <tr><th>Auth</th><td>clientId/clientid + apiKey/apikey</td></tr>
+        <tr><th>Batch size</th><td>1..100</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th></tr>
+        <tr><td>items</td><td>array</td><td>Yes</td><td>min 1, max 100</td></tr>
+        <tr><td>items[].requestId</td><td>string</td><td>Yes</td><td>bắt buộc</td></tr>
+        <tr><td>items[].orderId</td><td>string</td><td>Yes</td><td>bắt buộc</td></tr>
+        <tr><td>items[].amount</td><td>integer</td><td>Yes</td><td>>= 1</td></tr>
+        <tr><td>items[].paymentStatus</td><td>string</td><td>Yes</td><td>bắt buộc</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>cURL Happy case</h2>
+      <pre id="curlText">curl --location '{HOST_NAME}/PartnerAPI/Order/paymentConfirmBatch' \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: TESTCLIENT' \
+  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --data '{
+    "items": [
+      {
+        "requestId": "TEST_REQ_CONFIRM_PAYMENT_001",
+        "orderId": "TEST_ORDER_PARTNER_PENDING_001",
+        "amount": 91000,
+        "paymentStatus": "SUCCESS"
+      }
+    ]
+  }'</pre>
+    </div>
+
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": [
+    {
+      "index": 0,
+      "orderId": "TEST_ORDER_PARTNER_PENDING_001",
+      "requestId": "TEST_REQ_CONFIRM_PAYMENT_001"
+    }
+  ]
+}</pre>
+    </div>
+
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li>clientId: TESTCLIENT</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+        <li>requestId: TEST_REQ_CONFIRM_PAYMENT_001</li>
+        <li>orderId hợp lệ: TEST_ORDER_PARTNER_PENDING_001</li>
+        <li>amount hợp lệ: 91000</li>
+      </ul>
+      <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+    </div>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyCurlBtn');
+    const downloadBtn = document.getElementById('downloadMdBtn');
+    const curlText = document.getElementById('curlText').textContent;
+
+    copyBtn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(curlText);
+      copyBtn.textContent = 'Đã copy';
+      setTimeout(() => (copyBtn.textContent = 'Copy cURL Happy Case'), 1200);
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = './PartnerOrder_PaymentConfirmBatch.md';
+      a.download = 'PartnerOrder_PaymentConfirmBatch.md';
+      a.click();
+    });
+  </script>
+</body>
+</html>
