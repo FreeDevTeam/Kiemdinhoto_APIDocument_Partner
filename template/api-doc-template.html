@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partner Order Payment Confirm Batch</title>
+  <title>{API_TITLE}</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
     .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
@@ -22,20 +22,24 @@
 </head>
 <body>
   <div class="wrap">
+
+    <!-- Card 1: Header -->
     <div class="card">
-      <h1>Partner API - Order Payment Confirm Batch</h1>
-      <p>API xác nhận thanh toán hàng loạt đơn hàng của đối tác. Hỗ trợ tối đa 100 đơn hàng trong một yêu cầu.</p>
-      <p><a href="./index.html">Về module Order</a></p>
+      <h1>Partner API - {API_NAME}</h1>
+      <p>{SHORT_DESCRIPTION}</p>
+      <p><a href="./index.html">Về module {MODULE_NAME}</a></p>
     </div>
 
+    <!-- Card 2: Endpoint — chỉ URL, Method. Không thêm Batch size hay Auth row -->
     <div class="card">
       <h2>Endpoint</h2>
       <table>
-        <tr><th>URL</th><td>/PartnerAPI/Order/paymentConfirmBatch</td></tr>
-        <tr><th>Method</th><td>POST</td></tr>
+        <tr><th>URL</th><td>{ENDPOINT_URL}</td></tr>
+        <tr><th>Method</th><td>{HTTP_METHOD}</td></tr>
       </table>
     </div>
 
+    <!-- Card 3: Headers schema — tách riêng, không gộp vào Endpoint -->
     <div class="card">
       <h2>Headers schema</h2>
       <table>
@@ -45,86 +49,76 @@
       </table>
     </div>
 
+    <!-- Card 4: Body schema — bảng 5 cột: Field | Type | Required | Rule | Mô tả -->
     <div class="card">
       <h2>Body schema</h2>
       <table>
         <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
-        <tr><td>items</td><td>array</td><td>Yes</td><td>min 1, max 100</td><td>Danh sách đơn hàng cần xác nhận thanh toán</td></tr>
-        <tr><td>items[].requestId</td><td>string</td><td>Yes</td><td>bắt buộc</td><td>Mã định danh duy nhất cho yêu cầu (idempotency key)</td></tr>
-        <tr><td>items[].orderId</td><td>string</td><td>Yes</td><td>bắt buộc</td><td>Mã đơn hàng cần xác nhận</td></tr>
-        <tr><td>items[].amount</td><td>integer</td><td>Yes</td><td>>= 1</td><td>Số tiền thanh toán (đơn vị: VNĐ)</td></tr>
-        <tr><td>items[].paymentStatus</td><td>string</td><td>Yes</td><td>bắt buộc</td><td>Trạng thái thanh toán. Xem danh sách hợp lệ tại <a href="../../Common.html#payment-status">Quy chuẩn chung → Order Payment Status</a>.</td></tr>
+        <!-- Thêm hàng theo schema thực tế -->
+        <tr><td>{FIELD_NAME}</td><td>{TYPE}</td><td>Yes/No</td><td>{RULE}</td><td>{DESCRIPTION}</td></tr>
       </table>
     </div>
 
+    <!-- Card 5: Sample Request — tiêu đề + nút copy icon + Toast khi copy thành công -->
     <div class="card">
       <h2 style="display:flex;align-items:center;gap:8px;">Sample Request <button id="copySampleBtn" title="Copy sang clipboard" style="background:none;border:1px solid #dbe3ef;border-radius:6px;padding:4px 8px;cursor:pointer;display:inline-flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0b63ce" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg></button></h2>
-      <pre id="curlText">curl --location '{HOST_NAME}/PartnerAPI/Order/paymentConfirmBatch' \
+      <pre id="curlText">curl --location '{HOST_NAME}{ENDPOINT_URL}' \
   --header 'Content-Type: application/json' \
   --header 'clientId: TESTCLIENT' \
-  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --header 'apiKey: {TEST_API_KEY}' \
   --data '{
-    "items": [
-      {
-        "requestId": "TEST_REQ_CONFIRM_PAYMENT_001",
-        "orderId": "TEST_ORDER_PARTNER_PENDING_001",
-        "amount": 91000,
-        "paymentStatus": "Success"
-      }
-    ]
+    {REQUEST_BODY}
   }'</pre>
     </div>
 
+    <!-- Card 6: Success response -->
     <div class="card">
       <h2>Success response</h2>
       <pre>{
   "statusCode": 200,
   "error": null,
   "message": "Success",
-  "data": [
-    {
-      "index": 0,
-      "orderId": "TEST_ORDER_PARTNER_PENDING_001",
-      "requestId": "TEST_REQ_CONFIRM_PAYMENT_001"
-    }
-  ]
+  "data": {SUCCESS_DATA}
 }</pre>
     </div>
 
+    <!-- Card 7: Mã lỗi — KHÔNG ghi Nguồn file, KHÔNG ghi tên hàm/middleware nội bộ trong mô tả.
+         400 = Validation Error (Joi schema fail)
+         429 = QUOTA_EXCEEDED (apiKey sai/hết quota)
+         500 = mọi lỗi từ manager
+         Chỉ liệt kê error code thực sự được throw trong manager. Luôn có UNKNOWN_ERROR. -->
     <div class="card">
       <h2>Mã lỗi</h2>
       <table>
         <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
         <tr><td>400</td><td><em>Validation Error</em></td><td>Payload không đúng schema (thiếu field bắt buộc, sai kiểu, vượt giới hạn).</td></tr>
-        <tr><td>429</td><td><code>QUOTA_EXCEEDED</code></td><td>apiKey không hợp lệ, không tồn tại, hoặc vượt quota.</td></tr>
-        <tr><td>500</td><td><code>ORDER_NOT_FOUND</code></td><td>Không tìm thấy đơn hàng theo <code>orderId</code> đã cung cấp.</td></tr>
-        <tr><td>500</td><td><code>ALREADY_PAID</code></td><td>Đơn hàng đã xử lý, không thể xác nhận lại.</td></tr>
-        <tr><td>500</td><td><code>INVALID_ORDER</code></td><td>Đơn hàng đã bị hủy.</td></tr>
-        <tr><td>500</td><td><code>AMOUNT_MISMATCH</code></td><td>Số tiền trong request không khớp với tổng tiền của đơn hàng.</td></tr>
-        <tr><td>500</td><td><code>INVALID_BATCH_PAYLOAD</code></td><td>Cấu trúc batch không hợp lệ.</td></tr>
+        <tr><td>429</td><td><code>QUOTA_EXCEEDED</code></td><td>apiKey không hợp lệ hoặc vượt quota.</td></tr>
+        <tr><td>500</td><td><code>{ERROR_CODE}</code></td><td>{DESCRIPTION}</td></tr>
         <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định.</td></tr>
       </table>
     </div>
 
+    <!-- Card 8: Tham khảo — BẮTBUỘC, link tới Common.html; điều chỉnh các mục cho phù hợp API -->
     <div class="card">
       <h2>Tham khảo</h2>
       <ul>
         <li><a href="../../Common.html#common-error">Quy chuẩn chung → Common Error</a> — danh sách mã lỗi hệ thống trả về trong trường <code>error</code>.</li>
+        <!-- Thêm dòng dưới nếu API có field paymentStatus -->
         <li><a href="../../Common.html#payment-status">Quy chuẩn chung → Order Payment Status</a> — danh sách giá trị hợp lệ của trường <code>paymentStatus</code>.</li>
       </ul>
     </div>
 
+    <!-- Card 9: Data test -->
     <div class="card">
       <h2>Data test cho developer</h2>
       <ul>
         <li>clientId: TESTCLIENT</li>
-        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
-        <li>requestId: TEST_REQ_CONFIRM_PAYMENT_001</li>
-        <li>orderId hợp lệ: TEST_ORDER_PARTNER_PENDING_001</li>
-        <li>amount hợp lệ: 91000</li>
+        <li>apiKey: {TEST_API_KEY}</li>
+        <!-- Thêm các field test tương ứng với schema -->
       </ul>
       <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
     </div>
+
   </div>
 
   <script>

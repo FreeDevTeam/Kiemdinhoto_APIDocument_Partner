@@ -1,33 +1,41 @@
 # Partner API - Order Query Order Batch
 
-## 1. Tổng quan
+Truy vấn thông tin chi tiết nhiều đơn hàng trong một request (tối đa 100 đơn).
 
-API truy vấn chi tiết đơn hàng theo lô.
+[Về module Order](./index.html)
 
-- Endpoint: /PartnerAPI/Order/queryOrderBatch
-- Method: POST
-- Auth: header clientId/clientid + apiKey/apikey
-- Batch size: 1..100 item
+---
 
-## 2. Request
+## Endpoint
 
-### 2.1 Header
+| | |
+|---|---|
+| URL | /PartnerAPI/Order/queryOrderBatch |
+| Method | POST |
 
-| Field | Type | Required | Note |
-|---|---|---|---|
-| clientId | string | Yes | Hỗ trợ cả clientid |
-| apiKey | string | Yes | Hỗ trợ cả apikey |
+---
 
-### 2.2 Body schema
+## Headers schema
 
-| Field | Type | Required | Rule |
-|---|---|---|---|
-| items | array | Yes | min 1, max 100 |
-| items[].requestId | string | No | optional |
-| items[].orderId | string | Yes | bắt buộc |
-| items[].amount | integer | Yes | >= 1 |
+| Header | Required | Mô tả |
+|---|---|---|
+| clientId hoặc clientid | Yes | Mã định danh đối tác |
+| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
 
-### 2.3 cURL Happy case
+---
+
+## Body schema
+
+| Field | Type | Required | Rule | Mô tả |
+|---|---|---|---|---|
+| items | array | Yes | min 1, max 100 | Danh sách đơn hàng cần truy vấn |
+| items[].requestId | string | No | — | Mã định danh request từ phía đối tác (tuỳ chọn) |
+| items[].orderId | string | Yes | — | Mã đơn hàng cần truy vấn |
+| items[].amount | integer | Yes | >= 1 | Tổng tiền đơn hàng (dùng để xác thực khớp với hệ thống) |
+
+---
+
+## Sample Request
 
 ```bash
 curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrderBatch' \
@@ -45,9 +53,9 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrderBatch' \
   }'
 ```
 
-## 3. Response
+---
 
-### 3.1 Success response
+## Success response
 
 ```json
 {
@@ -62,19 +70,19 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrderBatch' \
       "discountAmount": 0,
       "taxAmount": 0,
       "paymentStatus": "New",
-      "createdAt": "2026-04-29T08:00:00.000Z",
-      "phoneNumber": null,
-      "firstName": null,
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "phoneNumber": "0900000001",
+      "firstName": "Test User",
       "orderItems": [
         {
-          "orderItemName": "E2E Partner Order Item 1",
+          "orderItemName": "[E2E-ORDER-PARTNER] Item #1 for queryOrderBatch detail check",
           "quantity": 1,
-          "payAmount": 50000
+          "payAmount": 45500
         },
         {
-          "orderItemName": "E2E Partner Order Item 2",
+          "orderItemName": "[E2E-ORDER-PARTNER] Item #2 for queryOrderBatch detail check",
           "quantity": 1,
-          "payAmount": 41000
+          "payAmount": 45500
         }
       ]
     }
@@ -82,33 +90,36 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrderBatch' \
 }
 ```
 
-### 3.2 Business errors thường gặp
+---
 
-| Error | Ý nghĩa |
-|---|---|
-| ORDER_NOT_FOUND | Không tìm thấy order theo orderId hoặc paymentQRRef |
-| AMOUNT_MISMATCH | amount request không khớp totalAmount của order |
-| INVALID_BATCH_PAYLOAD | payload items không hợp lệ |
-| UNKNOWN_ERROR | lỗi nội bộ không xác định |
+## Mã lỗi
 
-## 4. Data test cho developer
+| HTTP | Mã lỗi | Mô tả |
+|---|---|---|
+| 400 | _Validation Error_ | Payload không đúng schema (thiếu field bắt buộc, sai kiểu, vượt giới hạn). |
+| 429 | `QUOTA_EXCEEDED` | apiKey không hợp lệ hoặc vượt quota. |
+| 500 | `ORDER_NOT_FOUND` | Không tìm thấy đơn hàng theo `orderId` đã cung cấp. |
+| 500 | `AMOUNT_MISMATCH` | Số tiền trong request không khớp với tổng tiền của đơn hàng. |
+| 500 | `INVALID_BATCH_PAYLOAD` | Cấu trúc batch không hợp lệ. |
+| 500 | `UNKNOWN_ERROR` | Lỗi không xác định. |
 
-Nguồn data đang cố định trong test e2e tại API/Order/test/OrderTest_Partner_Data.js:
+---
+
+## Tham khảo
+
+- [Quy chuẩn chung → Common Error](../../Common.html#common-error) — danh sách mã lỗi hệ thống trả về trong trường `error`.
+- [Quy chuẩn chung → Order Payment Status](../../Common.html#payment-status) — danh sách giá trị hợp lệ của trường `paymentStatus`.
+
+---
+
+## Data test cho developer
 
 - clientId: TESTCLIENT
 - apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
 - requestId: TEST_REQ_QUERY_ORDER_001
-- orderId happy: TEST_ORDER_PARTNER_PENDING_001
-- amount happy: 91000
-- note item mẫu:
-  - [E2E-ORDER-PARTNER] Item #1 for queryOrderBatch detail check
-  - [E2E-ORDER-PARTNER] Item #2 for queryOrderBatch detail check
+- orderId (happy): TEST_ORDER_PARTNER_PENDING_001
+- orderId (not found): TEST_ORDER_PARTNER_NOT_FOUND_001
+- amount (happy): 91000
+- amount (mismatch): 12345
 
-Cần thay bằng dữ liệu riêng theo môi trường khi tích hợp thật.
-
-## 5. Tham chiếu code
-
-- Route: API/Order/route/OrderRoute_Partner.js
-- Route mount: API/PartnerAPI/route/index.js
-- Manager: API/Order/manager/OrderManager_Partner.js
-- Error constants: API/Order/OrderConstant_Partner.js
+Cần thay bằng dữ liệu môi trường thật khi tích hợp.
