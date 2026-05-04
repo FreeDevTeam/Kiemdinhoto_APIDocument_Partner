@@ -104,14 +104,22 @@
     <div class="card">
       <h2>Mã lỗi</h2>
       <table>
-        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
-        <tr><td>400</td><td><em>Validation Error</em></td><td>Payload không đúng schema (thiếu field bắt buộc, sai kiểu, vượt giới hạn).</td></tr>
-        <tr><td>429</td><td><code>QUOTA_EXCEEDED</code></td><td>apiKey không hợp lệ hoặc vượt quota.</td></tr>
-        <tr><td>500</td><td><code>ORDER_NOT_FOUND</code></td><td>Không tìm thấy đơn hàng theo <code>orderId</code> đã cung cấp.</td></tr>
-        <tr><td>500</td><td><code>AMOUNT_MISMATCH</code></td><td>Số tiền trong request không khớp với tổng tiền của đơn hàng.</td></tr>
-        <tr><td>500</td><td><code>INVALID_BATCH_PAYLOAD</code></td><td>Cấu trúc batch không hợp lệ.</td></tr>
-        <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định.</td></tr>
+        <tr><th style="width:100px">HTTP</th><th style="width:30%">Mã lỗi</th><th style="width:110px">errorCode</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td><em>Validation Error</em></td><td>—</td><td>Payload không đúng schema (thiếu field bắt buộc, sai kiểu, vượt giới hạn).</td></tr>
+        <tr><td>429</td><td><code>QUOTA_EXCEEDED</code></td><td>—</td><td>apiKey không hợp lệ hoặc vượt quota.</td></tr>
+        <tr><td>500</td><td><code>ORDER_NOT_FOUND</code></td><td><code>03</code></td><td>Không tìm thấy đơn hàng theo <code>orderId</code> đã cung cấp.</td></tr>
+        <tr><td>500</td><td><code>AMOUNT_MISMATCH</code></td><td><code>05</code></td><td>Số tiền trong request không khớp với tổng tiền của đơn hàng.</td></tr>
+        <tr><td>500</td><td><code>INVALID_BATCH_PAYLOAD</code></td><td><code>02</code></td><td>Cấu trúc batch không hợp lệ.</td></tr>
+        <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td><code>99</code></td><td>Lỗi không xác định.</td></tr>
       </table>
+      <p style="margin-top:12px;font-size:0.9em;color:#6b7280;">Cấu trúc response lỗi (ví dụ <code>ORDER_NOT_FOUND</code>):</p>
+      <pre style="background:#0f172a;color:#e5ecf6;padding:12px;border-radius:10px;overflow-x:auto;font-size:0.92em;">{
+  "statusCode": 500,
+  "error": "ORDER_NOT_FOUND",
+  "message": "An internal server error occurred",
+  "errorCode": "03"
+}</pre>
+      <p style="font-size:0.9em;color:#6b7280;">Xem đầy đủ bảng <code>errorCode</code> tại <a href="../../Common.html#order-error-code">Quy chuẩn chung → Partner Order Error Code</a>.</p>
     </div>
 
     <!-- Card 8: Tham khảo -->
@@ -119,6 +127,7 @@
       <h2>Tham khảo</h2>
       <ul>
         <li><a href="../../Common.html#common-error">Quy chuẩn chung → Common Error</a> — danh sách mã lỗi hệ thống trả về trong trường <code>error</code>.</li>
+        <li><a href="../../Common.html#order-error-code">Quy chuẩn chung → Partner Order Error Code</a> — bảng mã số <code>errorCode</code> đi kèm response lỗi.</li>
         <li><a href="../../Common.html#payment-status">Quy chuẩn chung → Order Payment Status</a> — danh sách giá trị hợp lệ của trường <code>transactionStatus</code>.</li>
       </ul>
     </div>

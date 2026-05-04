@@ -78,22 +78,34 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/paymentConfirmBatch' \
 
 ## Mã lỗi
 
-| HTTP | Mã lỗi | Mô tả |
-|---|---|---|
-| 400 | _Validation Error_ | Payload không đúng schema (thiếu field bắt buộc, sai kiểu, vượt giới hạn). |
-| 429 | `QUOTA_EXCEEDED` | apiKey không hợp lệ, không tồn tại, hoặc vượt quota. |
-| 500 | `ORDER_NOT_FOUND` | Không tìm thấy đơn hàng theo `orderId` đã cung cấp. |
-| 500 | `ALREADY_PAID` | Đơn hàng đã xử lý, không thể xác nhận lại. |
-| 500 | `INVALID_ORDER` | Đơn hàng đã bị hủy. |
-| 500 | `AMOUNT_MISMATCH` | Số tiền trong request không khớp với tổng tiền của đơn hàng. |
-| 500 | `INVALID_BATCH_PAYLOAD` | Cấu trúc batch không hợp lệ. |
-| 500 | `UNKNOWN_ERROR` | Lỗi không xác định. |
+| HTTP | Mã lỗi | errorCode | Mô tả |
+|---|---|---|---|
+| 400 | _Validation Error_ | — | Payload không đúng schema (thiếu field bắt buộc, sai kiểu, vượt giới hạn). |
+| 429 | `QUOTA_EXCEEDED` | — | apiKey không hợp lệ, không tồn tại, hoặc vượt quota. |
+| 500 | `ORDER_NOT_FOUND` | `03` | Không tìm thấy đơn hàng theo `orderId` đã cung cấp. |
+| 500 | `ALREADY_PAID` | `04` | Đơn hàng đã xử lý, không thể xác nhận lại. |
+| 500 | `INVALID_ORDER` | `06` | Đơn hàng đã bị hủy. |
+| 500 | `AMOUNT_MISMATCH` | `05` | Số tiền trong request không khớp với tổng tiền của đơn hàng. |
+| 500 | `INVALID_BATCH_PAYLOAD` | `02` | Cấu trúc batch không hợp lệ. |
+| 500 | `UNKNOWN_ERROR` | `99` | Lỗi không xác định. |
+
+Cấu trúc response lỗi (ví dụ `ORDER_NOT_FOUND`):
+
+```json
+{
+  "statusCode": 500,
+  "error": "ORDER_NOT_FOUND",
+  "message": "An internal server error occurred",
+  "errorCode": "03"
+}
+```
 
 ---
 
 ## Tham khảo
 
 - [Quy chuẩn chung → Common Error](../../Common.html#common-error) — danh sách mã lỗi hệ thống trả về trong trường `error`.
+- [Quy chuẩn chung → Partner Order Error Code](../../Common.html#order-error-code) — bảng mã số `errorCode` đi kèm response lỗi.
 - [Quy chuẩn chung → Order Payment Status](../../Common.html#payment-status) — danh sách giá trị hợp lệ của trường `paymentStatus`.
 
 ---

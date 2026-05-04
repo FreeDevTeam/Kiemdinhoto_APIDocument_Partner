@@ -37,6 +37,7 @@
         <a href="./index.html">← Trang chủ tài liệu</a>
         <a href="#common-error">Common Error</a>
         <a href="#payment-status">Order Payment Status</a>
+        <a href="#order-error-code">Partner Order Error Code</a>
       </nav>
     </div>
 
@@ -130,6 +131,27 @@
         </tr>
       </table>
 
+    </div>
+
+    <!-- Partner Order Error Code -->
+    <div class="card" id="order-error-code">
+      <h2>Partner Order Error Code</h2>
+      <p>Bảng mã số (<code>errorCode</code>) dùng cho các API Order đối tác. Trường <code>errorCode</code> được trả về cùng với <code>error</code> trong response khi xảy ra lỗi.</p>
+      <table>
+        <tr>
+          <th style="width:18%">errorCode</th>
+          <th style="width:30%">Mã lỗi (error)</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr><td><code>00</code></td><td>—</td><td>Thành công.</td></tr>
+        <tr><td><code>01</code></td><td><code>UNAUTHORIZED</code></td><td>Xác thực thất bại – clientId hoặc apiKey không hợp lệ.</td></tr>
+        <tr><td><code>02</code></td><td><code>INVALID_DATA</code> / <code>REQUIRED_FIELD_MISSING</code> / <code>INVALID_AMOUNT</code> / <code>INVALID_BATCH_PAYLOAD</code></td><td>Thiếu hoặc sai tham số đầu vào.</td></tr>
+        <tr><td><code>03</code></td><td><code>ORDER_NOT_FOUND</code></td><td>Không tìm thấy đơn hàng.</td></tr>
+        <tr><td><code>04</code></td><td><code>ALREADY_PAID</code></td><td>Đơn hàng đã thanh toán trước đó (idempotent).</td></tr>
+        <tr><td><code>05</code></td><td><code>AMOUNT_MISMATCH</code></td><td>Số tiền không khớp với đơn hàng.</td></tr>
+        <tr><td><code>06</code></td><td><code>INVALID_ORDER</code></td><td>Đơn hàng không hợp lệ để gạch nợ (đã huỷ, hết hạn, ...).</td></tr>
+        <tr><td><code>99</code></td><td><code>SYSTEM_ERROR</code> / <code>INTERNAL_ERROR</code> / <code>UNKNOWN_ERROR</code></td><td>Lỗi hệ thống hoặc exception khi xử lý.</td></tr>
+      </table>
     </div>
 
   </div>
