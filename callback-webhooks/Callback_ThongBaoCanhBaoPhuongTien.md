@@ -1,6 +1,6 @@
-# Callback / Webhooks - Thông báo cảnh báo phương tiện
+# Callback / Webhooks - Gói dịch vụ thông báo
 
-Mô tả dữ liệu đối tác nhận được khi hệ thống gửi callback liên quan đến gói cảnh báo phương tiện mà đối tác đã bán hoặc khởi tạo.
+Mô tả dữ liệu đối tác nhận được khi hệ thống gửi callback liên quan đến gói dịch vụ thông báo mà đối tác đã bán hoặc khởi tạo.
 
 ## Phạm vi dữ liệu
 
@@ -22,7 +22,7 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
     "notifyEndDateTime": "2026-06-14 23:59:59",
     "isAvailable": 1,
     "allowRenew": 1,
-    "notifyNote": "Gói cảnh báo phương tiện",
+    "notifyNote": "Gói dịch vụ thông báo",
     "notifyInterval": 1,
     "latestViolationStatus": 0,
     "lastCheckedAt": "2026-05-15 10:30:00",
@@ -41,7 +41,7 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
 
 | Field | Type | Mô tả |
 |---|---|---|
-| appUserVehicleNotifyInfoId | number | Mã gói cảnh báo phương tiện |
+| appUserVehicleNotifyInfoId | number | Mã gói dịch vụ thông báo |
 | partnerTranID | string | Mã giao dịch do đối tác gửi khi tạo mua gói |
 | partnerName | string | Tên đối tác phát sinh dữ liệu |
 | notifyType | number | Loại cảnh báo |
