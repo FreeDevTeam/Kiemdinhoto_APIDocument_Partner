@@ -131,8 +131,6 @@ Trường `status` theo chuẩn [Quy chuẩn chung → Partner Order Error Code]
 
 ## Data test cho developer
 
-- clientId: TESTCLIENT
-- apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
 - requestId: TEST_REQ_CONFIRM_PAYMENT_001
 - orderId hợp lệ: TEST_ORDER_PARTNER_PENDING_001
 - amount hợp lệ: 91000

@@ -18,8 +18,6 @@
 
 Nguồn: API/Order/test/OrderTest_Partner_Data.js trong server codebase.
 
-- clientId: TESTCLIENT
-- apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
 - orderId pending: TEST_ORDER_PARTNER_PENDING_001
 - orderId paid: TEST_ORDER_PARTNER_PAID_001
 - orderId canceled: TEST_ORDER_PARTNER_CANCELED_001

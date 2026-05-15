@@ -126,8 +126,6 @@ Cấu trúc response lỗi (ví dụ `ORDER_NOT_FOUND`):
 
 ## Data test cho developer
 
-- clientId: TESTCLIENT
-- apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
 - requestId: TEST_REQ_QUERY_ORDER_001
 - orderId (happy): TEST_ORDER_PARTNER_PENDING_001
 - orderId (not found): TEST_ORDER_PARTNER_NOT_FOUND_001

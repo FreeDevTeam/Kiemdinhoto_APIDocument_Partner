@@ -112,8 +112,6 @@ Cấu trúc response lỗi (ví dụ `ORDER_NOT_FOUND`):
 
 ## Data test cho developer
 
-- clientId: TESTCLIENT
-- apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
 - requestId: TEST_REQ_QUERY_TRANSACTION_001
 - transactionId (happy): TEST_TXN_QUERY_OK_001
 - transactionId (missing): TEST_TXN_QUERY_MISSING_001
