@@ -8,6 +8,10 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - Module index HTML: ./modules/Order/index.html
 - Module index MD: ./modules/Order/index.md
 
+2. Order Payment (CustomerOrder)
+- Module index HTML: ./modules/OrderPayment/index.html
+- Module index MD: ./modules/OrderPayment/index.md
+
 ## Callback / Webhooks
 
 1. Lịch hẹn
