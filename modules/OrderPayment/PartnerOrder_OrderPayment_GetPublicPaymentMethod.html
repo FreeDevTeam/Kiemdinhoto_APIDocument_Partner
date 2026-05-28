@@ -15,6 +15,7 @@
     pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
     a { color: #0b63ce; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .copy-btn { border: 1px solid #c7d2e5; background: #fff; border-radius: 8px; padding: 4px 10px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -40,13 +41,19 @@
     </div>
     <div class="card">
       <h2>Body schema</h2>
-      <pre>{}</pre>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>(empty)</td><td>object</td><td>No</td><td>Body rỗng</td><td>API không yêu cầu tham số trong body</td></tr>
+      </table>
     </div>
     <div class="card">
-      <h2>Sample Request</h2>
-      <pre>curl --location '{HOST_NAME}/PartnerAPI/PaymentQR/user/getPublicPaymentMethod' \
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        Sample Request
+        <button id="copySampleBtn" class="copy-btn" type="button" onclick="copySample()">Copy</button>
+      </h2>
+      <pre id="curlText">curl --location 'https://partner.ttdk.com.vn/PartnerAPI/PaymentQR/user/getPublicPaymentMethod' \
   --header 'Content-Type: application/json' \
-  --header 'apiKey: {PARTNER_API_KEY}' \
+  --header 'apiKey: demo_partner_api_key' \
   --data '{}'</pre>
     </div>
     <div class="card">
@@ -63,6 +70,40 @@
   ]
 }</pre>
     </div>
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
+        <tr><td>429</td><td>APIKEY_QUOTA_EXCEEDED</td><td>Vượt quota cho apiKey.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li><b>Host:</b> https://partner.ttdk.com.vn</li>
+        <li><b>apiKey test:</b> demo_partner_api_key</li>
+      </ul>
+    </div>
   </div>
+  <script>
+    function copySample() {
+      const text = document.getElementById('curlText')?.innerText || '';
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('copySampleBtn');
+      if (btn) {
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(() => { btn.innerText = old; }, 1000);
+      }
+    }
+  </script>
 </body>
 </html>

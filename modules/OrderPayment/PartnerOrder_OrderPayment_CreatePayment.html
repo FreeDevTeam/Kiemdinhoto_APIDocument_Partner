@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -15,6 +15,7 @@
     pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
     a { color: #0b63ce; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .copy-btn { border: 1px solid #c7d2e5; background: #fff; border-radius: 8px; padding: 4px 10px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -41,20 +42,23 @@
     <div class="card">
       <h2>Body schema</h2>
       <table>
-        <tr><th>Field</th><th>Type</th><th>Required</th><th>Mô tả</th></tr>
-        <tr><td>customerScheduleId</td><td>number</td><td>Yes</td><td>ID lịch hẹn</td></tr>
-        <tr><td>paymentMethodType</td><td>number</td><td>Yes</td><td>Loại phương thức thanh toán</td></tr>
-        <tr><td>paymentMethodId</td><td>number</td><td>No</td><td>ID phương thức thanh toán</td></tr>
-        <tr><td>paymentMethodSubType</td><td>string</td><td>No</td><td>Sub-type thanh toán</td></tr>
-        <tr><td>stationServicesList</td><td>number[]</td><td>No</td><td>Danh sách dịch vụ trạm</td></tr>
-        <tr><td>stationsId</td><td>number</td><td>No</td><td>ID trạm</td></tr>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>customerScheduleId</td><td>number</td><td>Yes</td><td>> 0</td><td>ID lịch hẹn</td></tr>
+        <tr><td>paymentMethodType</td><td>number</td><td>Yes</td><td>Giá trị trong danh sách payment type</td><td>Loại phương thức thanh toán</td></tr>
+        <tr><td>paymentMethodId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID phương thức thanh toán</td></tr>
+        <tr><td>paymentMethodSubType</td><td>string</td><td>No</td><td>Chuỗi định danh subtype</td><td>Sub-type thanh toán</td></tr>
+        <tr><td>stationServicesList</td><td>number[]</td><td>No</td><td>Mỗi phần tử > 0</td><td>Danh sách dịch vụ trạm</td></tr>
+        <tr><td>stationsId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID trạm</td></tr>
       </table>
     </div>
     <div class="card">
-      <h2>Sample Request</h2>
-      <pre>curl --location '{HOST_NAME}/PartnerAPI/CustomerSchedule/user/createPayment' \
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        Sample Request
+        <button id="copySampleBtn" class="copy-btn" type="button" onclick="copySample()">Copy</button>
+      </h2>
+      <pre id="curlText">curl --location 'https://partner.ttdk.com.vn/PartnerAPI/CustomerSchedule/user/createPayment' \
   --header 'Content-Type: application/json' \
-  --header 'apiKey: {PARTNER_API_KEY}' \
+  --header 'apiKey: demo_partner_api_key' \
   --data '{
     "customerScheduleId": 1869,
     "paymentMethodType": 2,
@@ -74,6 +78,41 @@
   }
 }</pre>
     </div>
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td>INVALID_REQUEST</td><td>Dữ liệu đầu vào không hợp lệ.</td></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li><b>Host:</b> https://partner.ttdk.com.vn</li>
+        <li><b>apiKey test:</b> demo_partner_api_key</li>
+        <li><b>customerScheduleId:</b> 1869</li>
+      </ul>
+    </div>
   </div>
+  <script>
+    function copySample() {
+      const text = document.getElementById('curlText')?.innerText || '';
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('copySampleBtn');
+      if (btn) {
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(() => { btn.innerText = old; }, 1000);
+      }
+    }
+  </script>
 </body>
 </html>
