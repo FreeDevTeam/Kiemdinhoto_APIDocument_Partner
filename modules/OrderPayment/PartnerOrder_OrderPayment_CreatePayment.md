@@ -1,8 +1,8 @@
-# Partner API - Order Payment - Create Payment
+﻿# Partner API - Order Payment - Create Payment
 
-T?o th�ng tin thanh to�n cho l?ch h?n/don h�ng ? trang thanh to�n.
+Tạo thông tin thanh toán cho lịch hẹn/đơn hàng ở trang thanh toán.
 
-[V? module Order Payment](./index.html)
+[Về module Order Payment](./index.html)
 
 ---
 
@@ -17,22 +17,22 @@ T?o th�ng tin thanh to�n cho l?ch h?n/don h�ng ? trang thanh to�n.
 
 ## Headers schema
 
-| Header | Required | M� t? |
+| Header | Required | Mô tả |
 |---|---|---|
-| apiKey ho?c apikey | Yes | Kh�a x�c th?c API c?a d?i t�c |
+| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
 
 ---
 
 ## Body schema
 
-| Field | Type | Required | Rule | M� t? |
+| Field | Type | Required | Rule | Mô tả |
 |---|---|---|---|---|
-| customerScheduleId | number | Yes | > 0 | ID l?ch h?n |
-| paymentMethodType | number | Yes | Gi� tr? trong danh s�ch payment type | Lo?i phuong th?c thanh to�n |
-| paymentMethodId | number | No | > 0 n?u truy?n | ID phuong th?c thanh to�n |
-| paymentMethodSubType | string | No | Chu?i d?nh danh subtype | Sub-type thanh to�n |
-| stationServicesList | number[] | No | M?i ph?n t? > 0 | Danh s�ch d?ch v? tr?m |
-| stationsId | number | No | > 0 n?u truy?n | ID tr?m |
+| customerScheduleId | number | Yes | > 0 | ID lịch hẹn |
+| paymentMethodType | number | Yes | Giá trị trong danh sách payment type | Loại phương thức thanh toán |
+| paymentMethodId | number | No | > 0 nếu truyền | ID phương thức thanh toán |
+| paymentMethodSubType | string | No | Chuỗi định danh subtype | Sub-type thanh toán |
+| stationServicesList | number[] | No | Mỗi phần tử > 0 | Danh sách dịch vụ trạm |
+| stationsId | number | No | > 0 nếu truyền | ID trạm |
 
 ---
 
@@ -57,30 +57,49 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
 ```json
 {
   "statusCode": 200,
+  "error": null,
+  "message": "Success",
   "data": {
-    "orderId": 99999,
-    "paymentQR": {
-      "paymentContent": "TTDH 99999"
-    }
+    "customerScheduleId": 1869,
+    "isSuccess": 1,
+    "paymentStatus": "New",
+    "totalPayment": 120000,
+    "orderData": { "orderId": 99999 },
+    "errorMessage": null,
+    "errorCode": null,
+    "inAppGtelOrderId": null,
+    "paymentMethodId": 1,
+    "paymentMethodType": 2,
+    "paymentMethodSubType": null,
+    "metaData": null,
+    "bankQR": {
+      "qrData": "https://.../qr.png",
+      "qrCode": "000201...",
+      "paymentContent": "ORDER99999"
+    },
+    "momoQR": null,
+    "paymentLinkUrl": null,
+    "paymentDeepLink": null,
+    "paymentGatewayData": null
   }
 }
 ```
 
 ---
 
-## M� l?i
+## Mã lỗi
 
-| HTTP | M� l?i | M� t? |
+| HTTP | Mã lỗi | Mô tả |
 |---|---|---|
-| 400 | INVALID_REQUEST | D? li?u d?u v�o kh�ng h?p l?. |
-| 401 | UNAUTHORIZED | apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p. |
-| 500 | UNKNOWN_ERROR | L?i h? th?ng n?i b?. |
+| 400 | INVALID_REQUEST | Dữ liệu đầu vào không hợp lệ. |
+| 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
+| 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
 
 ---
 
-## Tham kh?o
+## Tham khảo
 
-- [Danh s�ch m� l?i v� quy u?c response chung](../../Common.html)
+- [Danh sách mã lỗi và quy ước response chung](../../Common.html)
 
 ---
 

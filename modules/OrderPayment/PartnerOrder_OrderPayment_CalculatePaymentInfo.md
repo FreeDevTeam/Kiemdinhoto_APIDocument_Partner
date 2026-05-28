@@ -1,8 +1,8 @@
-# Partner API - Order Payment - Calculate Payment Info
+﻿# Partner API - Order Payment - Calculate Payment Info
 
-T�nh th�ng tin thanh to�n (t?ng ti?n, gi?m gi�...) cho trang thanh to�n.
+Tính thông tin thanh toán (tổng tiền, giảm giá...) cho trang thanh toán.
 
-[V? module Order Payment](./index.html)
+[Về module Order Payment](./index.html)
 
 ---
 
@@ -17,20 +17,20 @@ T�nh th�ng tin thanh to�n (t?ng ti?n, gi?m gi�...) cho trang thanh to�n.
 
 ## Headers schema
 
-| Header | Required | M� t? |
+| Header | Required | Mô tả |
 |---|---|---|
-| apiKey ho?c apikey | Yes | Kh�a x�c th?c API c?a d?i t�c |
+| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
 
 ---
 
 ## Body schema
 
-| Field | Type | Required | Rule | M� t? |
+| Field | Type | Required | Rule | Mô tả |
 |---|---|---|---|---|
-| orderId | number | No | > 0 n?u truy?n | ID don h�ng |
-| licensePlatesList | string[] | No | M?ng bi?n s? h?p l? | Danh s�ch bi?n s? |
-| productIds | number[] \| object[] | No | object[] theo d?ng `{ productId, quantity }` | Danh s�ch s?n ph?m |
-| promotionCode | string | No | M� khuy?n m�i h?p l? | M� gi?m gi� |
+| orderId | number | No | > 0 nếu truyền | ID đơn hàng |
+| licensePlatesList | string[] | No | Mảng biển số hợp lệ | Danh sách biển số |
+| productIds | number[] \| object[] | No | object[] theo dạng `{ productId, quantity }` | Danh sách sản phẩm |
+| promotionCode | string | No | Mã khuyến mãi hợp lệ | Mã giảm giá |
 
 ---
 
@@ -53,29 +53,40 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
 ```json
 {
   "statusCode": 200,
+  "error": null,
+  "message": "Success",
   "data": {
-    "totalAmount": 120000,
+    "subTotalAmount": 100000,
+    "payment": 100000,
+    "taxAmount": 8000,
     "discountAmount": 10000,
-    "finalAmount": 110000
+    "totalPayment": 98000,
+    "totalAmount": 98000,
+    "paidAmount": 0,
+    "unpaidAmount": 98000,
+    "refundAmount": 0,
+    "debtStatus": 0,
+    "promotionData": null,
+    "salesChannel": "PARTNER"
   }
 }
 ```
 
 ---
 
-## M� l?i
+## Mã lỗi
 
-| HTTP | M� l?i | M� t? |
+| HTTP | Mã lỗi | Mô tả |
 |---|---|---|
-| 400 | INVALID_REQUEST | D? li?u d?u v�o kh�ng h?p l?. |
-| 401 | UNAUTHORIZED | apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p. |
-| 500 | UNKNOWN_ERROR | L?i h? th?ng n?i b?. |
+| 400 | INVALID_REQUEST | Dữ liệu đầu vào không hợp lệ. |
+| 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
+| 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
 
 ---
 
-## Tham kh?o
+## Tham khảo
 
-- [Danh s�ch m� l?i v� quy u?c response chung](../../Common.html)
+- [Danh sách mã lỗi và quy ước response chung](../../Common.html)
 
 ---
 

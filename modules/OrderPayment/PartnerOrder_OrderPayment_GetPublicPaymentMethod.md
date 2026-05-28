@@ -1,8 +1,8 @@
-# Partner API - Order Payment - Get Public Payment Method
+﻿# Partner API - Order Payment - Get Public Payment Method
 
-L?y danh s�ch phuong th?c thanh to�n c�ng khai cho trang thanh to�n.
+Lấy danh sách phương thức thanh toán công khai cho trang thanh toán.
 
-[V? module Order Payment](./index.html)
+[Về module Order Payment](./index.html)
 
 ---
 
@@ -17,17 +17,15 @@ L?y danh s�ch phuong th?c thanh to�n c�ng khai cho trang thanh to�n.
 
 ## Headers schema
 
-| Header | Required | M� t? |
+| Header | Required | Mô tả |
 |---|---|---|
-| apiKey ho?c apikey | Yes | Kh�a x�c th?c API c?a d?i t�c |
+| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
 
 ---
 
 ## Body schema
 
-| Field | Type | Required | Rule | M� t? |
-|---|---|---|---|---|
-| (empty) | object | No | Body r?ng | API kh�ng y�u c?u tham s? trong body |
+API không yêu cầu body. Có thể gửi body rỗng `{}` hoặc không gửi body.
 
 ---
 
@@ -47,32 +45,38 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
 ```json
 {
   "statusCode": 200,
-  "data": [
-    {
-      "paymentMethodId": 1,
-      "paymentMethodType": 2,
-      "paymentMethodName": "VNPay",
-      "paymentMethodEnable": 1
-    }
-  ]
+  "error": null,
+  "message": "Success",
+  "data": {
+    "bank": { "paymentMethodId": 1, "paymentMethodType": 2, "paymentMethodName": "VietQR" },
+    "momo": null,
+    "gtelPay": null,
+    "zaloPay": null,
+    "taMove": null,
+    "vnPay": null,
+    "shopeePay": null,
+    "baoKim": null,
+    "kimNgan": null,
+    "vnpayAppInApp": null
+  }
 }
 ```
 
 ---
 
-## M� l?i
+## Mã lỗi
 
-| HTTP | M� l?i | M� t? |
+| HTTP | Mã lỗi | Mô tả |
 |---|---|---|
-| 401 | UNAUTHORIZED | apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p. |
-| 429 | APIKEY_QUOTA_EXCEEDED | Vu?t quota cho apiKey. |
-| 500 | UNKNOWN_ERROR | L?i h? th?ng n?i b?. |
+| 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
+| 429 | APIKEY_QUOTA_EXCEEDED | Vượt quota cho apiKey. |
+| 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
 
 ---
 
-## Tham kh?o
+## Tham khảo
 
-- [Danh s�ch m� l?i v� quy u?c response chung](../../Common.html)
+- [Danh sách mã lỗi và quy ước response chung](../../Common.html)
 
 ---
 

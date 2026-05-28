@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -22,8 +22,8 @@
   <div class="wrap">
     <div class="card">
       <h1>Partner API - Order Payment - Create Payment</h1>
-      <p>T?o th�ng tin thanh to�n cho l?ch h?n/don h�ng ? trang thanh to�n.</p>
-      <p><a href="./index.html">V? module Order Payment</a></p>
+      <p>Tạo thông tin thanh toán cho lịch hẹn/đơn hàng ở trang thanh toán.</p>
+      <p><a href="./index.html">Về module Order Payment</a></p>
     </div>
     <div class="card">
       <h2>Endpoint</h2>
@@ -35,20 +35,20 @@
     <div class="card">
       <h2>Headers schema</h2>
       <table>
-        <tr><th>Header</th><th>Required</th><th>M� t?</th></tr>
-        <tr><td>apiKey ho?c apikey</td><td>Yes</td><td>Kh�a x�c th?c API c?a d?i t�c</td></tr>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>apiKey hoặc apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
       </table>
     </div>
     <div class="card">
       <h2>Body schema</h2>
       <table>
-        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>M� t?</th></tr>
-        <tr><td>customerScheduleId</td><td>number</td><td>Yes</td><td>> 0</td><td>ID l?ch h?n</td></tr>
-        <tr><td>paymentMethodType</td><td>number</td><td>Yes</td><td>Gi� tr? trong danh s�ch payment type</td><td>Lo?i phuong th?c thanh to�n</td></tr>
-        <tr><td>paymentMethodId</td><td>number</td><td>No</td><td>> 0 n?u truy?n</td><td>ID phuong th?c thanh to�n</td></tr>
-        <tr><td>paymentMethodSubType</td><td>string</td><td>No</td><td>Chu?i d?nh danh subtype</td><td>Sub-type thanh to�n</td></tr>
-        <tr><td>stationServicesList</td><td>number[]</td><td>No</td><td>M?i ph?n t? > 0</td><td>Danh s�ch d?ch v? tr?m</td></tr>
-        <tr><td>stationsId</td><td>number</td><td>No</td><td>> 0 n?u truy?n</td><td>ID tr?m</td></tr>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>customerScheduleId</td><td>number</td><td>Yes</td><td>> 0</td><td>ID lịch hẹn</td></tr>
+        <tr><td>paymentMethodType</td><td>number</td><td>Yes</td><td>Giá trị trong danh sách payment type</td><td>Loại phương thức thanh toán</td></tr>
+        <tr><td>paymentMethodId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID phương thức thanh toán</td></tr>
+        <tr><td>paymentMethodSubType</td><td>string</td><td>No</td><td>Chuỗi định danh subtype</td><td>Sub-type thanh toán</td></tr>
+        <tr><td>stationServicesList</td><td>number[]</td><td>No</td><td>Mỗi phần tử > 0</td><td>Danh sách dịch vụ trạm</td></tr>
+        <tr><td>stationsId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID trạm</td></tr>
       </table>
     </div>
     <div class="card">
@@ -70,27 +70,46 @@
       <h2>Success response</h2>
       <pre>{
   "statusCode": 200,
+  "error": null,
+  "message": "Success",
   "data": {
-    "orderId": 99999,
-    "paymentQR": {
-      "paymentContent": "TTDH 99999"
-    }
+    "customerScheduleId": 1869,
+    "isSuccess": 1,
+    "paymentStatus": "New",
+    "totalPayment": 120000,
+    "orderData": { "orderId": 99999 },
+    "errorMessage": null,
+    "errorCode": null,
+    "inAppGtelOrderId": null,
+    "paymentMethodId": 1,
+    "paymentMethodType": 2,
+    "paymentMethodSubType": null,
+    "metaData": null,
+    "bankQR": {
+      "qrData": "https://.../qr.png",
+      "qrCode": "000201...",
+      "paymentContent": "ORDER99999"
+    },
+    "momoQR": null,
+    "paymentLinkUrl": null,
+    "paymentDeepLink": null,
+    "paymentGatewayData": null
   }
 }</pre>
     </div>
     <div class="card">
-      <h2>M� l?i</h2>
+      <h2>Mã lỗi</h2>
       <table>
-        <tr><th style="width:100px">HTTP</th><th style="width:35%">M� l?i</th><th>M� t?</th></tr>
-        <tr><td>400</td><td>INVALID_REQUEST</td><td>D? li?u d?u v�o kh�ng h?p l?.</td></tr>
-        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p.</td></tr>
-        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>L?i h? th?ng n?i b?.</td></tr>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td>INVALID_REQUEST</td><td>Dữ liệu đầu vào không hợp lệ.</td></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
       </table>
     </div>
     <div class="card">
-      <h2>Tham kh?o</h2>
+      <h2>Tham khảo</h2>
       <ul>
-        <li><a href="../../Common.html">Danh s�ch m� l?i v� quy u?c response chung</a></li>
+        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
       </ul>
     </div>
     <div class="card">

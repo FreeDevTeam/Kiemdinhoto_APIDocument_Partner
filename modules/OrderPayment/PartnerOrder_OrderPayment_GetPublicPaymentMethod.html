@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -41,10 +41,7 @@
     </div>
     <div class="card">
       <h2>Body schema</h2>
-      <table>
-        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
-        <tr><td>(empty)</td><td>object</td><td>No</td><td>Body rỗng</td><td>API không yêu cầu tham số trong body</td></tr>
-      </table>
+      <p>API không yêu cầu body. Có thể gửi body rỗng <code>{}</code> hoặc không gửi body.</p>
     </div>
     <div class="card">
       <h2 style="display:flex;align-items:center;gap:8px;">
@@ -60,14 +57,20 @@
       <h2>Success response</h2>
       <pre>{
   "statusCode": 200,
-  "data": [
-    {
-      "paymentMethodId": 1,
-      "paymentMethodType": 2,
-      "paymentMethodName": "VNPay",
-      "paymentMethodEnable": 1
-    }
-  ]
+  "error": null,
+  "message": "Success",
+  "data": {
+    "bank": { "paymentMethodId": 1, "paymentMethodType": 2, "paymentMethodName": "VietQR" },
+    "momo": null,
+    "gtelPay": null,
+    "zaloPay": null,
+    "taMove": null,
+    "vnPay": null,
+    "shopeePay": null,
+    "baoKim": null,
+    "kimNgan": null,
+    "vnpayAppInApp": null
+  }
 }</pre>
     </div>
     <div class="card">

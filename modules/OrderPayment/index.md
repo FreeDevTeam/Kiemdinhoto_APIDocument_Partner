@@ -1,4 +1,4 @@
-# Partner API Module: Order Payment (CustomerOrder)
+﻿# Partner API Module: Order Payment (CustomerOrder)
 
 ## Danh sách API
 
