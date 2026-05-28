@@ -50,7 +50,7 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/user/calculatePaymentInfo' \
 
 ---
 
-## Success response (rút gọn)
+## Success response
 
 ```json
 {

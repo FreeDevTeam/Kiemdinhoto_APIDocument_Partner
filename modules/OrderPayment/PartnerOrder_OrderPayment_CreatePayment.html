@@ -24,7 +24,6 @@
       <p>Tạo thông tin thanh toán cho lịch hẹn/đơn hàng ở trang thanh toán.</p>
       <p><a href="./index.html">Về module Order Payment</a></p>
     </div>
-
     <div class="card">
       <h2>Endpoint</h2>
       <table>
@@ -32,7 +31,6 @@
         <tr><th>Method</th><td>POST</td></tr>
       </table>
     </div>
-
     <div class="card">
       <h2>Headers schema</h2>
       <table>
@@ -40,7 +38,6 @@
         <tr><td>apiKey hoặc apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
       </table>
     </div>
-
     <div class="card">
       <h2>Body schema</h2>
       <table>
@@ -53,7 +50,6 @@
         <tr><td>stationsId</td><td>number</td><td>No</td><td>ID trạm</td></tr>
       </table>
     </div>
-
     <div class="card">
       <h2>Sample Request</h2>
       <pre>curl --location '{HOST_NAME}/PartnerAPI/CustomerSchedule/user/createPayment' \
@@ -65,6 +61,18 @@
     "paymentMethodId": 1,
     "stationServicesList": [101]
   }'</pre>
+    </div>
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "data": {
+    "orderId": 99999,
+    "paymentQR": {
+      "paymentContent": "TTDH 99999"
+    }
+  }
+}</pre>
     </div>
   </div>
 </body>

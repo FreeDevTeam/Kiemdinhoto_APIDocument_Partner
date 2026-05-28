@@ -42,7 +42,7 @@ curl --location '{HOST_NAME}/PartnerAPI/PaymentQR/user/getPublicPaymentMethod' \
 
 ---
 
-## Success response (rút gọn)
+## Success response
 
 ```json
 {

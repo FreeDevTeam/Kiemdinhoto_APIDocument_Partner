@@ -52,7 +52,7 @@ curl --location '{HOST_NAME}/PartnerAPI/CustomerSchedule/user/createPayment' \
 
 ---
 
-## Success response (rút gọn)
+## Success response
 
 ```json
 {
