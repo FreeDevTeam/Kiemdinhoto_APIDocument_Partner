@@ -1,0 +1,137 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Order Payment - Create Payment</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .copy-btn { border: 1px solid #c7d2e5; background: #fff; border-radius: 8px; padding: 4px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Order Payment - Create Payment</h1>
+      <p>Tạo thông tin thanh toán cho lịch hẹn/đơn hàng ở trang thanh toán.</p>
+      <p><a href="./index.html">Về module Order Payment</a></p>
+    </div>
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL</th><td>/PartnerAPI/CustomerSchedule/user/createPayment</td></tr>
+        <tr><th>Method</th><td>POST</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>apiKey hoặc apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>customerScheduleId</td><td>number</td><td>Yes</td><td>> 0</td><td>ID lịch hẹn</td></tr>
+        <tr><td>paymentMethodType</td><td>number</td><td>Yes</td><td>Giá trị trong danh sách payment type</td><td>Loại phương thức thanh toán</td></tr>
+        <tr><td>paymentMethodId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID phương thức thanh toán</td></tr>
+        <tr><td>paymentMethodSubType</td><td>string</td><td>No</td><td>Chuỗi định danh subtype</td><td>Sub-type thanh toán</td></tr>
+        <tr><td>stationServicesList</td><td>number[]</td><td>No</td><td>Mỗi phần tử > 0</td><td>Danh sách dịch vụ trạm</td></tr>
+        <tr><td>stationsId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID trạm</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        Sample Request
+        <button id="copySampleBtn" class="copy-btn" type="button" onclick="copySample()">Copy</button>
+      </h2>
+      <pre id="curlText">curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/CustomerSchedule/user/createPayment' \
+  --header 'Content-Type: application/json' \
+  --header 'apiKey: demo_partner_api_key' \
+  --data '{
+    "customerScheduleId": 1869,
+    "paymentMethodType": 2,
+    "paymentMethodId": 1,
+    "stationServicesList": [101]
+  }'</pre>
+    </div>
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "customerScheduleId": 1869,
+    "isSuccess": 1,
+    "paymentStatus": "New",
+    "totalPayment": 120000,
+    "orderData": { "orderId": 99999 },
+    "errorMessage": null,
+    "errorCode": null,
+    "inAppGtelOrderId": null,
+    "paymentMethodId": 1,
+    "paymentMethodType": 2,
+    "paymentMethodSubType": null,
+    "metaData": null,
+    "bankQR": {
+      "qrData": "https://.../qr.png",
+      "qrCode": "000201...",
+      "paymentContent": "ORDER99999"
+    },
+    "momoQR": null,
+    "paymentLinkUrl": null,
+    "paymentDeepLink": null,
+    "paymentGatewayData": null
+  }
+}</pre>
+    </div>
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td>INVALID_REQUEST</td><td>Dữ liệu đầu vào không hợp lệ.</td></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li><b>Host:</b> https://ttdk-develop-server.service.makefamousapp.com</li>
+        <li><b>apiKey test:</b> demo_partner_api_key</li>
+        <li><b>customerScheduleId:</b> 1869</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    function copySample() {
+      const text = document.getElementById('curlText')?.innerText || '';
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('copySampleBtn');
+      if (btn) {
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(() => { btn.innerText = old; }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>

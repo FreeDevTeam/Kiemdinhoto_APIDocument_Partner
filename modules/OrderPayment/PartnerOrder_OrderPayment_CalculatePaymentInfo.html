@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Order Payment - Calculate Payment Info</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .copy-btn { border: 1px solid #c7d2e5; background: #fff; border-radius: 8px; padding: 4px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Order Payment - Calculate Payment Info</h1>
+      <p>Tính thông tin thanh toán (tổng tiền, giảm giá...) cho trang thanh toán.</p>
+      <p><a href="./index.html">Về module Order Payment</a></p>
+    </div>
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL</th><td>/PartnerAPI/Order/user/calculatePaymentInfo</td></tr>
+        <tr><th>Method</th><td>POST</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>apiKey hoặc apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>orderId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID đơn hàng</td></tr>
+        <tr><td>licensePlatesList</td><td>string[]</td><td>No</td><td>Mảng biển số hợp lệ</td><td>Danh sách biển số</td></tr>
+        <tr><td>productIds</td><td>number[] | object[]</td><td>No</td><td>object[] theo dạng { productId, quantity }</td><td>Danh sách sản phẩm</td></tr>
+        <tr><td>promotionCode</td><td>string</td><td>No</td><td>Mã khuyến mãi hợp lệ</td><td>Mã giảm giá</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        Sample Request
+        <button id="copySampleBtn" class="copy-btn" type="button" onclick="copySample()">Copy</button>
+      </h2>
+      <pre id="curlText">curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/Order/user/calculatePaymentInfo' \
+  --header 'Content-Type: application/json' \
+  --header 'apiKey: demo_partner_api_key' \
+  --data '{
+    "orderId": 12345,
+    "promotionCode": "SALE10"
+  }'</pre>
+    </div>
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "subTotalAmount": 100000,
+    "payment": 100000,
+    "taxAmount": 8000,
+    "discountAmount": 10000,
+    "totalPayment": 98000,
+    "totalAmount": 98000,
+    "paidAmount": 0,
+    "unpaidAmount": 98000,
+    "refundAmount": 0,
+    "debtStatus": 0,
+    "promotionData": null,
+    "salesChannel": "PARTNER"
+  }
+}</pre>
+    </div>
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td>INVALID_REQUEST</td><td>Dữ liệu đầu vào không hợp lệ.</td></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li><b>Host:</b> https://ttdk-develop-server.service.makefamousapp.com</li>
+        <li><b>apiKey test:</b> demo_partner_api_key</li>
+        <li><b>orderId:</b> 12345</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    function copySample() {
+      const text = document.getElementById('curlText')?.innerText || '';
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('copySampleBtn');
+      if (btn) {
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(() => { btn.innerText = old; }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Order Payment - Get Public Payment Method</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .copy-btn { border: 1px solid #c7d2e5; background: #fff; border-radius: 8px; padding: 4px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Order Payment - Get Public Payment Method</h1>
+      <p>Lấy danh sách phương thức thanh toán công khai cho trang thanh toán.</p>
+      <p><a href="./index.html">Về module Order Payment</a></p>
+    </div>
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL</th><td>/PartnerAPI/PaymentQR/user/getPublicPaymentMethod</td></tr>
+        <tr><th>Method</th><td>POST</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>apiKey hoặc apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Body schema</h2>
+      <p>API không yêu cầu body. Có thể gửi body rỗng <code>{}</code> hoặc không gửi body.</p>
+    </div>
+    <div class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        Sample Request
+        <button id="copySampleBtn" class="copy-btn" type="button" onclick="copySample()">Copy</button>
+      </h2>
+      <pre id="curlText">curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/PaymentQR/user/getPublicPaymentMethod' \
+  --header 'Content-Type: application/json' \
+  --header 'apiKey: demo_partner_api_key' \
+  --data '{}'</pre>
+    </div>
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "bank": { "paymentMethodId": 1, "paymentMethodType": 2, "paymentMethodName": "VietQR" },
+    "momo": null,
+    "gtelPay": null,
+    "zaloPay": null,
+    "taMove": null,
+    "vnPay": null,
+    "shopeePay": null,
+    "baoKim": null,
+    "kimNgan": null,
+    "vnpayAppInApp": null
+  }
+}</pre>
+    </div>
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
+        <tr><td>429</td><td>APIKEY_QUOTA_EXCEEDED</td><td>Vượt quota cho apiKey.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li><b>Host:</b> https://ttdk-develop-server.service.makefamousapp.com</li>
+        <li><b>apiKey test:</b> demo_partner_api_key</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    function copySample() {
+      const text = document.getElementById('curlText')?.innerText || '';
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('copySampleBtn');
+      if (btn) {
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(() => { btn.innerText = old; }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>
