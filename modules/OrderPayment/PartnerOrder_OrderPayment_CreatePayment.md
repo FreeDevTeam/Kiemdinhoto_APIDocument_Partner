@@ -1,8 +1,8 @@
-﻿# Partner API - Order Payment - Create Payment
+# Partner API - Order Payment - Create Payment
 
-Tạo thông tin thanh toán cho lịch hẹn/đơn hàng ở trang thanh toán.
+T?o th�ng tin thanh to�n cho l?ch h?n/don h�ng ? trang thanh to�n.
 
-[Về module Order Payment](./index.html)
+[V? module Order Payment](./index.html)
 
 ---
 
@@ -17,29 +17,29 @@ Tạo thông tin thanh toán cho lịch hẹn/đơn hàng ở trang thanh toán.
 
 ## Headers schema
 
-| Header | Required | Mô tả |
+| Header | Required | M� t? |
 |---|---|---|
-| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
+| apiKey ho?c apikey | Yes | Kh�a x�c th?c API c?a d?i t�c |
 
 ---
 
 ## Body schema
 
-| Field | Type | Required | Rule | Mô tả |
+| Field | Type | Required | Rule | M� t? |
 |---|---|---|---|---|
-| customerScheduleId | number | Yes | > 0 | ID lịch hẹn |
-| paymentMethodType | number | Yes | Giá trị trong danh sách payment type | Loại phương thức thanh toán |
-| paymentMethodId | number | No | > 0 nếu truyền | ID phương thức thanh toán |
-| paymentMethodSubType | string | No | Chuỗi định danh subtype | Sub-type thanh toán |
-| stationServicesList | number[] | No | Mỗi phần tử > 0 | Danh sách dịch vụ trạm |
-| stationsId | number | No | > 0 nếu truyền | ID trạm |
+| customerScheduleId | number | Yes | > 0 | ID l?ch h?n |
+| paymentMethodType | number | Yes | Gi� tr? trong danh s�ch payment type | Lo?i phuong th?c thanh to�n |
+| paymentMethodId | number | No | > 0 n?u truy?n | ID phuong th?c thanh to�n |
+| paymentMethodSubType | string | No | Chu?i d?nh danh subtype | Sub-type thanh to�n |
+| stationServicesList | number[] | No | M?i ph?n t? > 0 | Danh s�ch d?ch v? tr?m |
+| stationsId | number | No | > 0 n?u truy?n | ID tr?m |
 
 ---
 
 ## Sample Request
 
 ```bash
-curl --location 'https://partner.ttdk.com.vn/PartnerAPI/CustomerSchedule/user/createPayment' \
+curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/CustomerSchedule/user/createPayment' \
   --header 'Content-Type: application/json' \
   --header 'apiKey: demo_partner_api_key' \
   --data '{
@@ -68,24 +68,24 @@ curl --location 'https://partner.ttdk.com.vn/PartnerAPI/CustomerSchedule/user/cr
 
 ---
 
-## Mã lỗi
+## M� l?i
 
-| HTTP | Mã lỗi | Mô tả |
+| HTTP | M� l?i | M� t? |
 |---|---|---|
-| 400 | INVALID_REQUEST | Dữ liệu đầu vào không hợp lệ. |
-| 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
-| 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
+| 400 | INVALID_REQUEST | D? li?u d?u v�o kh�ng h?p l?. |
+| 401 | UNAUTHORIZED | apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p. |
+| 500 | UNKNOWN_ERROR | L?i h? th?ng n?i b?. |
 
 ---
 
-## Tham khảo
+## Tham kh?o
 
-- [Danh sách mã lỗi và quy ước response chung](../../Common.html)
+- [Danh s�ch m� l?i v� quy u?c response chung](../../Common.html)
 
 ---
 
 ## Data test cho developer
 
-- Host: `https://partner.ttdk.com.vn`
+- Host: `https://ttdk-develop-server.service.makefamousapp.com`
 - apiKey test: `demo_partner_api_key`
 - customerScheduleId: `1869`

@@ -1,8 +1,8 @@
-﻿# Partner API - Order Payment - Get Public Payment Method
+# Partner API - Order Payment - Get Public Payment Method
 
-Lấy danh sách phương thức thanh toán công khai cho trang thanh toán.
+L?y danh s�ch phuong th?c thanh to�n c�ng khai cho trang thanh to�n.
 
-[Về module Order Payment](./index.html)
+[V? module Order Payment](./index.html)
 
 ---
 
@@ -17,24 +17,24 @@ Lấy danh sách phương thức thanh toán công khai cho trang thanh toán.
 
 ## Headers schema
 
-| Header | Required | Mô tả |
+| Header | Required | M� t? |
 |---|---|---|
-| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
+| apiKey ho?c apikey | Yes | Kh�a x�c th?c API c?a d?i t�c |
 
 ---
 
 ## Body schema
 
-| Field | Type | Required | Rule | Mô tả |
+| Field | Type | Required | Rule | M� t? |
 |---|---|---|---|---|
-| (empty) | object | No | Body rỗng | API không yêu cầu tham số trong body |
+| (empty) | object | No | Body r?ng | API kh�ng y�u c?u tham s? trong body |
 
 ---
 
 ## Sample Request
 
 ```bash
-curl --location 'https://partner.ttdk.com.vn/PartnerAPI/PaymentQR/user/getPublicPaymentMethod' \
+curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/PaymentQR/user/getPublicPaymentMethod' \
   --header 'Content-Type: application/json' \
   --header 'apiKey: demo_partner_api_key' \
   --data '{}'
@@ -60,23 +60,23 @@ curl --location 'https://partner.ttdk.com.vn/PartnerAPI/PaymentQR/user/getPublic
 
 ---
 
-## Mã lỗi
+## M� l?i
 
-| HTTP | Mã lỗi | Mô tả |
+| HTTP | M� l?i | M� t? |
 |---|---|---|
-| 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
-| 429 | APIKEY_QUOTA_EXCEEDED | Vượt quota cho apiKey. |
-| 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
+| 401 | UNAUTHORIZED | apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p. |
+| 429 | APIKEY_QUOTA_EXCEEDED | Vu?t quota cho apiKey. |
+| 500 | UNKNOWN_ERROR | L?i h? th?ng n?i b?. |
 
 ---
 
-## Tham khảo
+## Tham kh?o
 
-- [Danh sách mã lỗi và quy ước response chung](../../Common.html)
+- [Danh s�ch m� l?i v� quy u?c response chung](../../Common.html)
 
 ---
 
 ## Data test cho developer
 
-- Host: `https://partner.ttdk.com.vn`
+- Host: `https://ttdk-develop-server.service.makefamousapp.com`
 - apiKey test: `demo_partner_api_key`

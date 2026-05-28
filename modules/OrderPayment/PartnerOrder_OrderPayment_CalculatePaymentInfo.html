@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -22,8 +22,8 @@
   <div class="wrap">
     <div class="card">
       <h1>Partner API - Order Payment - Calculate Payment Info</h1>
-      <p>Tính thông tin thanh toán (tổng tiền, giảm giá...) cho trang thanh toán.</p>
-      <p><a href="./index.html">Về module Order Payment</a></p>
+      <p>T�nh th�ng tin thanh to�n (t?ng ti?n, gi?m gi�...) cho trang thanh to�n.</p>
+      <p><a href="./index.html">V? module Order Payment</a></p>
     </div>
     <div class="card">
       <h2>Endpoint</h2>
@@ -35,18 +35,18 @@
     <div class="card">
       <h2>Headers schema</h2>
       <table>
-        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
-        <tr><td>apiKey hoặc apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
+        <tr><th>Header</th><th>Required</th><th>M� t?</th></tr>
+        <tr><td>apiKey ho?c apikey</td><td>Yes</td><td>Kh�a x�c th?c API c?a d?i t�c</td></tr>
       </table>
     </div>
     <div class="card">
       <h2>Body schema</h2>
       <table>
-        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
-        <tr><td>orderId</td><td>number</td><td>No</td><td>> 0 nếu truyền</td><td>ID đơn hàng</td></tr>
-        <tr><td>licensePlatesList</td><td>string[]</td><td>No</td><td>Mảng biển số hợp lệ</td><td>Danh sách biển số</td></tr>
-        <tr><td>productIds</td><td>number[] | object[]</td><td>No</td><td>object[] theo dạng { productId, quantity }</td><td>Danh sách sản phẩm</td></tr>
-        <tr><td>promotionCode</td><td>string</td><td>No</td><td>Mã khuyến mãi hợp lệ</td><td>Mã giảm giá</td></tr>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>M� t?</th></tr>
+        <tr><td>orderId</td><td>number</td><td>No</td><td>> 0 n?u truy?n</td><td>ID don h�ng</td></tr>
+        <tr><td>licensePlatesList</td><td>string[]</td><td>No</td><td>M?ng bi?n s? h?p l?</td><td>Danh s�ch bi?n s?</td></tr>
+        <tr><td>productIds</td><td>number[] | object[]</td><td>No</td><td>object[] theo d?ng { productId, quantity }</td><td>Danh s�ch s?n ph?m</td></tr>
+        <tr><td>promotionCode</td><td>string</td><td>No</td><td>M� khuy?n m�i h?p l?</td><td>M� gi?m gi�</td></tr>
       </table>
     </div>
     <div class="card">
@@ -54,7 +54,7 @@
         Sample Request
         <button id="copySampleBtn" class="copy-btn" type="button" onclick="copySample()">Copy</button>
       </h2>
-      <pre id="curlText">curl --location 'https://partner.ttdk.com.vn/PartnerAPI/Order/user/calculatePaymentInfo' \
+      <pre id="curlText">curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/Order/user/calculatePaymentInfo' \
   --header 'Content-Type: application/json' \
   --header 'apiKey: demo_partner_api_key' \
   --data '{
@@ -74,24 +74,24 @@
 }</pre>
     </div>
     <div class="card">
-      <h2>Mã lỗi</h2>
+      <h2>M� l?i</h2>
       <table>
-        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
-        <tr><td>400</td><td>INVALID_REQUEST</td><td>Dữ liệu đầu vào không hợp lệ.</td></tr>
-        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey không hợp lệ hoặc không có quyền truy cập.</td></tr>
-        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>Lỗi hệ thống nội bộ.</td></tr>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">M� l?i</th><th>M� t?</th></tr>
+        <tr><td>400</td><td>INVALID_REQUEST</td><td>D? li?u d?u v�o kh�ng h?p l?.</td></tr>
+        <tr><td>401</td><td>UNAUTHORIZED</td><td>apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p.</td></tr>
+        <tr><td>500</td><td>UNKNOWN_ERROR</td><td>L?i h? th?ng n?i b?.</td></tr>
       </table>
     </div>
     <div class="card">
-      <h2>Tham khảo</h2>
+      <h2>Tham kh?o</h2>
       <ul>
-        <li><a href="../../Common.html">Danh sách mã lỗi và quy ước response chung</a></li>
+        <li><a href="../../Common.html">Danh s�ch m� l?i v� quy u?c response chung</a></li>
       </ul>
     </div>
     <div class="card">
       <h2>Data test cho developer</h2>
       <ul>
-        <li><b>Host:</b> https://partner.ttdk.com.vn</li>
+        <li><b>Host:</b> https://ttdk-develop-server.service.makefamousapp.com</li>
         <li><b>apiKey test:</b> demo_partner_api_key</li>
         <li><b>orderId:</b> 12345</li>
       </ul>

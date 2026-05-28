@@ -1,8 +1,8 @@
-﻿# Partner API - Order Payment - Calculate Payment Info
+# Partner API - Order Payment - Calculate Payment Info
 
-Tính thông tin thanh toán (tổng tiền, giảm giá...) cho trang thanh toán.
+T�nh th�ng tin thanh to�n (t?ng ti?n, gi?m gi�...) cho trang thanh to�n.
 
-[Về module Order Payment](./index.html)
+[V? module Order Payment](./index.html)
 
 ---
 
@@ -17,27 +17,27 @@ Tính thông tin thanh toán (tổng tiền, giảm giá...) cho trang thanh to�
 
 ## Headers schema
 
-| Header | Required | Mô tả |
+| Header | Required | M� t? |
 |---|---|---|
-| apiKey hoặc apikey | Yes | Khóa xác thực API của đối tác |
+| apiKey ho?c apikey | Yes | Kh�a x�c th?c API c?a d?i t�c |
 
 ---
 
 ## Body schema
 
-| Field | Type | Required | Rule | Mô tả |
+| Field | Type | Required | Rule | M� t? |
 |---|---|---|---|---|
-| orderId | number | No | > 0 nếu truyền | ID đơn hàng |
-| licensePlatesList | string[] | No | Mảng biển số hợp lệ | Danh sách biển số |
-| productIds | number[] \| object[] | No | object[] theo dạng `{ productId, quantity }` | Danh sách sản phẩm |
-| promotionCode | string | No | Mã khuyến mãi hợp lệ | Mã giảm giá |
+| orderId | number | No | > 0 n?u truy?n | ID don h�ng |
+| licensePlatesList | string[] | No | M?ng bi?n s? h?p l? | Danh s�ch bi?n s? |
+| productIds | number[] \| object[] | No | object[] theo d?ng `{ productId, quantity }` | Danh s�ch s?n ph?m |
+| promotionCode | string | No | M� khuy?n m�i h?p l? | M� gi?m gi� |
 
 ---
 
 ## Sample Request
 
 ```bash
-curl --location 'https://partner.ttdk.com.vn/PartnerAPI/Order/user/calculatePaymentInfo' \
+curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAPI/Order/user/calculatePaymentInfo' \
   --header 'Content-Type: application/json' \
   --header 'apiKey: demo_partner_api_key' \
   --data '{
@@ -63,24 +63,24 @@ curl --location 'https://partner.ttdk.com.vn/PartnerAPI/Order/user/calculatePaym
 
 ---
 
-## Mã lỗi
+## M� l?i
 
-| HTTP | Mã lỗi | Mô tả |
+| HTTP | M� l?i | M� t? |
 |---|---|---|
-| 400 | INVALID_REQUEST | Dữ liệu đầu vào không hợp lệ. |
-| 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
-| 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
+| 400 | INVALID_REQUEST | D? li?u d?u v�o kh�ng h?p l?. |
+| 401 | UNAUTHORIZED | apiKey kh�ng h?p l? ho?c kh�ng c� quy?n truy c?p. |
+| 500 | UNKNOWN_ERROR | L?i h? th?ng n?i b?. |
 
 ---
 
-## Tham khảo
+## Tham kh?o
 
-- [Danh sách mã lỗi và quy ước response chung](../../Common.html)
+- [Danh s�ch m� l?i v� quy u?c response chung](../../Common.html)
 
 ---
 
 ## Data test cho developer
 
-- Host: `https://partner.ttdk.com.vn`
+- Host: `https://ttdk-develop-server.service.makefamousapp.com`
 - apiKey test: `demo_partner_api_key`
 - orderId: `12345`
