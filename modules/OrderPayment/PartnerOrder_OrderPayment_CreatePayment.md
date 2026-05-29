@@ -93,6 +93,7 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
 |---|---|---|
 | 400 | INVALID_REQUEST | Dữ liệu đầu vào không hợp lệ. |
 | 401 | UNAUTHORIZED | apiKey không hợp lệ hoặc không có quyền truy cập. |
+| 429 | APIKEY_QUOTA_EXCEEDED | Vượt quota cho apiKey. |
 | 500 | UNKNOWN_ERROR | Lỗi hệ thống nội bộ. |
 
 ---
@@ -108,3 +109,4 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
 - Host: `https://ttdk-develop-server.service.makefamousapp.com`
 - apiKey test: `demo_partner_api_key`
 - customerScheduleId: `1869`
+

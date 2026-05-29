@@ -60,7 +60,17 @@
   "error": null,
   "message": "Success",
   "data": {
-    "bank": { "paymentMethodId": 1, "paymentMethodType": 2, "paymentMethodName": "VietQR" },
+    "bank": {
+      "paymentMethodId": 1,
+      "paymentMethodName": "Techcombank",
+      "paymentMethodType": 2,
+      "paymentMethodIdentityNumber": "19038779892016",
+      "paymentMethodOwnerName": "CONG TY TNHH ...",
+      "paymentMethodImageUrl": "https://...",
+      "paymentMethodEnable": 1,
+      "paymentMethodNote": "VietQR",
+      "stationsId": 57
+    },
     "momo": null,
     "gtelPay": null,
     "zaloPay": null,
@@ -72,6 +82,10 @@
     "vnpayAppInApp": null
   }
 }</pre>
+      <p style="margin-top:12px;">
+        Ghi chú: mỗi key trong <code>data</code> (<code>bank</code>, <code>momo</code>, <code>gtelPay</code>, ...)
+        trả về <b>1 bản ghi PaymentMethod</b> hoặc <code>null</code>. Tùy cấu hình từng trạm, thường chỉ một số phương thức có dữ liệu.
+      </p>
     </div>
     <div class="card">
       <h2>Mã lỗi</h2>
