@@ -28,17 +28,17 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field               | Type          | Required | Rule      | Mô tả |
 | ------------------- | ------------- | -------- | --------- | ----- |
-| licensePlates       | string        | Yes      | max 15    | -     |
-| phone               | string        | Yes      | required  | -     |
-| fullnameSchedule    | string        | No       | default - | -     |
-| vehicleType         | number        | Yes      | required  | -     |
-| licensePlateColor   | number        | Yes      | required  | -     |
-| stationsId          | number        | No       | -         | -     |
-| dateSchedule        | string        | No       | -         | -     |
-| time                | string        | No       | -         | -     |
-| stationServicesList | array<number> | No       | -         | -     |
-| isImmediate         | number        | No       | 0 or 1    | -     |
-| attachmentList      | array<object> | No       | -         | -     |
+| licensePlates | string | Yes | max 15 | Biển số xe cần tạo lịch. |
+| phone | string | Yes | required | Số điện thoại khách hàng. |
+| fullnameSchedule | string | No | default - | Họ tên người đặt lịch. |
+| vehicleType | number | Yes | required, default CAR | Loại phương tiện theo enum hệ thống. |
+| licensePlateColor | number | Yes | required | Màu biển số theo enum hệ thống. |
+| stationsId | number | No | - | ID trạm đăng kiểm. |
+| dateSchedule | string | No | - | Ngày hẹn dự kiến (dd/MM/yyyy). |
+| time | string | No | - | Khung giờ hẹn. |
+| stationServicesList | array<number> | No | - | Danh sách ID dịch vụ trạm đã chọn. |
+| isImmediate | number | No | valid 0|1 | 1: tạo lịch ngay cùng đơn, 0: chỉ tạo đơn trước. |
+| attachmentList | array<object> | No | - | Danh sách tệp đính kèm hồ sơ. |
 
 ---
 

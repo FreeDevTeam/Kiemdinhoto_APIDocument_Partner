@@ -137,77 +137,71 @@
             <td>string</td>
             <td>Yes</td>
             <td>max 15</td>
-            <td>-</td>
+            <td>Biển số xe cần tạo lịch.</td>
           </tr>
           <tr>
             <td>phone</td>
             <td>string</td>
             <td>Yes</td>
             <td>required</td>
-            <td>-</td>
+            <td>Số điện thoại khách hàng.</td>
           </tr>
           <tr>
             <td>fullnameSchedule</td>
             <td>string</td>
             <td>No</td>
             <td>default -</td>
-            <td>-</td>
+            <td>Họ tên người đặt lịch.</td>
           </tr>
           <tr>
             <td>vehicleType</td>
             <td>number</td>
             <td>Yes</td>
-            <td>required</td>
-            <td>-</td>
+            <td>required, default CAR</td>
+            <td>Loại phương tiện theo enum hệ thống.</td>
           </tr>
           <tr>
             <td>licensePlateColor</td>
             <td>number</td>
             <td>Yes</td>
             <td>required</td>
-            <td>-</td>
+            <td>Màu biển số theo enum hệ thống.</td>
           </tr>
           <tr>
             <td>stationsId</td>
             <td>number</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>ID trạm đăng kiểm.</td>
           </tr>
           <tr>
             <td>dateSchedule</td>
             <td>string</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Ngày hẹn dự kiến (dd/MM/yyyy).</td>
           </tr>
           <tr>
             <td>time</td>
             <td>string</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Khung giờ hẹn.</td>
           </tr>
           <tr>
             <td>stationServicesList</td>
             <td>array&lt;number&gt;</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Danh sách ID dịch vụ trạm đã chọn.</td>
           </tr>
-          <tr>
-            <td>isImmediate</td>
-            <td>number</td>
-            <td>No</td>
-            <td>0 or 1</td>
-            <td>-</td>
-          </tr>
+          <tr><td>isImmediate</td><td>number</td><td>No</td><td>valid 0|1</td><td>1: tạo lịch ngay cùng đơn, 0: chỉ tạo đơn trước.</td></tr>
           <tr>
             <td>attachmentList</td>
             <td>array&lt;object&gt;</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Danh sách tệp đính kèm hồ sơ.</td>
           </tr>
         </table>
       </div>
@@ -324,3 +318,4 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/user/createOrderSchedule' \
     </script>
   </body>
 </html>
+

@@ -28,11 +28,11 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field      | Type   | Required | Rule        | Mô tả |
 | ---------- | ------ | -------- | ----------- | ----- |
-| filter     | object | No       | -           | -     |
-| searchText | string | No       | allow empty | -     |
-| skip       | number | No       | default 0   | -     |
-| limit      | number | No       | max 350     | -     |
-| order      | object | No       | -           | -     |
+| filter | object | No | - | Bộ điều kiện lọc danh sách. |
+| searchText | string | No | allow "", null | Từ khóa tìm kiếm. |
+| skip | number | No | default 0, min 0 | Số bản ghi bỏ qua (phân trang). |
+| limit | number | No | max 350 | Số bản ghi tối đa trả về (phân trang). |
+| order | object | No | object(default key/value) | Cấu hình sắp xếp kết quả. |
 
 ---
 

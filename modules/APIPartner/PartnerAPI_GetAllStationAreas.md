@@ -28,7 +28,7 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field     | Type   | Required | Rule  | Mô tả |
 | --------- | ------ | -------- | ----- | ----- |
-| (payload) | object | No       | empty | -     |
+| (payload) | object | No | empty object | - |
 
 ---
 

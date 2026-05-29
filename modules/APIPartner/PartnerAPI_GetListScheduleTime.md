@@ -28,9 +28,9 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field       | Type   | Required | Rule     | Mô tả |
 | ----------- | ------ | -------- | -------- | ----- |
-| stationsId  | number | Yes      | required | -     |
-| date        | string | Yes      | required | -     |
-| vehicleType | number | Yes      | required | -     |
+| stationsId | number | Yes | required, integer, min 0 | ID trạm đăng kiểm. |
+| date | string | Yes | required, dd/MM/yyyy | Ngày cần lấy khung giờ theo định dạng dd/MM/yyyy. |
+| vehicleType | number | Yes | required, valid [1, 2, 3] | Loại phương tiện theo enum hệ thống. |
 
 ---
 

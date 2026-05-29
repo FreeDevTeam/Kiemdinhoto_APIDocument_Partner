@@ -28,10 +28,10 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field       | Type   | Required | Rule       | Mô tả |
 | ----------- | ------ | -------- | ---------- | ----- |
-| stationsId  | number | Yes      | required   | -     |
-| startDate   | string | No       | dd/MM/yyyy | -     |
-| endDate     | string | No       | dd/MM/yyyy | -     |
-| vehicleType | number | Yes      | required   | -     |
+| stationsId | number | Yes | required, integer, min 0 | ID trạm đăng kiểm. |
+| startDate | string | No | string dd/MM/yyyy | Ngày bắt đầu phạm vi lấy lịch (dd/MM/yyyy). |
+| endDate | string | No | string dd/MM/yyyy | Ngày kết thúc phạm vi lấy lịch (dd/MM/yyyy). |
+| vehicleType | number | Yes | required, valid [1, 2, 3] | Loại phương tiện theo enum hệ thống. |
 
 ---
 

@@ -28,16 +28,16 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field               | Type          | Required | Rule      | Mô tả |
 | ------------------- | ------------- | -------- | --------- | ----- |
-| licensePlates       | string        | Yes      | max 15    | -     |
-| phone               | string        | Yes      | required  | -     |
-| fullnameSchedule    | string        | No       | default - | -     |
-| email               | string        | No       | email     | -     |
-| dateSchedule        | string        | No       | -         | -     |
-| time                | string        | No       | -         | -     |
-| stationsId          | number        | No       | -         | -     |
-| vehicleType         | number        | Yes      | required  | -     |
-| licensePlateColor   | number        | Yes      | required  | -     |
-| stationServicesList | array<number> | No       | -         | -     |
+| licensePlates | string | Yes | max 15 | Biển số xe cần tạo lịch. |
+| phone | string | Yes | required | Số điện thoại khách hàng. |
+| fullnameSchedule | string | No | default - | Họ tên người đặt lịch. |
+| email | string | No | email | Email nhận thông báo (nếu có). |
+| dateSchedule | string | No | - | Ngày hẹn dự kiến (dd/MM/yyyy). |
+| time | string | No | - | Khung giờ hẹn. |
+| stationsId | number | No | - | ID trạm đăng kiểm. |
+| vehicleType | number | Yes | required, default CAR | Loại phương tiện theo enum hệ thống. |
+| licensePlateColor | number | Yes | required | Màu biển số theo enum hệ thống. |
+| stationServicesList | array<number> | No | - | Danh sách ID dịch vụ trạm đã chọn. |
 
 ---
 

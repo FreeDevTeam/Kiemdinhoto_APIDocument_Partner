@@ -136,22 +136,22 @@
             <td>stationsId</td>
             <td>number</td>
             <td>Yes</td>
-            <td>required</td>
-            <td>-</td>
+            <td>required, integer, min 0</td>
+            <td>ID trạm đăng kiểm.</td>
           </tr>
           <tr>
             <td>date</td>
             <td>string</td>
             <td>Yes</td>
-            <td>required</td>
-            <td>-</td>
+            <td>required, dd/MM/yyyy</td>
+            <td>Ngày cần lấy khung giờ theo định dạng dd/MM/yyyy.</td>
           </tr>
           <tr>
             <td>vehicleType</td>
             <td>number</td>
             <td>Yes</td>
-            <td>required</td>
-            <td>-</td>
+            <td>required, valid [1, 2, 3]</td>
+            <td>Loại phương tiện theo enum hệ thống.</td>
           </tr>
         </table>
       </div>
@@ -274,3 +274,4 @@ curl --location '{HOST_NAME}/PartnerAPI/Stations/user/getListScheduleTime' \
     </script>
   </body>
 </html>
+

@@ -136,50 +136,50 @@
             <td>searchText</td>
             <td>string</td>
             <td>No</td>
-            <td>allow empty</td>
-            <td>-</td>
+            <td>allow "", null</td>
+            <td>Từ khóa tìm kiếm.</td>
           </tr>
           <tr>
             <td>filter.stationArea</td>
             <td>string</td>
             <td>No</td>
-            <td>-</td>
+            <td>Khu vực trạm để lọc danh sách trạm.</td>
             <td>-</td>
           </tr>
           <tr>
             <td>filter.availableStatus</td>
             <td>number or array</td>
             <td>No</td>
-            <td>-</td>
+            <td>number|number[]</td>
             <td>-</td>
           </tr>
           <tr>
             <td>filter.enablePriorityMode</td>
             <td>number or array</td>
             <td>No</td>
-            <td>-</td>
+            <td>number(min 0)|number[]</td>
             <td>-</td>
           </tr>
           <tr>
             <td>skip</td>
             <td>number</td>
             <td>No</td>
-            <td>default 0</td>
-            <td>-</td>
+            <td>default 0, min 0</td>
+            <td>Số bản ghi bỏ qua (phân trang).</td>
           </tr>
           <tr>
             <td>limit</td>
             <td>number</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Số bản ghi tối đa trả về (phân trang).</td>
           </tr>
           <tr>
             <td>order</td>
             <td>object</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Cấu hình sắp xếp kết quả.</td>
           </tr>
         </table>
       </div>
@@ -302,3 +302,4 @@ curl --location '{HOST_NAME}/PartnerAPI/Stations/user/getAllExternal' \
     </script>
   </body>
 </html>
+

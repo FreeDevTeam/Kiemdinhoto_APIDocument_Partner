@@ -28,13 +28,13 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field                     | Type            | Required | Rule        | Mô tả |
 | ------------------------- | --------------- | -------- | ----------- | ----- |
-| searchText                | string          | No       | allow empty | -     |
-| filter.stationArea        | string          | No       | -           | -     |
-| filter.availableStatus    | number or array | No       | -           | -     |
-| filter.enablePriorityMode | number or array | No       | -           | -     |
-| skip                      | number          | No       | default 0   | -     |
-| limit                     | number          | No       | -           | -     |
-| order                     | object          | No       | -           | -     |
+| searchText | string | No | allow "", null | Từ khóa tìm kiếm. |
+| filter.stationArea | string | No | - | Mã khu vực trạm (ví dụ HN, HCM) để lọc danh sách trạm. |
+| filter.availableStatus | number or array | No | number|number[] | - |
+| filter.enablePriorityMode | number or array | No | number(min 0)|number[] | - |
+| skip | number | No | default 0, min 0 | Số bản ghi bỏ qua (phân trang). |
+| limit | number | No | - | Số bản ghi tối đa trả về (phân trang). |
+| order | object | No | - | Cấu hình sắp xếp kết quả. |
 
 ---
 

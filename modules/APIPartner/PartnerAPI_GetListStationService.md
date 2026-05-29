@@ -26,13 +26,13 @@ Tài liệu API dành cho PartnerBooking.
 
 ## Body schema
 
-| Field             | Type   | Required | Rule      | Mô tả |
-| ----------------- | ------ | -------- | --------- | ----- |
-| filter.stationsId | number | Yes      | required  | -     |
-| searchText        | string | No       | -         | -     |
-| skip              | number | No       | default 0 | -     |
-| limit             | number | No       | -         | -     |
-| order             | object | No       | -         | -     |
+| Field             | Type   | Required | Rule      | Mô tả                                               |
+| ----------------- | ------ | -------- | --------- | --------------------------------------------------- |
+| filter.stationsId | number | Yes | required, integer, min 0 | ID trạm cần lấy danh sách dịch vụ. |
+| searchText | string | No | - | Từ khóa tìm theo tên dịch vụ (`serviceName`). |
+| skip | number | No | default 0, min 0 | Số bản ghi bỏ qua (phân trang). |
+| limit | number | No | - | Số bản ghi tối đa trả về (phân trang). |
+| order | object | No | - | Sắp xếp kết quả, ví dụ `{ key: 'createdAt', ... }`. |
 
 ---
 

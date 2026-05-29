@@ -137,35 +137,35 @@
             <td>object</td>
             <td>No</td>
             <td>-</td>
-            <td>-</td>
+            <td>Bộ điều kiện lọc danh sách.</td>
           </tr>
           <tr>
             <td>searchText</td>
             <td>string</td>
             <td>No</td>
-            <td>allow empty</td>
-            <td>-</td>
+            <td>allow "", null</td>
+            <td>Từ khóa tìm kiếm.</td>
           </tr>
           <tr>
             <td>skip</td>
             <td>number</td>
             <td>No</td>
-            <td>default 0</td>
-            <td>-</td>
+            <td>default 0, min 0</td>
+            <td>Số bản ghi bỏ qua (phân trang).</td>
           </tr>
           <tr>
             <td>limit</td>
             <td>number</td>
             <td>No</td>
             <td>max 350</td>
-            <td>-</td>
+            <td>Số bản ghi tối đa trả về (phân trang).</td>
           </tr>
           <tr>
             <td>order</td>
             <td>object</td>
             <td>No</td>
-            <td>-</td>
-            <td>-</td>
+            <td>object(default key/value)</td>
+            <td>Cấu hình sắp xếp kết quả.</td>
           </tr>
         </table>
       </div>
@@ -289,3 +289,4 @@ curl --location '{HOST_NAME}/PartnerAPI/Stations/user/getList' \
     </script>
   </body>
 </html>
+

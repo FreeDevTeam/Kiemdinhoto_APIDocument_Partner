@@ -28,7 +28,7 @@ Tài liệu API dành cho PartnerBooking.
 
 | Field  | Type   | Required | Rule     | Mô tả |
 | ------ | ------ | -------- | -------- | ----- |
-| apiKey | string | Yes      | required | -     |
+| apiKey | string | Yes | required | ApiKey cần tra cứu thông tin cấu hình trạm. |
 
 ---
 
