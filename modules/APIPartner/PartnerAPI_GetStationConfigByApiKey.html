@@ -1,0 +1,261 @@
+﻿<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Partner API - Get Station Config By ApiKey</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f7fb;
+        color: #1f2937;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #dbe3ef;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 14px;
+      }
+      h1,
+      h2 {
+        margin-top: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #dbe3ef;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background: #eef3fb;
+      }
+      a {
+        color: #0b63ce;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      pre {
+        background: #0f172a;
+        color: #e5ecf6;
+        padding: 12px;
+        border-radius: 10px;
+        overflow-x: auto;
+      }
+      .copy-btn {
+        border: 1px solid #0b63ce;
+        background: #fff;
+        color: #0b63ce;
+        border-radius: 8px;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+      #toast {
+        visibility: hidden;
+        min-width: 200px;
+        background: #111827;
+        color: #fff;
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px 14px;
+        position: fixed;
+        z-index: 9999;
+        right: 24px;
+        bottom: 24px;
+      }
+      #toast.show {
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Partner API - Get Station Config By ApiKey</h1>
+        <p>Tài liệu API dành cho PartnerBooking.</p>
+        <p>
+          <a href="./index.html">Về module API Partner</a>
+        </p>
+      </div>
+      <div class="card">
+        <h2>Endpoint</h2>
+        <table>
+          <tr>
+            <th style="width: 180px">URL</th>
+            <td>/PartnerAPI/StationServices/user/getStationConfigByApiKey</td>
+          </tr>
+          <tr>
+            <th>Method</th>
+            <td>POST</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2>Headers schema</h2>
+        <table>
+          <tr>
+            <th>Header</th>
+            <th>Required</th>
+            <th>Mô tả</th>
+          </tr>
+          <tr>
+            <td>clientId hoặc clientid</td>
+            <td>Yes</td>
+            <td>Mã định danh đối tác</td>
+          </tr>
+          <tr>
+            <td>apiKey hoặc apikey</td>
+            <td>Yes</td>
+            <td>Khóa xác thực API của đối tác</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2>Body schema</h2>
+        <table>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Rule</th>
+            <th>Mô tả</th>
+          </tr>
+          <tr>
+            <td>apiKey</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>required</td>
+            <td>ApiKey cần tra cứu thông tin cấu hình trạm.</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2 style="display: flex; align-items: center; gap: 8px">
+          Sample Request<button
+            id="copySampleBtn"
+            class="copy-btn"
+            type="button"
+            aria-label="Copy sample request"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path
+                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              ></path>
+            </svg>
+          </button>
+        </h2>
+        <pre id="curlText">
+curl --location '{HOST_NAME}/PartnerAPI/StationServices/user/getStationConfigByApiKey' \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: TESTCLIENT' \
+  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --data '{
+  "apiKey": "TEST_VALUE"
+}'</pre
+        >
+      </div>
+      <div class="card">
+        <h2>Success response</h2>
+        <pre>
+{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": [
+    {
+      "stationsId": 57,
+      "stationSettingKey": "stationMiniAppLink",
+      "stationSettingValue": "{\"visible_StationsCode\":true}",
+      "stationsLogo": "https://.../logo.png"
+    }
+  ]
+}</pre
+        >
+      </div>
+      <div class="card">
+        <h2>Mã lỗi</h2>
+        <table>
+          <tr>
+            <th>HTTP</th>
+            <th>Mã lỗi</th>
+            <th>Mô tả</th>
+          </tr>
+          <tr>
+            <td>400</td>
+            <td>
+              <em>Validation Error</em>
+            </td>
+            <td>Payload không đúng schema.</td>
+          </tr>
+          <tr>
+            <td>429</td>
+            <td>
+              <code>QUOTA_EXCEEDED</code>
+            </td>
+            <td>apiKey không hợp lệ hoặc vượt quota.</td>
+          </tr>
+          <tr>
+            <td>500</td>
+            <td>
+              <code>UNKNOWN_ERROR</code>
+            </td>
+            <td>Lỗi không xác định.</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2>Tham khảo</h2>
+        <ul>
+          <li>
+            <a href="../../Common.html#common-error"
+              >Quy chuẩn chung -> Common Error</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Data test cho developer</h2>
+        <ul>
+          <li>clientId: TESTCLIENT</li>
+          <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+        </ul>
+        <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+      </div>
+    </div>
+    <div id="toast">Sao chép thành công</div>
+    <script>
+      const copySampleBtn = document.getElementById("copySampleBtn");
+      const curlText = document.getElementById("curlText").textContent;
+      copySampleBtn.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(curlText);
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      });
+    </script>
+  </body>
+</html>
+

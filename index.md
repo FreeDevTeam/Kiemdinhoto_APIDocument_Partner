@@ -12,6 +12,10 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - Module index HTML: ./modules/OrderPayment/index.html
 - Module index MD: ./modules/OrderPayment/index.md
 
+3. API Partner
+- Module index HTML: ./modules/APIPartner/index.html
+- Module index MD: ./modules/APIPartner/index.md
+
 ## Callback / Webhooks
 
 1. Lịch hẹn

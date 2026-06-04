@@ -48,7 +48,17 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
   "error": null,
   "message": "Success",
   "data": {
-    "bank": { "paymentMethodId": 1, "paymentMethodType": 2, "paymentMethodName": "VietQR" },
+    "bank": {
+      "paymentMethodId": 1,
+      "paymentMethodName": "Techcombank",
+      "paymentMethodType": 2,
+      "paymentMethodIdentityNumber": "19038779892016",
+      "paymentMethodOwnerName": "CONG TY TNHH ...",
+      "paymentMethodImageUrl": "https://...",
+      "paymentMethodEnable": 1,
+      "paymentMethodNote": "VietQR",
+      "stationsId": 57
+    },
     "momo": null,
     "gtelPay": null,
     "zaloPay": null,
@@ -61,6 +71,10 @@ curl --location 'https://ttdk-develop-server.service.makefamousapp.com/PartnerAP
   }
 }
 ```
+
+Ghi chú:
+- Mỗi key trong `data` (`bank`, `momo`, `gtelPay`, ...) trả về **1 bản ghi PaymentMethod** hoặc `null`.
+- Tùy cấu hình từng trạm, thường chỉ một số phương thức có dữ liệu, các phương thức còn lại là `null`.
 
 ---
 
