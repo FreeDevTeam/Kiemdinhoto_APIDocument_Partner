@@ -86,9 +86,11 @@
       <h2>Cấu trúc payload callback</h2>
       <pre>{
   "callbackData": {
+    "customerIdentifier": "0382716917"
     "vehicleIdentity": "30A84812",
     "vehicleType": 1,
-    "vehicleExpiryDate": "01/01/2027"
+    "vehicleExpiryDate": "01/01/2027",
+    "vehiclePlateColor": "WHITE",
   }
 }</pre>
     </div>
@@ -115,6 +117,16 @@
           <td>vehicleExpiryDate</td>
           <td>string</td>
           <td>Ngày hết hạn đăng kiểm (định dạng DD/MM/YYYY).</td>
+        </tr>
+        <tr>
+          <td>vehiclePlateColor</td>
+          <td>string</td>
+          <td>Màu biển số xe.</td>
+        </tr>
+        <tr>
+          <td>customerIdentifier</td>
+          <td>string</td>
+          <td>Định danh khách hàng (Số điện thoại hoặc userId).</td>
         </tr>
       </table>
     </div>
@@ -146,6 +158,29 @@
         <tr>
           <td>40</td>
           <td>Xe điện.</td>
+        </tr>
+      </table>
+      <h3>vehiclePlateColor - Màu biển số xe</h3>
+      <table>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>WHITE</td>
+          <td>Trắng.</td>
+        </tr>
+        <tr>
+          <td>YELLOW</td>
+          <td>Vàng.</td>
+        </tr>
+        <tr>
+          <td>BLUE</td>
+          <td>Xanh.</td>
+        </tr>
+        <tr>
+          <td>RED</td>
+          <td>Đỏ.</td>
         </tr>
       </table>
     </div>

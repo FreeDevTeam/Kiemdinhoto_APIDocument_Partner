@@ -11,9 +11,11 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 ```json
 {
   "callbackData": {
+    "customerIdentifier": "0382716917"
     "vehicleIdentity": "30A84812",
     "vehicleType": 1,
-    "vehicleExpiryDate": "01/01/2027"
+    "vehicleExpiryDate": "01/01/2027",
+    "vehiclePlateColor": "WHITE",
   }
 }
 ```
@@ -25,6 +27,8 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 | vehicleIdentity | string | Biển số xe |
 | vehicleType | number | Loại phương tiện |
 | vehicleExpiryDate | string | Ngày hết hạn đăng kiểm (định dạng DD/MM/YYYY) |
+| vehiclePlateColor | string | Màu biển số xe |
+| customerIdentifier | string | Định danh khách hàng (Số điện thoại hoặc userId) |
 
 ## Bảng liệt kê trạng thái
 
@@ -37,3 +41,12 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 | 20 | Rơ moóc |
 | 30 | Xe máy |
 | 40 | Xe điện |
+
+### vehiclePlateColor - Màu biển số xe
+
+| Giá trị | Mô tả |
+|---|---|
+| WHITE | Trắng |
+| YELLOW | Vàng |
+| BLUE | Xanh |
+| RED | Đỏ |
