@@ -34,6 +34,10 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - HTML: ./callback-webhooks/Callback_CustomerCriminalRecord.html
 - MD: ./callback-webhooks/Callback_CustomerCriminalRecord.md
 
+5. Thông tin đăng kiểm
+- HTML: ./callback-webhooks/Callback_ThongTinDangKiem.html
+- MD: ./callback-webhooks/Callback_ThongTinDangKiem.md
+
 ## Quy ước tài liệu
 
 - Mỗi API có 2 file tương ứng: 1 file Markdown và 1 file HTML.
