@@ -13,7 +13,7 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
   "callbackData": {
     "vehicleIdentity": "30A84812",
     "vehicleType": 1,
-    "vehicleExpiryDate": "2026-12-31"
+    "vehicleExpiryDate": "01/01/2027"
   }
 }
 ```
@@ -24,7 +24,7 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 |---|---|---|
 | vehicleIdentity | string | Biển số xe |
 | vehicleType | number | Loại phương tiện |
-| vehicleExpiryDate | string | Ngày hết hạn đăng kiểm (định dạng YYYY-MM-DD) |
+| vehicleExpiryDate | string | Ngày hết hạn đăng kiểm (định dạng DD/MM/YYYY) |
 
 ## Bảng liệt kê trạng thái
 
