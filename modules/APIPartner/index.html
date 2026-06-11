@@ -1,145 +1,125 @@
 ﻿<!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Partner API - API PartnerBooking Module</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #f5f7fb;
-        color: #1f2937;
-      }
-      .wrap {
-        max-width: 980px;
-        margin: 24px auto;
-        padding: 0 16px;
-      }
-      .card {
-        background: #fff;
-        border: 1px solid #dbe3ef;
-        border-radius: 12px;
-        padding: 18px;
-        margin-bottom: 14px;
-      }
-      h1,
-      h2 {
-        margin-top: 0;
-      }
-      a {
-        color: #0b63ce;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      ul {
-        margin: 0;
-        padding-left: 18px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <div class="card">
-        <h1>Partner API Module: API PartnerBooking</h1>
-        <p>
-          <a href="../../index.html">Quay về trang chủ</a> |
-          <a href="./index.md">Mở bản Markdown module</a>
-        </p>
-      </div>
 
-      <div class="card">
-        <h2>Danh sách API đang dùng thực tế cho trang /booking</h2>
-        <ul>
-          <li>
-            Create Schedule<br /><a href="./PartnerAPI_CreateSchedule.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_CreateSchedule.md">MD</a>
-          </li>
-          <li>
-            Create Consultant<br /><a href="./PartnerAPI_CreateConsultant.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_CreateConsultant.md">MD</a>
-          </li>
-          <li>
-            Create Order Schedule<br /><a
-              href="./PartnerAPI_CreateOrderSchedule.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_CreateOrderSchedule.md">MD</a>
-          </li>
-          <li>
-            Get List Station<br /><a href="./PartnerAPI_GetListStation.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetListStation.md">MD</a>
-          </li>
-          <li>
-            Get All External Stations<br /><a
-              href="./PartnerAPI_GetAllExternalStations.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetAllExternalStations.md">MD</a>
-          </li>
-          <li>
-            Get All Station Areas<br /><a
-              href="./PartnerAPI_GetAllStationAreas.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetAllStationAreas.md">MD</a>
-          </li>
-          <li>
-            Get List Schedule Date<br /><a
-              href="./PartnerAPI_GetListScheduleDate.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetListScheduleDate.md">MD</a>
-          </li>
-          <li>
-            Get List Schedule Time<br /><a
-              href="./PartnerAPI_GetListScheduleTime.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetListScheduleTime.md">MD</a>
-          </li>
-          <li>
-            Get List Station Service<br /><a
-              href="./PartnerAPI_GetListStationService.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetListStationService.md">MD</a>
-          </li>
-          <li>
-            Get Station By ApiKey<br /><a
-              href="./PartnerAPI_GetStationByApiKey.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetStationByApiKey.md">MD</a>
-          </li>
-          <li>
-            Get Station Config By ApiKey<br /><a
-              href="./PartnerAPI_GetStationConfigByApiKey.html"
-              >HTML</a
-            >
-            | <a href="./PartnerAPI_GetStationConfigByApiKey.md">MD</a>
-          </li>
-        </ul>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - API PartnerBooking Module</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
 
-      <div class="card">
-        <h2>Data test tham chiếu</h2>
-        <ul>
-          <li>clientId: TESTCLIENT</li>
-          <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
-        </ul>
-        <p>
-          Cần thay bằng credential và dữ liệu thật khi tích hợp UAT/Production.
-        </p>
-      </div>
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2 {
+      margin-top: 0;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API Module: API PartnerBooking</h1>
+      <p>
+        <a href="../../index.html">Quay về trang chủ</a> |
+        <a href="./index.md">Mở bản Markdown module</a>
+      </p>
     </div>
-  </body>
+
+    <div class="card">
+      <h2>Danh sách API đang dùng thực tế cho trang /booking</h2>
+      <ul>
+        <li>
+          Create Schedule<br /><a href="./PartnerAPI_CreateSchedule.html">HTML</a>
+          | <a href="./PartnerAPI_CreateSchedule.md">MD</a>
+        </li>
+        <li>
+          Create Consultant<br /><a href="./PartnerAPI_CreateConsultant.html">HTML</a>
+          | <a href="./PartnerAPI_CreateConsultant.md">MD</a>
+        </li>
+        <li>
+          Create Order Schedule<br /><a href="./PartnerAPI_CreateOrderSchedule.html">HTML</a>
+          | <a href="./PartnerAPI_CreateOrderSchedule.md">MD</a>
+        </li>
+        <li>
+          Get List Station<br /><a href="./PartnerAPI_GetListStation.html">HTML</a>
+          | <a href="./PartnerAPI_GetListStation.md">MD</a>
+        </li>
+        <li>
+          Get All External Stations<br /><a href="./PartnerAPI_GetAllExternalStations.html">HTML</a>
+          | <a href="./PartnerAPI_GetAllExternalStations.md">MD</a>
+        </li>
+        <li>
+          Get All Station Areas<br /><a href="./PartnerAPI_GetAllStationAreas.html">HTML</a>
+          | <a href="./PartnerAPI_GetAllStationAreas.md">MD</a>
+        </li>
+        <li>
+          Get List Schedule Date<br /><a href="./PartnerAPI_GetListScheduleDate.html">HTML</a>
+          | <a href="./PartnerAPI_GetListScheduleDate.md">MD</a>
+        </li>
+        <li>
+          Get List Schedule Time<br /><a href="./PartnerAPI_GetListScheduleTime.html">HTML</a>
+          | <a href="./PartnerAPI_GetListScheduleTime.md">MD</a>
+        </li>
+        <li>
+          Get List Station Service<br /><a href="./PartnerAPI_GetListStationService.html">HTML</a>
+          | <a href="./PartnerAPI_GetListStationService.md">MD</a>
+        </li>
+        <li>
+          Get Station By ApiKey<br /><a href="./PartnerAPI_GetStationByApiKey.html">HTML</a>
+          | <a href="./PartnerAPI_GetStationByApiKey.md">MD</a>
+        </li>
+        <li>
+          Get Station Config By ApiKey<br /><a href="./PartnerAPI_GetStationConfigByApiKey.html">HTML</a>
+          | <a href="./PartnerAPI_GetStationConfigByApiKey.md">MD</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data test tham chiếu</h2>
+      <ul>
+        <li>clientId: TESTCLIENT</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
+        </li>
+      </ul>
+      <p>
+        Cần thay bằng credential và dữ liệu thật khi tích hợp UAT/Production.
+      </p>
+    </div>
+  </div>
+</body>
+
 </html>

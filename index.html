@@ -1,20 +1,58 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Partner API Documentation</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
-    .wrap { max-width: 980px; margin: 24px auto; padding: 0 16px; }
-    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-    h1, h2 { margin-top: 0; }
-    a { color: #0b63ce; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    ul { margin: 0; padding-left: 18px; }
-    .note { font-size: 14px; color: #4b5563; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2 {
+      margin-top: 0;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #4b5563;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
@@ -27,18 +65,23 @@
       <h2>Danh sách module API</h2>
       <ul>
         <li>
-          <strong>Order</strong><br/>
-          <a href="./modules/Order/index.html">Mở module Order (HTML)</a><br/>
+          <strong>Order</strong><br />
+          <a href="./modules/Order/index.html">Mở module Order (HTML)</a><br />
           <a href="./modules/Order/index.md">Mở module Order (MD)</a>
         </li>
         <li>
-          <strong>Order Payment (CustomerOrder)</strong><br/>
-          <a href="./modules/OrderPayment/index.html">Mở module Order Payment (HTML)</a><br/>
+          <strong>Order Payment Confirm (Single)</strong><br />
+          <a href="./modules/OrderPaymentConfirm/index.html">Mở module Order Payment Confirm (HTML)</a><br />
+          <a href="./modules/OrderPaymentConfirm/index.md">Mở module Order Payment Confirm (MD)</a>
+        </li>
+        <li>
+          <strong>Order Payment (CustomerOrder)</strong><br />
+          <a href="./modules/OrderPayment/index.html">Mở module Order Payment (HTML)</a><br />
           <a href="./modules/OrderPayment/index.md">Mở module Order Payment (MD)</a>
         </li>
         <li>
-          <strong>API Partner</strong><br/>
-          <a href="./modules/APIPartner/index.html">Mở module API Partner (HTML)</a><br/>
+          <strong>API Partner</strong><br />
+          <a href="./modules/APIPartner/index.html">Mở module API Partner (HTML)</a><br />
           <a href="./modules/APIPartner/index.md">Mở module API Partner (MD)</a>
         </li>
       </ul>
@@ -48,27 +91,27 @@
       <h2>Callback / Webhooks</h2>
       <ul>
         <li>
-          <strong>Lịch hẹn</strong><br/>
+          <strong>Lịch hẹn</strong><br />
           <a href="./callback-webhooks/Callback_LichHen.html">HTML</a> |
           <a href="./callback-webhooks/Callback_LichHen.md">MD</a>
         </li>
         <li>
-          <strong>Đơn hàng</strong><br/>
+          <strong>Đơn hàng</strong><br />
           <a href="./callback-webhooks/Callback_DonHang.html">HTML</a> |
           <a href="./callback-webhooks/Callback_DonHang.md">MD</a>
         </li>
         <li>
-          <strong>Gói dịch vụ thông báo</strong><br/>
+          <strong>Gói dịch vụ thông báo</strong><br />
           <a href="./callback-webhooks/Callback_ThongBaoCanhBaoPhuongTien.html">HTML</a> |
           <a href="./callback-webhooks/Callback_ThongBaoCanhBaoPhuongTien.md">MD</a>
         </li>
         <li>
-          <strong>Dữ liệu vi phạm</strong><br/>
+          <strong>Dữ liệu vi phạm</strong><br />
           <a href="./callback-webhooks/Callback_CustomerCriminalRecord.html">HTML</a> |
           <a href="./callback-webhooks/Callback_CustomerCriminalRecord.md">MD</a>
         </li>
         <li>
-          <strong>Thông tin đăng kiểm</strong><br/>
+          <strong>Thông tin đăng kiểm</strong><br />
           <a href="./callback-webhooks/Callback_ThongTinDangKiem.html">HTML</a> |
           <a href="./callback-webhooks/Callback_ThongTinDangKiem.md">MD</a>
         </li>
@@ -79,10 +122,12 @@
       <h2>Data test tham chiếu</h2>
       <ul>
         <li>clientId: TESTCLIENT</li>
-        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
+        </li>
       </ul>
       <p class="note">Lưu ý: chỉ dùng để test/integration, cần thay bằng dữ liệu môi trường thật trước production.</p>
     </div>
   </div>
 </body>
+
 </html>

@@ -8,11 +8,15 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - Module index HTML: ./modules/Order/index.html
 - Module index MD: ./modules/Order/index.md
 
-2. Order Payment (CustomerOrder)
+2. Order Payment Confirm (Single)
+- Module index HTML: ./modules/OrderPaymentConfirm/index.html
+- Module index MD: ./modules/OrderPaymentConfirm/index.md
+
+3. Order Payment (CustomerOrder)
 - Module index HTML: ./modules/OrderPayment/index.html
 - Module index MD: ./modules/OrderPayment/index.md
 
-3. API Partner
+4. API Partner
 - Module index HTML: ./modules/APIPartner/index.html
 - Module index MD: ./modules/APIPartner/index.md
 
@@ -44,7 +48,7 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - Trang chủ có 2 file tương ứng: index.md và index.html.
 - Mỗi module có 2 file tương ứng: index.md và index.html.
 - cURL mẫu chỉ giữ trường hợp Happy case để tránh nhiễu khi tích hợp.
-
+07e73e61-0dce-4b39-8ecf-06ef70b35c08
 ## Data test đang dùng cho Partner Order
 
 - clientId: TESTCLIENT

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Order - Query Order</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { background: #0b63ce; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; margin-right: 8px; }
+    #toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 22px; border-radius: 8px; font-size: 0.95em; opacity: 0; pointer-events: none; transition: opacity 0.25s; z-index: 9999; }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Order Query Order</h1>
+      <p>API do TAMOVE cung cấp cho phép đối tác gọi để kiểm tra thông tin và trạng thái đơn hàng trước hoặc trong quá trình xử lý thanh toán.</p>
+      <p><a href="./index.html">Về module Order Payment Confirm</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL Production</th><td>POST {HOST}/PartnerAPI/Order/queryOrder</td></tr>
+        <tr><th>URL Sandbox</th><td>POST {HOST_SANDBOX}/PartnerAPI/Order/queryOrder</td></tr>
+        <tr><th>HTTP Method</th><td>POST</td></tr>
+        <tr><th>Content-Type</th><td>application/json</td></tr>
+        <tr><th>Encoding</th><td>UTF-8</td></tr>
+        <tr><th>Timeout</th><td>Phản hồi trong vòng 30 giây</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>clientId</td><td>Yes</td><td>Định danh đối tác do TAMOVE cấp</td></tr>
+        <tr><td>apiKey</td><td>Yes</td><td>Khóa xác thực API do TAMOVE cấp. Giữ bí mật tuyệt đối</td></tr>
+      </table>
+      <p style="font-size:0.9em;color:#dc2626;margin-top:8px;">Lưu ý: TAMOVE sẽ từ chối toàn bộ request thiếu hoặc sai thông tin xác thực với HTTP 401 (code "01").</p>
+    </div>
+
+    <div class="card">
+      <h2>Body schema (JSON)</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>requestId</td><td>string</td><td>Yes</td><td>Mã giao dịch phía đối tác – dùng để đối soát và ghi nhận nguồn thanh toán</td></tr>
+        <tr><td>orderId</td><td>string</td><td>Yes</td><td>Mã đơn hàng trong hệ thống TAMOVE cần truy vấn</td></tr>
+        <tr><td>serviceCode</td><td>string</td><td>Yes</td><td>Mã dịch vụ khi TAMOVE tạo đơn hàng</td></tr>
+        <tr><td>amount</td><td>number</td><td>Yes</td><td>Số tiền cần xác nhận khớp với đơn hàng (đơn vị: VNĐ, kiểu số nguyên dương). Ví dụ: 150000</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;">Sample Request <button id="copySampleBtn" title="Copy sang clipboard" style="background:none;border:1px solid #dbe3ef;border-radius:6px;padding:4px 8px;cursor:pointer;display:inline-flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0b63ce" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg></button></h2>
+      <pre id="curlText">curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrder' \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: YOUR_CLIENT_ID' \
+  --header 'apiKey: YOUR_API_KEY' \
+  --data '{
+    "requestId": "YOUR_REQUEST_ID",
+    "orderId": "YOUR_ORDER_ID",
+    "serviceCode": "YOUR_SERVICE_CODE",
+    "amount": 150000
+  }'</pre>
+    </div>
+
+    <div class="card">
+      <h2>Logic Xử Lý Phía TAMOVE</h2>
+      <p>TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào thất bại sẽ dừng và trả lỗi ngay lập tức:</p>
+      <table>
+        <tr><th>Bước</th><th>Kiểm tra</th><th>Mô tả</th><th>Lỗi nếu thất bại</th></tr>
+        <tr><td>1</td><td>Xác thực clientId & apiKey</td><td>Kiểm tra header clientId và apiKey hợp lệ và được cấp quyền truy vấn</td><td>01</td></tr>
+        <tr><td>2</td><td>Kiểm tra input</td><td>orderId, serviceCode không rỗng; amount là số nguyên dương</td><td>02</td></tr>
+        <tr><td>3</td><td>Kiểm tra đơn tồn tại</td><td>Tra cứu orderId trong hệ thống TAMOVE</td><td>03</td></tr>
+        <tr><td>4</td><td>Kiểm tra số tiền</td><td>amount trong request phải khớp chính xác với số tiền đơn hàng</td><td>05</td></tr>
+        <tr><td>5</td><td>Trả kết quả</td><td>Trả về thông tin chi tiết đơn hàng bao gồm trạng thái, thông tin khách hàng</td><td>00</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Success Response</h2>
+      <p>Khi thành công (code = "00"), trường <code>data</code> chứa thông tin chi tiết đơn hàng:</p>
+      <pre>{
+  "code": "00",
+  "message": "Thanh cong",
+  "data": {
+    "orderId": "YOUR_ORDER_ID",
+    "totalAmount": 150000,
+    "discountAmount": 10000,
+    "taxAmount": 0,
+    "paymentStatus": "NEW",
+    "createdAt": "2026-04-02T14:00:00+07:00",
+    "phoneNumber": "0901234567",
+    "firstName": "Nguyen Van A",
+    "orderItems": [
+      {
+        "orderItemName": "Goi cuoc dich vu",
+        "quantity": 1,
+        "payAmount": 150000
+      }
+    ]
+  }
+}</pre>
+      
+      <h3 style="margin-top:14px;">Chi tiết cấu trúc data response:</h3>
+      <table>
+        <tr><th>Trường</th><th>Kiểu</th><th>Mô tả</th></tr>
+        <tr><td>orderId</td><td>string</td><td>Mã đơn hàng</td></tr>
+        <tr><td>totalAmount</td><td>number</td><td>Tổng tiền đơn hàng (VNĐ, sau giảm giá và thuế)</td></tr>
+        <tr><td>discountAmount</td><td>number</td><td>Số tiền được giảm giá (VNĐ). 0 nếu không có</td></tr>
+        <tr><td>taxAmount</td><td>number</td><td>Số tiền thuế (VNĐ). 0 nếu không có</td></tr>
+        <tr><td>paymentStatus</td><td>string</td><td>Trạng thái thanh toán (xem bảng trạng thái bên dưới)</td></tr>
+        <tr><td>createdAt</td><td>string</td><td>Thời điểm tạo đơn, định dạng ISO 8601. Ví dụ: "2026-04-02T14:30:00+07:00"</td></tr>
+        <tr><td>phoneNumber</td><td>string</td><td>Số điện thoại người mua</td></tr>
+        <tr><td>firstName</td><td>string | null</td><td>Họ và tên người mua (nếu có, có thể null)</td></tr>
+        <tr><td>orderItems</td><td>array</td><td>Danh sách sản phẩm/dịch vụ trong đơn hàng (Xem chi tiết orderItem bên dưới)</td></tr>
+      </table>
+
+      <h3 style="margin-top:14px;">Chi tiết Object orderItem:</h3>
+      <table>
+        <tr><th>Trường</th><th>Kiểu</th><th>Mô tả</th></tr>
+        <tr><td>orderItemName</td><td>string</td><td>Tên sản phẩm / dịch vụ</td></tr>
+        <tr><td>quantity</td><td>number</td><td>Số lượng</td></tr>
+        <tr><td>payAmount</td><td>number</td><td>Thành tiền của item, sau giảm giá và VAT (VNĐ). Ví dụ: quantity=2, payAmount=100000 nghĩa là 2 x 50,000</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Mã lỗi & Ví dụ Response</h2>
+      <p><strong>Cấu trúc Response Body chung:</strong></p>
+      <table>
+        <tr><th>Trường</th><th>Kiểu</th><th>Mô tả</th></tr>
+        <tr><td>code</td><td>String</td><td>Mã kết quả xử lý (xem bảng mã bên dưới)</td></tr>
+        <tr><td>message</td><td>String</td><td>Mô tả kết quả</td></tr>
+        <tr><td>data</td><td>Object | null</td><td>Dữ liệu bổ sung hoặc thông tin lỗi (tuỳ từng trường hợp, có thể null)</td></tr>
+      </table>
+
+      <p style="margin-top:14px;"><strong>Bảng Mã Kết Quả:</strong></p>
+      <table>
+        <tr><th style="width:80px">Code</th><th style="width:120px">HTTP</th><th>Ý nghĩa</th><th>Mô tả & Hướng xử lý cho đối tác</th></tr>
+        <tr><td><code>00</code></td><td>200 OK</td><td>Thành công</td><td>Tìm thấy đơn hàng, trả về thông tin đầy đủ trong data.</td></tr>
+        <tr><td><code>01</code></td><td>400 Unauthorized / 401</td><td>Xác thực thất bại</td><td>clientId hoặc apiKey không hợp lệ hoặc không được cấp quyền.</td></tr>
+        <tr><td><code>02</code></td><td>400 Bad Request</td><td>Thiếu hoặc sai tham số</td><td>Một hoặc nhiều trường bắt buộc bị thiếu, sai kiểu hoặc không hợp lệ.</td></tr>
+        <tr><td><code>03</code></td><td>400 Not Found</td><td>Không tìm thấy đơn hàng</td><td>orderId không tồn tại trong hệ thống TAMOVE.</td></tr>
+        <tr><td><code>05</code></td><td>500 Unprocessable Entity</td><td>Số tiền không khớp</td><td>amount trong request khác số tiền thực tế của đơn. data trả về amount đúng.</td></tr>
+        <tr><td><code>99</code></td><td>500 Internal Error</td><td>Lỗi hệ thống</td><td>Lỗi nội bộ TAMOVE – liên hệ hỗ trợ nếu lặp lại.</td></tr>
+      </table>
+
+      <p style="margin-top:14px;"><strong>Ví dụ Response lỗi:</strong></p>
+      
+      <p>1. Sai clientId hoặc apiKey (HTTP 400/401 Unauthorized):</p>
+      <pre>{ "code": "01", "message": "Xac thuc that bai", "data": null }</pre>
+
+      <p>2. Thiếu hoặc sai tham số đầu vào (HTTP 400 Bad Request):</p>
+      <pre>{ "code": "02", "message": "Thieu tham so bat buoc: orderId", "data": null }</pre>
+
+      <p>3. Không tìm thấy đơn hàng (HTTP 400 Not Found):</p>
+      <pre>{ "code": "03", "message": "Khong tim thay don hang", "data": null }</pre>
+
+      <p>4. Số tiền không khớp (HTTP 500 Unprocessable Entity):</p>
+      <pre>{ "code": "05", "message": "So tien khong khop", "data": { "amount": 150000 } }</pre>
+    </div>
+
+    <div class="card">
+      <h2>Bảng Trạng Thái Đơn Hàng (paymentStatus)</h2>
+      <table>
+        <tr><th>Giá trị</th><th>Ý nghĩa</th><th>Mô tả & Hướng xử lý cho đối tác</th></tr>
+        <tr><td><code>New</code></td><td>Chờ thanh toán</td><td>Đơn hàng hợp lệ, có thể tiến hành thanh toán</td></tr>
+        <tr><td><code>Processing</code></td><td>Đang thanh toán</td><td>Đang xử lý thanh toán, có thể tiến hành thanh toán</td></tr>
+        <tr><td><code>Pending</code></td><td>Chờ thanh toán</td><td>Chờ thanh toán, có thể tiến hành thanh toán</td></tr>
+        <tr><td><code>Failed</code></td><td>Thanh toán thất bại</td><td>Thanh toán thất bại, có thể tiến hành thanh toán lại</td></tr>
+        <tr><td><code>Success</code></td><td>Thanh toán thành công</td><td>Thanh toán thành công, không thanh toán lại</td></tr>
+        <tr><td><code>Canceled</code></td><td>Huỷ thanh toán</td><td>Huỷ thanh toán, không thanh toán lại</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Quy Tắc Quan Trọng</h2>
+      <ul>
+        <li><strong>Kiểm tra số tiền:</strong> <code>amount</code> phải là số nguyên dương tính bằng VNĐ. TAMOVE so sánh chính xác (exact match) với số tiền đơn hàng. Trường hợp không khớp, TAMOVE trả code <code>"05"</code> kèm amount đúng trong <code>data</code> để đối tác đối chiếu.</li>
+        <li><strong>Trạng thái đơn và luồng tiếp theo:</strong> Đối tác nên kiểm tra <code>paymentStatus</code> trong response trước khi tiến hành các bước tiếp theo:
+          <ul>
+            <li><code>New</code>, <code>Processing</code>, <code>Pending</code>, <code>Failed</code> → Đơn hợp lệ, có thể tiến hành thanh toán và gọi API gạch nợ.</li>
+            <li><code>Success</code> → Đơn đã thanh toán, không cần thực hiện thêm hành động nào.</li>
+            <li><code>Canceled</code> → Đơn không còn hiệu lực, dừng luồng và thông báo cho khách hàng.</li>
+          </ul>
+        </li>
+        <li><strong>requestId:</strong> TAMOVE lưu lại <code>requestId</code> từ đối tác để phục vụ đối soát giao dịch. Đây là mã giao dịch bên đối tác, không phải mã để tra cứu đơn hàng phía TAMOVE.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Bảo Mật</h2>
+      <ul>
+        <li>apiKey do TAMOVE cấp riêng cho đối tác qua kênh bảo mật ngoài băng tần. Không lưu trong source code hay log.</li>
+        <li>Toàn bộ giao tiếp bắt buộc qua HTTPS. HTTP thuần không được hỗ trợ.</li>
+        <li>TAMOVE giới hạn tần suất gọi (rate limit). Vượt ngưỡng sẽ trả HTTP 429.</li>
+        <li>Mọi request và response được ghi log đầy đủ phục vụ đối soát và xử lý tranh chấp.</li>
+        <li>Đối tác nên cấu hình IP cố định để gọi API. TAMOVE có thể bổ sung IP whitelist theo yêu cầu.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html#common-error">Quy chuẩn chung → Common Error</a> — danh sách mã lỗi hệ thống trả về trong trường <code>error</code>.</li>
+        <li><a href="../../Common.html#order-error-code">Quy chuẩn chung → Partner Order Error Code</a> — bảng mã số <code>errorCode</code> đi kèm response lỗi.</li>
+        <li><a href="../../Common.html#payment-status">Quy chuẩn chung → Order Payment Status</a> — danh sách giá trị hợp lệ của trường <code>paymentStatus</code>.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Thông Tin Liên Hệ</h2>
+      <table>
+        <tr><th>Thông tin</th><th>Giá trị</th></tr>
+        <tr><td>Endpoint Sandbox</td><td>https://tamove-develop-server.service.makefamousapp.com</td></tr>
+        <tr><td>Endpoint Production</td><td>(Liên hệ sau)</td></tr>
+        <tr><td>API Gạch Nợ liên quan</td><td><a href="./PartnerOrder_PaymentConfirm.html">POST /PartnerAPI/Order/paymentConfirm</a></td></tr>
+        <tr><td>Email kỹ thuật</td><td>tech@tamove.vn</td></tr>
+        <tr><td>Hotline hỗ trợ</td><td>1800 xxxx (8:00 – 17:30, Thứ 2 – Thứ 6)</td></tr>
+        <tr><td>Đầu mối liên hệ</td><td>Team TAMOVE</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const copySampleBtn = document.getElementById('copySampleBtn');
+    const curlText = document.getElementById('curlText').textContent;
+
+    copySampleBtn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(curlText);
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    });
+  </script>
+  <div id="toast">Sao chép thành công</div>
+</body>
+</html>

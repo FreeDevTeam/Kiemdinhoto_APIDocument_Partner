@@ -1,8 +1,8 @@
-# Partner API - Order Payment Confirm (VNPAY InApp)
+# Partner API - Order Payment Confirm
 
-API do TAMOVE cung cấp cho phép VNPAY gọi vào để thực hiện gạch nợ (xác nhận thanh toán) đơn hàng sau khi khách hàng thanh toán thành công qua luồng VNPAY InApp.
+API do TAMOVE cung cấp cho phép đối tác gọi vào để thực hiện gạch nợ (xác nhận thanh toán) đơn hàng sau khi khách hàng thanh toán thành công qua luồng thanh toán tích hợp.
 
-[Về module Order](./index.html)
+[Về module Order Payment Confirm](./index.html)
 
 ---
 
@@ -22,8 +22,8 @@ API do TAMOVE cung cấp cho phép VNPAY gọi vào để thực hiện gạch n
 
 | Header | Required | Mô tả |
 |---|---|---|
-| clientId | Yes | Định danh client do TAMOVE cấp cho VNPAY |
-| apiKey | Yes | Khóa xác thực do TAMOVE cấp cho VNPAY. Giữ bí mật tuyệt đối |
+| clientId | Yes | Định danh đối tác do TAMOVE cấp |
+| apiKey | Yes | Khóa xác thực API do TAMOVE cấp. Giữ bí mật tuyệt đối |
 
 *Lưu ý: TAMOVE sẽ từ chối toàn bộ request thiếu hoặc sai thông tin xác thực với HTTP 400 (code "01").*
 
@@ -33,7 +33,7 @@ API do TAMOVE cung cấp cho phép VNPAY gọi vào để thực hiện gạch n
 
 | Field | Type | Required | Mô tả |
 |---|---|---|---|
-| requestId | string | Yes | Mã giao dịch phía VNPAY – dùng để đối soát và ghi nhận nguồn thanh toán |
+| requestId | string | Yes | Mã giao dịch phía đối tác – dùng để đối soát và ghi nhận nguồn thanh toán |
 | orderId | string | Yes | Mã đơn hàng trong hệ thống TAMOVE cần gạch nợ |
 | serviceCode | string | Yes | Mã dịch vụ khi TAMOVE tạo đơn hàng |
 | amount | number | Yes | Số tiền thanh toán (đơn vị: VNĐ, kiểu số nguyên dương). Ví dụ: 150000 |
@@ -46,12 +46,12 @@ API do TAMOVE cung cấp cho phép VNPAY gọi vào để thực hiện gạch n
 ```bash
 curl --location '{HOST_NAME}/PartnerAPI/Order/paymentConfirm' \
   --header 'Content-Type: application/json' \
-  --header 'clientId: vnpay_client_001' \
-  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --header 'clientId: YOUR_CLIENT_ID' \
+  --header 'apiKey: YOUR_API_KEY' \
   --data '{
-    "requestId": "TRANS20260402001",
-    "orderId": "BILL20260402001",
-    "serviceCode": "VNPAY_TXN_20260402_XYZ",
+    "requestId": "YOUR_REQUEST_ID",
+    "orderId": "YOUR_ORDER_ID",
+    "serviceCode": "YOUR_SERVICE_CODE",
     "amount": 150000,
     "paymentStatus": "Success"
   }'
@@ -81,7 +81,7 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
   "code": "00",
   "message": "Thanh toan thanh cong",
   "data": {
-    "orderId": "BILL20260402001"
+    "orderId": "YOUR_ORDER_ID"
   }
 }
 ```
@@ -96,7 +96,7 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
 - `data` (Object | null): Dữ liệu bổ sung (tuỳ từng trường hợp, có thể null).
 
 ### Bảng Mã Kết Quả:
-| Code | HTTP | Ý nghĩa | Mô tả & Hướng xử lý cho VNPAY |
+| Code | HTTP | Ý nghĩa | Mô tả & Hướng xử lý cho đối tác |
 |---|---|---|---|
 | `00` | 200 | Thành công | Gạch nợ thành công, đơn hàng đã được cập nhật trạng thái đã thanh toán |
 | `01` | 400 | Xác thực thất bại | clientId hoặc apiKey không hợp lệ hoặc không được cấp quyền |
@@ -142,7 +142,7 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
   "code": "04",
   "message": "Don hang da thanh toan",
   "data": {
-    "orderId": "BILL20260402001"
+    "orderId": "YOUR_ORDER_ID"
   }
 }
 ```
@@ -160,9 +160,9 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
 
 ---
 
-## Bảng Trạng Trạng Thái Đơn Hàng (paymentStatus)
+## Bảng Trạng Thái Đơn Hàng (paymentStatus)
 
-| Giá trị | Ý nghĩa | Mô tả & Hướng xử lý cho VNPAY |
+| Giá trị | Ý nghĩa | Mô tả & Hướng xử lý cho đối tác |
 |---|---|---|
 | `Processing` | Đang thanh toán | Đang xử lý thanh toán |
 | `Pending` | Chờ thanh toán | Chờ thanh toán |
@@ -174,20 +174,20 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
 
 ## Quy Tắc Quan Trọng
 
-- **Idempotency:** Nếu VNPAY gọi lại cùng một `orderId` đã được gạch nợ thành công, TAMOVE trả code `"04"` thay vị xử lý lại. VNPAY không cần retry khi nhận code `"04"`.
-- **Kiểm tra số tiền:** `amount` phải là số nguyên dương tính bằng VNĐ. TAMOVE so sánh chính xác (exact match) với số tiền đơn hàng. Trường hợp không khớp, TAMOVE trả code `"05"` kèm amount đúng trong `data` để VNPAY đối chiếu.
-- **Retry Policy:** VNPAY có thể retry khi gặp lỗi HTTP 5xx hoặc timeout. TAMOVE xử lý idempotent nên gọi lại cùng orderId là an toàn. Khuyến nghị retry tối đa 3 lần với exponential backoff (1s, 3s, 9s).
-- **requestId:** TAMOVE lưu lại `requestId` từ VNPAY để phục vụ đối soát giao dịch. Đây là mã giao dịch bên VNPAY, không phải mã để tra cứu đơn hàng phía TAMOVE.
+- **Idempotency:** Nếu đối tác gọi lại cùng một `orderId` đã được gạch nợ thành công, TAMOVE trả code `"04"` thay vì xử lý lại. Đối tác không cần retry khi nhận code `"04"`.
+- **Kiểm tra số tiền:** `amount` phải là số nguyên dương tính bằng VNĐ. TAMOVE so sánh chính xác (exact match) với số tiền đơn hàng. Trường hợp không khớp, TAMOVE trả code `"05"` kèm amount đúng trong `data` để đối tác đối chiếu.
+- **Retry Policy:** Đối tác có thể retry khi gặp lỗi HTTP 5xx hoặc timeout. TAMOVE xử lý idempotent nên gọi lại cùng orderId là an toàn. Khuyến nghị retry tối đa 3 lần với exponential backoff (1s, 3s, 9s).
+- **requestId:** TAMOVE lưu lại `requestId` từ đối tác để phục vụ đối soát giao dịch. Đây là mã giao dịch bên đối tác, không phải mã để tra cứu đơn hàng phía TAMOVE.
 
 ---
 
 ## Bảo Mật
 
-- apiKey do TAMOVE cấp riêng cho VNPAY qua kênh bảo mật ngoài băng tần. Không lưu trong source code hay log.
+- apiKey do TAMOVE cấp riêng cho đối tác qua kênh bảo mật ngoài băng tần. Không lưu trong source code hay log.
 - Toàn bộ giao tiếp bắt buộc qua HTTPS. HTTP thuần không được hỗ trợ.
 - TAMOVE giới hạn tần suất gọi (rate limit). Vượt ngưỡng sẽ trả HTTP 429.
 - Mọi request và response được ghi log đầy đủ phục vụ đối soát và xử lý tranh chấp.
-- VNPAY nên cấu hình IP cố định để gọi API. TAMOVE có thể bổ sung IP whitelist theo yêu cầu.
+- Đối tác nên cấu hình IP cố định để gọi API. TAMOVE có thể bổ sung IP whitelist theo yêu cầu.
 
 ---
 

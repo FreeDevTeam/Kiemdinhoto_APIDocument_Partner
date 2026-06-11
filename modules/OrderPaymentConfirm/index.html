@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Order Payment Confirm Module</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { margin: 0; padding-left: 18px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API Module: Order Payment Confirm (Single)</h1>
+      <p>Các API xác nhận thanh toán, truy vấn đơn hàng và truy vấn giao dịch dành cho đối tác (xử lý đơn lẻ, không theo lô).</p>
+      <p><a href="../../index.html">Quay về trang chủ</a> | <a href="./index.md">Mở bản Markdown module</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Danh sách API</h2>
+      <ul>
+        <li>
+          Payment Confirm (Xác nhận thanh toán)<br/>
+          <a href="./PartnerOrder_PaymentConfirm.html">HTML</a> |
+          <a href="./PartnerOrder_PaymentConfirm.md">MD</a>
+        </li>
+        <li>
+          Query Order (Truy vấn đơn hàng)<br/>
+          <a href="./PartnerOrder_QueryOrder.html">HTML</a> |
+          <a href="./PartnerOrder_QueryOrder.md">MD</a>
+        </li>
+        <li>
+          Query Transaction (Truy vấn giao dịch)<br/>
+          <a href="./PartnerOrder_QueryTransaction.html">HTML</a> |
+          <a href="./PartnerOrder_QueryTransaction.md">MD</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Lưu ý cho developer</h2>
+      <ul>
+        <li>Các tham số xác thực <code>clientId</code> và <code>apiKey</code> cần được truyền qua HTTP Header của mỗi request.</li>
+        <li>Dữ liệu kiểm thử mẫu trong tài liệu chỉ mang tính chất tham khảo. Developer cần thay bằng dữ liệu thực tế do hệ thống cấp riêng cho từng đối tác.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
