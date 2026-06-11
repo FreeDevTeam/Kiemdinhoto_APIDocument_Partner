@@ -46,7 +46,7 @@ API do TAMOVE cung cấp cho phép VNPAY gọi để kiểm tra thông tin và t
 curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrder' \
   --header 'Content-Type: application/json' \
   --header 'clientId: vnpay_client_001' \
-  --header 'apiKey: sk_live_xxxxxxxxxxxxxxxxxxxxxxxx' \
+  --header 'apiKey: <YOUR_STRIPE_API_KEY>' \
   --data '{
     "requestId": "TRANS20260402001",
     "orderId": "ORDER20260402001",
