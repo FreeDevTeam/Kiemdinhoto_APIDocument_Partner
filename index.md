@@ -8,7 +8,7 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - Module index HTML: ./modules/Order/index.html
 - Module index MD: ./modules/Order/index.md
 
-2. Order Payment Confirm (Single)
+2. Order (Single)
 - Module index HTML: ./modules/OrderPaymentConfirm/index.html
 - Module index MD: ./modules/OrderPaymentConfirm/index.md
 

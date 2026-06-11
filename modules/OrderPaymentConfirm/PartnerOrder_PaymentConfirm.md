@@ -35,7 +35,6 @@ API do TAMOVE cung cấp cho phép đối tác gọi vào để thực hiện g�
 |---|---|---|---|
 | requestId | string | Yes | Mã giao dịch phía đối tác – dùng để đối soát và ghi nhận nguồn thanh toán |
 | orderId | string | Yes | Mã đơn hàng trong hệ thống TAMOVE cần gạch nợ |
-| serviceCode | string | Yes | Mã dịch vụ khi TAMOVE tạo đơn hàng |
 | amount | number | Yes | Số tiền thanh toán (đơn vị: VNĐ, kiểu số nguyên dương). Ví dụ: 150000 |
 | paymentStatus | string | Yes | Trạng thái thanh toán (Thường là `Success`). |
 
@@ -51,7 +50,6 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/paymentConfirm' \
   --data '{
     "requestId": "YOUR_REQUEST_ID",
     "orderId": "YOUR_ORDER_ID",
-    "serviceCode": "YOUR_SERVICE_CODE",
     "amount": 150000,
     "paymentStatus": "Success"
   }'
@@ -66,7 +64,7 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
 | Bước | Kiểm tra | Mô tả | Lỗi nếu thất bại |
 |---|---|---|---|
 | 1 | Xác thực clientId & apiKey | Kiểm tra header clientId và apiKey hợp lệ và được cấp quyền gạch nợ | 01 |
-| 2 | Kiểm tra input | orderId, serviceCode không rỗng; amount là số nguyên dương | 02 |
+| 2 | Kiểm tra input | orderId không rỗng; amount là số nguyên dương | 02 |
 | 3 | Kiểm tra đơn tồn tại | Tra cứu orderId trong hệ thống TAMOVE | 03 |
 | 4 | Kiểm tra trạng thái đơn | Đơn phải ở trạng thái chờ thanh toán. Đơn đã thanh toán trả idempotent | 04 / 06 |
 | 5 | Kiểm tra số tiền | amount trong request phải khớp chính xác với số tiền đơn hàng | 05 |

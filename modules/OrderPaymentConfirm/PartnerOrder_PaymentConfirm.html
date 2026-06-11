@@ -56,7 +56,6 @@
         <tr><th>Field</th><th>Type</th><th>Required</th><th>Mô tả</th></tr>
         <tr><td>requestId</td><td>string</td><td>Yes</td><td>Mã giao dịch phía đối tác – dùng để đối soát và ghi nhận nguồn thanh toán</td></tr>
         <tr><td>orderId</td><td>string</td><td>Yes</td><td>Mã đơn hàng trong hệ thống TAMOVE cần gạch nợ</td></tr>
-        <tr><td>serviceCode</td><td>string</td><td>Yes</td><td>Mã dịch vụ khi TAMOVE tạo đơn hàng</td></tr>
         <tr><td>amount</td><td>number</td><td>Yes</td><td>Số tiền thanh toán (đơn vị: VNĐ, kiểu số nguyên dương). Ví dụ: 150000</td></tr>
         <tr><td>paymentStatus</td><td>string</td><td>Yes</td><td>Trạng thái thanh toán (Thường là <code>Success</code>). Xem bảng trạng thái.</td></tr>
       </table>
@@ -71,7 +70,6 @@
   --data '{
     "requestId": "YOUR_REQUEST_ID",
     "orderId": "YOUR_ORDER_ID",
-    "serviceCode": "YOUR_SERVICE_CODE",
     "amount": 150000,
     "paymentStatus": "Success"
   }'</pre>
@@ -83,7 +81,7 @@
       <table>
         <tr><th>Bước</th><th>Kiểm tra</th><th>Mô tả</th><th>Lỗi nếu thất bại</th></tr>
         <tr><td>1</td><td>Xác thực clientId & apiKey</td><td>Kiểm tra header clientId và apiKey hợp lệ và được cấp quyền gạch nợ</td><td>01</td></tr>
-        <tr><td>2</td><td>Kiểm tra input</td><td>orderId, serviceCode không rỗng; amount là số nguyên dương</td><td>02</td></tr>
+        <tr><td>2</td><td>Kiểm tra input</td><td>orderId không rỗng; amount là số nguyên dương</td><td>02</td></tr>
         <tr><td>3</td><td>Kiểm tra đơn tồn tại</td><td>Tra cứu orderId trong hệ thống TAMOVE</td><td>03</td></tr>
         <tr><td>4</td><td>Kiểm tra trạng thái đơn</td><td>Đơn phải ở trạng thái chờ thanh toán. Đơn đã thanh toán trả idempotent</td><td>04 / 06</td></tr>
         <tr><td>5</td><td>Kiểm tra số tiền</td><td>amount trong request phải khớp chính xác với số tiền đơn hàng</td><td>05</td></tr>

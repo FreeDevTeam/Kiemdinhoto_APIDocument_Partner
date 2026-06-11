@@ -1,4 +1,4 @@
-# Partner API Module: Order Payment Confirm (Single)
+# Partner API Module: Order (Single)
 
 Các API xác nhận thanh toán, truy vấn đơn hàng và truy vấn giao dịch dành cho đối tác (xử lý đơn lẻ, không theo lô).
 
