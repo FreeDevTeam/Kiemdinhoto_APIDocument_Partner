@@ -2,15 +2,27 @@
 
 ## Danh sách API
 
-1. Payment Confirm Batch
+1. Payment Confirm (VNPAY InApp)
+- HTML: ./PartnerOrder_PaymentConfirm.html
+- MD: ./PartnerOrder_PaymentConfirm.md
+
+2. Payment Confirm Batch
 - HTML: ./PartnerOrder_PaymentConfirmBatch.html
 - MD: ./PartnerOrder_PaymentConfirmBatch.md
 
-2. Query Order Batch
+3. Query Order (VNPAY InApp)
+- HTML: ./PartnerOrder_QueryOrder.html
+- MD: ./PartnerOrder_QueryOrder.md
+
+4. Query Order Batch
 - HTML: ./PartnerOrder_QueryOrderBatch.html
 - MD: ./PartnerOrder_QueryOrderBatch.md
 
-3. Query Transaction Batch
+5. Query Transaction (VNPAY InApp)
+- HTML: ./PartnerOrder_QueryTransaction.html
+- MD: ./PartnerOrder_QueryTransaction.md
+
+6. Query Transaction Batch
 - HTML: ./PartnerOrder_QueryTransactionBatch.html
 - MD: ./PartnerOrder_QueryTransactionBatch.md
 
