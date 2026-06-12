@@ -49,8 +49,8 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/paymentConfirm' \
   --header 'apiKey: YOUR_API_KEY' \
   --data '{
     "requestId": "YOUR_REQUEST_ID",
-    "orderId": "YOUR_ORDER_ID",
-    "amount": 150000,
+    "orderId": "TEST_ORDER_PARTNER_PENDING_001",
+    "amount": 91000,
     "paymentStatus": "Success"
   }'
 ```
@@ -79,7 +79,7 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
   "code": "00",
   "message": "Thanh toan thanh cong",
   "data": {
-    "orderId": "YOUR_ORDER_ID"
+    "orderId": "TEST_ORDER_PARTNER_PENDING_001"
   }
 }
 ```
@@ -140,7 +140,7 @@ TAMOVE thực hiện kiểm tra tuần tự theo thứ tự sau. Bước nào th
   "code": "04",
   "message": "Don hang da thanh toan",
   "data": {
-    "orderId": "YOUR_ORDER_ID"
+    "orderId": "ORDER_ID"
   }
 }
 ```

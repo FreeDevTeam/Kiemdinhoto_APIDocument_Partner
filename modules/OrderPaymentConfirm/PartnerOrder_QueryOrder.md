@@ -48,8 +48,8 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/queryOrder' \
   --header 'apiKey: YOUR_API_KEY' \
   --data '{
     "requestId": "YOUR_REQUEST_ID",
-    "orderId": "YOUR_ORDER_ID",
-    "amount": 150000
+    "orderId": "TEST_ORDER_PARTNER_PENDING_001",
+    "amount": 91000
   }'
 ```
 
@@ -78,9 +78,9 @@ Khi thành công (code = "00"), trường `data` chứa thông tin chi tiết đ
   "code": "00",
   "message": "Thanh cong",
   "data": {
-    "orderId":        "YOUR_ORDER_ID",
-    "totalAmount":    150000,
-    "discountAmount": 10000,
+    "orderId":        "TEST_ORDER_PARTNER_PENDING_001",
+    "totalAmount":    91000,
+    "discountAmount": 0,
     "taxAmount":      0,
     "paymentStatus":  "NEW",
     "createdAt":      "2026-04-02T14:00:00+07:00",

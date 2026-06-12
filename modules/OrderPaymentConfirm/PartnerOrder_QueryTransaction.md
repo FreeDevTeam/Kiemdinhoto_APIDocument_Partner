@@ -50,8 +50,8 @@ curl --location '{HOST_NAME}/PartnerAPI/Order/queryTransaction' \
   --data '{
     "requestId": "YOUR_REQUEST_ID",
     "transactionId": "YOUR_TRANSACTION_ID",
-    "orderId": "YOUR_ORDER_ID",
-    "amount": 150000
+    "orderId": "TEST_ORDER_PARTNER_PENDING_001",
+    "amount": 91000
   }'
 ```
 
@@ -80,8 +80,8 @@ Khi thành công (code = "00"), trường `data` chứa thông tin trạng thái
   "code": "00",
   "message": "Thanh cong",
   "data": {
-    "orderId":        "YOUR_ORDER_ID",
-    "amount":         150000,
+    "orderId":        "TEST_ORDER_PARTNER_PENDING_001",
+    "amount":         91000,
     "transactionStatus": "Success",
     "updatedAt":      "2026-04-02T14:00:00.000Z"
   }
