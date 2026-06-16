@@ -1,12 +1,8 @@
-# Callback / Webhooks - Dữ liệu vi phạm
+Chỉnh sửa tài liệu Callback_CustomerCriminalRecord.html
 
-Mô tả dữ liệu mà đối tác nhận được khi hệ thống gửi callback liên quan đến bản ghi vi phạm của phương tiện.
+## 1. Cập nhật payload callback
 
-## Phạm vi dữ liệu
-
-Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương tiện mà đối tác có liên quan.
-
-## Cấu trúc payload callback
+Thay thế toàn bộ phần "Cấu trúc payload callback" bằng format mới sau:
 
 ```json
 {
@@ -66,9 +62,9 @@ Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương 
 }
 ```
 
-## Dữ liệu callback
+## 2. Bổ sung bảng mô tả các section trong payload
 
-### Cấu trúc các section
+Thêm bảng mô tả 4 section cấp cao nhất vào phần "Dữ liệu callback", đặt phía trên bảng chi tiết field hiện có:
 
 | Section | Mô tả |
 |---|---|
@@ -77,21 +73,11 @@ Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương 
 | serviceData | Thông tin gói dịch vụ đang sử dụng |
 | callbackData | Dữ liệu kết quả tra cứu vi phạm |
 
-### customerData
+## 3. Bổ sung mô tả các field trong serviceData
 
-| Field | Type | Mô tả |
-|---|---|---|
-| customerIdentifier | string | Định danh khách hàng (Số điện thoại hoặc userId) |
+Thêm bảng sau vào phần "Dữ liệu callback", sau bảng section ở trên:
 
-### vehicleData
-
-| Field | Type | Mô tả |
-|---|---|---|
-| vehicleIdentity | string | Biển số xe |
-| vehiclePlateColor | string | Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới) |
-| vehicleType | number | Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới) |
-
-### serviceData
+**serviceData**
 
 | Field | Type | Mô tả |
 |---|---|---|
@@ -100,60 +86,3 @@ Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương 
 | notifyEndDateTime | string (ISO 8601) | Ngày kết thúc dịch vụ |
 | allowRenew | number | Cho phép gia hạn tự động (1 = có, 0 = không) |
 | partnerRequestId | string | ID do đối tác cung cấp khi đăng ký dịch vụ |
-
-### callbackData
-
-| Field | Type | Mô tả |
-|---|---|---|
-| fineStatus | number | Trạng thái vi phạm phạt nguội (1 = có vi phạm, 0 = không vi phạm) |
-| refreshDate | string | Ngày cập nhật dữ liệu (định dạng DD/MM/YYYY) |
-| criminalRecords | array | Danh sách các bản ghi vi phạm (chi tiết bên dưới) |
-
-### Chi tiết bản ghi vi phạm (trong criminalRecords)
-
-| Field | Type | Mô tả |
-|---|---|---|
-| customerCriminalRecordId | number | Mã bản ghi vi phạm (primary key) |
-| customerRecordPlatenumber | string | Biển số xe vi phạm |
-| customerRecordPlateColor | string | Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới) |
-| customerRecordPlateColorDesc | string | Mô tả màu biển số |
-| vehicleType | number | Loại phương tiện vi phạm (Xem bảng liệt kê trạng thái bên dưới) |
-| crimeRecordContent | string | Nội dung vi phạm |
-| crimeRecordStatus | string | Trạng thái xử lý vi phạm (Xem bảng liệt kê trạng thái bên dưới) |
-| crimeRecordTime | datetime | Thời gian phát hiện vi phạm |
-| crimeRecordPIC | string | Cơ quan phát hiện vi phạm |
-| crimeRecordLocation | string | Địa điểm phát hiện vi phạm |
-| crimeRecordContact | string | Số điện thoại liên hệ của cơ quan |
-| crimeRecordAgency | string | Tên đơn vị xử lý vi phạm |
-| crimeRecordAddressPIC | string | Địa chỉ đơn vị phát hiện vi phạm |
-| crimeRecordAmendmentDate | string | Ngày sửa đổi bổ sung bản ghi (định dạng DD/MM/YYYY) |
-
-## Bảng liệt kê trạng thái
-
-### crimeRecordStatus - Trạng thái xử lý vi phạm
-
-| Giá trị | Mô tả |
-|---|---|
-| Chưa xử phạt | Vi phạm chưa được xử phạt |
-| Đã xử phạt | Vi phạm đã được xử phạt |
-| Không vi phạm | Dữ liệu không phải vi phạm thực tế |
-| Lỗi tra cứu | Có lỗi xảy ra khi tra cứu vi phạm |
-
-### customerRecordPlateColor - Màu biển số
-
-| Giá trị | Mô tả |
-|---|---|
-| WHITE | Trắng |
-| YELLOW | Vàng |
-| BLUE | Xanh |
-| RED | Đỏ |
-
-### vehicleType - Loại phương tiện
-
-| Giá trị | Mô tả |
-|---|---|
-| 1 | Ô tô |
-| 10 | Xe khác |
-| 20 | Rơ moóc |
-| 30 | Xe máy |
-| 40 | Xe điện |

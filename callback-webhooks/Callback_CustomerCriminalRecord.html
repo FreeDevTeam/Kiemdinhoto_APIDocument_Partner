@@ -33,49 +33,262 @@
     <div class="card">
       <h2>Cấu trúc payload callback</h2>
       <pre>{
+  "customerData": {
+    "customerIdentifier": "0382716917"
+  },
+  "vehicleData": {
+    "vehicleIdentity": "30A84812",
+    "vehiclePlateColor": "WHITE",
+    "vehicleType": 1
+  },
+  "serviceData": {
+    "appUserVehicleNotifyInfoId": 1,
+    "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
+    "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
+    "allowRenew": 1,
+    "partnerRequestId": "1781585503732"
+  },
   "callbackData": {
-    "customerCriminalRecordId": 123456,
-    "customerRecordPlatenumber": "30A84812",
-    "customerRecordPlateColor": 2,
-    "customerRecordPlateColorDesc": "Xanh",
-    "vehicleType": 1,
-    "crimeRecordContent": "Vi phạm vượt đèn đỏ",
-    "crimeRecordStatus": "Chưa xử phạt",
-    "crimeRecordTime": "2026-05-15 10:30:00",
-    "crimeRecordPIC": "Công an giao thông quận 1",
-    "crimeRecordLocation": "Ngã tư Hàng Xanh, TP. HCM",
-    "crimeRecordContact": "0987654321",
-    "crimeRecordAgency": "Đội CSGT Quận 1",
-    "crimeRecordAddressPIC": "Số 1 Lê Lợi, Quận 1, TP. HCM",
-    "crimeRecordAmendmentDate": "2026-05-16",
-    "projectName": "Kiemdinhoto_StationServer",
-    "createdAt": "2026-05-15T10:45:00.000Z",
-    "updatedAt": "2026-05-15T10:45:00.000Z"
+    "fineStatus": 1,
+    "refreshDate": "16/06/2026",
+    "criminalRecords": [
+      {
+        "customerCriminalRecordId": 100001,
+        "customerRecordPlatenumber": "30A84812",
+        "vehicleType": 1,
+        "customerRecordPlateColor": "WHITE",
+        "customerRecordPlateColorDesc": "Nền màu trắng, chữ và số màu đen",
+        "crimeRecordContent": "Điều khiển xe chạy quá tốc độ quy định từ 05 km/h đến dưới 10 km/h",
+        "crimeRecordStatus": "Chưa xử phạt",
+        "crimeRecordTime": "2026-06-10 08:15:00",
+        "crimeRecordPIC": "Đội Cảnh sát giao thông số 1 - Công an TP. Hà Nội",
+        "crimeRecordAddressPIC": "Số 2 Thiền Quang, Nguyễn Du, Hai Bà Trưng, Hà Nội",
+        "crimeRecordLocation": "Đường Nguyễn Trãi, Phường Thanh Xuân Trung, Quận Thanh Xuân, TP. Hà Nội",
+        "crimeRecordContact": "024.38521234",
+        "crimeRecordAgency": "Cục Cảnh sát giao thông - Bộ Công an",
+        "crimeRecordAmendmentDate": "10/06/2026"
+      },
+      {
+        "customerCriminalRecordId": 100002,
+        "customerRecordPlatenumber": "30A84812",
+        "vehicleType": 1,
+        "customerRecordPlateColor": "WHITE",
+        "customerRecordPlateColorDesc": "Nền màu trắng, chữ và số màu đen",
+        "crimeRecordContent": "Không chấp hành hiệu lệnh của đèn tín hiệu giao thông",
+        "crimeRecordStatus": "Chưa xử phạt",
+        "crimeRecordTime": "2026-06-12 17:45:00",
+        "crimeRecordPIC": "Đội Cảnh sát giao thông số 3 - Công an TP. Hà Nội",
+        "crimeRecordAddressPIC": "Số 89 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội",
+        "crimeRecordLocation": "Ngã tư Đinh Tiên Hoàng - Tràng Thi, Quận Hoàn Kiếm, TP. Hà Nội",
+        "crimeRecordContact": "024.39431234",
+        "crimeRecordAgency": "Cục Cảnh sát giao thông - Bộ Công an",
+        "crimeRecordAmendmentDate": "12/06/2026"
+      }
+    ]
   }
 }</pre>
     </div>
 
     <div class="card">
       <h2>Dữ liệu callback</h2>
+      
+      <h3 style="margin-top: 12px; margin-bottom: 8px;">Cấu trúc các section</h3>
       <table>
-        <tr><th>Field</th><th>Type</th><th>Mô tả</th></tr>
-        <tr><td>customerCriminalRecordId</td><td>number</td><td>Mã bản ghi vi phạm (primary key).</td></tr>
-        <tr><td>customerRecordPlatenumber</td><td>string</td><td>Biển số xe vi phạm.</td></tr>
-        <tr><td>customerRecordPlateColor</td><td>number</td><td>Màu biển số xe.</td></tr>
-        <tr><td>customerRecordPlateColorDesc</td><td>string</td><td>Mô tả màu biển số.</td></tr>
-        <tr><td>vehicleType</td><td>number</td><td>Loại phương tiện vi phạm.</td></tr>
-        <tr><td>crimeRecordContent</td><td>string</td><td>Nội dung vi phạm.</td></tr>
-        <tr><td>crimeRecordStatus</td><td>string</td><td>Trạng thái xử lý vi phạm.</td></tr>
-        <tr><td>crimeRecordTime</td><td>datetime</td><td>Thời gian phát hiện vi phạm.</td></tr>
-        <tr><td>crimeRecordPIC</td><td>string</td><td>Cơ quan phát hiện vi phạm.</td></tr>
-        <tr><td>crimeRecordLocation</td><td>string</td><td>Địa điểm phát hiện vi phạm.</td></tr>
-        <tr><td>crimeRecordContact</td><td>string</td><td>Số điện thoại liên hệ của cơ quan.</td></tr>
-        <tr><td>crimeRecordAgency</td><td>string</td><td>Tên đơn vị xử lý vi phạm.</td></tr>
-        <tr><td>crimeRecordAddressPIC</td><td>string</td><td>Địa chỉ đơn vị phát hiện vi phạm.</td></tr>
-        <tr><td>crimeRecordAmendmentDate</td><td>string</td><td>Ngày sửa đổi bổ sung bản ghi.</td></tr>
-        <tr><td>projectName</td><td>string</td><td>Tên hệ thống phát sinh bản ghi.</td></tr>
-        <tr><td>createdAt</td><td>datetime</td><td>Thời điểm bản ghi được tạo.</td></tr>
-        <tr><td>updatedAt</td><td>datetime</td><td>Thời điểm cập nhật gần nhất.</td></tr>
+        <tr>
+          <th>Section</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>customerData</td>
+          <td>Thông tin định danh khách hàng.</td>
+        </tr>
+        <tr>
+          <td>vehicleData</td>
+          <td>Thông tin phương tiện đăng ký dịch vụ.</td>
+        </tr>
+        <tr>
+          <td>serviceData</td>
+          <td>Thông tin gói dịch vụ đang sử dụng.</td>
+        </tr>
+        <tr>
+          <td>callbackData</td>
+          <td>Dữ liệu kết quả tra cứu vi phạm.</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">customerData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>customerIdentifier</td>
+          <td>string</td>
+          <td>Định danh khách hàng (Số điện thoại hoặc userId).</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">vehicleData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>vehicleIdentity</td>
+          <td>string</td>
+          <td>Biển số xe.</td>
+        </tr>
+        <tr>
+          <td>vehiclePlateColor</td>
+          <td>string</td>
+          <td>Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
+          <td>vehicleType</td>
+          <td>number</td>
+          <td>Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">serviceData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>appUserVehicleNotifyInfoId</td>
+          <td>number</td>
+          <td>ID gói dịch vụ thông báo vi phạm tự động.</td>
+        </tr>
+        <tr>
+          <td>notifyStartDateTime</td>
+          <td>string (ISO 8601)</td>
+          <td>Ngày kích hoạt dịch vụ.</td>
+        </tr>
+        <tr>
+          <td>notifyEndDateTime</td>
+          <td>string (ISO 8601)</td>
+          <td>Ngày kết thúc dịch vụ.</td>
+        </tr>
+        <tr>
+          <td>allowRenew</td>
+          <td>number</td>
+          <td>Cho phép gia hạn tự động (1 = có, 0 = không).</td>
+        </tr>
+        <tr>
+          <td>partnerRequestId</td>
+          <td>string</td>
+          <td>ID do đối tác cung cấp khi đăng ký dịch vụ.</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">callbackData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>fineStatus</td>
+          <td>number</td>
+          <td>Trạng thái vi phạm phạt nguội (1 = có vi phạm, 0 = không vi phạm).</td>
+        </tr>
+        <tr>
+          <td>refreshDate</td>
+          <td>string</td>
+          <td>Ngày cập nhật dữ liệu (định dạng DD/MM/YYYY).</td>
+        </tr>
+        <tr>
+          <td>criminalRecords</td>
+          <td>array</td>
+          <td>Danh sách các bản ghi vi phạm (chi tiết bên dưới).</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">Chi tiết bản ghi vi phạm (trong criminalRecords)</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>customerCriminalRecordId</td>
+          <td>number</td>
+          <td>Mã bản ghi vi phạm (primary key).</td>
+        </tr>
+        <tr>
+          <td>customerRecordPlatenumber</td>
+          <td>string</td>
+          <td>Biển số xe vi phạm.</td>
+        </tr>
+        <tr>
+          <td>customerRecordPlateColor</td>
+          <td>string</td>
+          <td>Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
+          <td>customerRecordPlateColorDesc</td>
+          <td>string</td>
+          <td>Mô tả màu biển số.</td>
+        </tr>
+        <tr>
+          <td>vehicleType</td>
+          <td>number</td>
+          <td>Loại phương tiện vi phạm (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
+          <td>crimeRecordContent</td>
+          <td>string</td>
+          <td>Nội dung vi phạm.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordStatus</td>
+          <td>string</td>
+          <td>Trạng thái xử lý vi phạm (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
+          <td>crimeRecordTime</td>
+          <td>datetime</td>
+          <td>Thời gian phát hiện vi phạm.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordPIC</td>
+          <td>string</td>
+          <td>Cơ quan phát hiện vi phạm.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordLocation</td>
+          <td>string</td>
+          <td>Địa điểm phát hiện vi phạm.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordContact</td>
+          <td>string</td>
+          <td>Số điện thoại liên hệ của cơ quan.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordAgency</td>
+          <td>string</td>
+          <td>Tên đơn vị xử lý vi phạm.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordAddressPIC</td>
+          <td>string</td>
+          <td>Địa chỉ đơn vị phát hiện vi phạm.</td>
+        </tr>
+        <tr>
+          <td>crimeRecordAmendmentDate</td>
+          <td>string</td>
+          <td>Ngày sửa đổi bổ sung bản ghi (định dạng DD/MM/YYYY).</td>
+        </tr>
       </table>
     </div>
 
@@ -92,10 +305,10 @@
       <h3>customerRecordPlateColor - Màu biển số</h3>
       <table>
         <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Trắng.</td></tr>
-        <tr><td>2</td><td>Xanh.</td></tr>
-        <tr><td>3</td><td>Vàng.</td></tr>
-        <tr><td>4</td><td>Đỏ.</td></tr>
+        <tr><td>WHITE</td><td>Trắng.</td></tr>
+        <tr><td>YELLOW</td><td>Vàng.</td></tr>
+        <tr><td>BLUE</td><td>Xanh.</td></tr>
+        <tr><td>RED</td><td>Đỏ.</td></tr>
       </table>
       <h3>vehicleType - Loại phương tiện</h3>
       <table>
