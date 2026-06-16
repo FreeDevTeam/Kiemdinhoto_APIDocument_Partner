@@ -13,13 +13,15 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
   "customerData": {
     "customerIdentifier": "0382716917"
   },
+  "vehicleData": {
+    "vehicleIdentity": "30A84812",
+    "vehiclePlateColor": "WHITE",
+    "vehicleType": 1
+  },
   "serviceData": {
     "appUserVehicleNotifyInfoId": 1,
     "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
     "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
-    "vehicleIdentity": "30A84812",
-    "vehiclePlateColor": "WHITE",
-    "vehicleType": "",
     "allowRenew": 1,
     "partnerRequestId": "1781585503732"
   },
@@ -41,6 +43,14 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 |---|---|---|
 | customerIdentifier | string | Định danh khách hàng (Số điện thoại hoặc userId) |
 
+### vehicleData
+
+| Field | Type | Mô tả |
+|---|---|---|
+| vehicleIdentity | string | Biển số xe |
+| vehiclePlateColor | string | Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới) |
+| vehicleType | number | Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới) |
+
 ### serviceData
 
 | Field | Type | Mô tả |
@@ -48,9 +58,6 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 | appUserVehicleNotifyInfoId | number | ID dịch vụ (ID gói dịch vụ thông báo vi phạm tự động,...) |
 | notifyStartDateTime | string | Ngày kích hoạt dịch vụ (định dạng ISO 8601) |
 | notifyEndDateTime | string | Ngày kết thúc dịch vụ (định dạng ISO 8601) |
-| vehicleIdentity | string | Biển số xe |
-| vehiclePlateColor | string | Màu biển số xe |
-| vehicleType | string | Loại phương tiện |
 | allowRenew | number | Trạng thái cho phép gia hạn (1: Cho phép gia hạn, 0: Không cho phép gia hạn) |
 | partnerRequestId | string | ID đối tác yêu cầu đăng ký dịch vụ lúc đầu |
 

@@ -88,13 +88,15 @@
   "customerData": {
     "customerIdentifier": "0382716917"
   },
+  "vehicleData": {
+    "vehicleIdentity": "30A84812",
+    "vehiclePlateColor": "WHITE",
+    "vehicleType": 1
+  },
   "serviceData": {
     "appUserVehicleNotifyInfoId": 1,
     "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
     "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
-    "vehicleIdentity": "30A84812",
-    "vehiclePlateColor": "WHITE",
-    "vehicleType": "",
     "allowRenew": 1,
     "partnerRequestId": "1781585503732"
   },
@@ -125,6 +127,30 @@
         </tr>
       </table>
 
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">vehicleData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>vehicleIdentity</td>
+          <td>string</td>
+          <td>Biển số xe.</td>
+        </tr>
+        <tr>
+          <td>vehiclePlateColor</td>
+          <td>string</td>
+          <td>Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
+          <td>vehicleType</td>
+          <td>number</td>
+          <td>Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+      </table>
+
       <h3 style="margin-top: 18px; margin-bottom: 8px;">serviceData</h3>
       <table>
         <tr>
@@ -146,21 +172,6 @@
           <td>notifyEndDateTime</td>
           <td>string</td>
           <td>Ngày kết thúc dịch vụ (định dạng ISO 8601).</td>
-        </tr>
-        <tr>
-          <td>vehicleIdentity</td>
-          <td>string</td>
-          <td>Biển số xe.</td>
-        </tr>
-        <tr>
-          <td>vehiclePlateColor</td>
-          <td>string</td>
-          <td>Màu biển số xe.</td>
-        </tr>
-        <tr>
-          <td>vehicleType</td>
-          <td>string</td>
-          <td>Loại phương tiện.</td>
         </tr>
         <tr>
           <td>allowRenew</td>
