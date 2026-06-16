@@ -1,12 +1,8 @@
-# Callback / Webhooks - Lịch hẹn
+Chỉnh sửa tài liệu Callback_LichHen.html
 
-Mô tả dữ liệu mà đối tác nhận được khi hệ thống gửi callback liên quan đến lịch hẹn do chính đối tác tạo.
+## 1. Cập nhật payload callback
 
-## Phạm vi dữ liệu
-
-Chỉ truy cập những dữ liệu mà đối tác tạo ra.
-
-## Cấu trúc payload callback
+Thay thế toàn bộ phần "Cấu trúc payload callback" bằng format mới sau:
 
 ```json
 {
@@ -42,9 +38,9 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
 }
 ```
 
-## Dữ liệu callback
+## 2. Bổ sung bảng mô tả các section trong payload
 
-### Cấu trúc các section
+Thêm bảng mô tả 3 section cấp cao nhất vào phần "Dữ liệu callback", đặt phía trên bảng chi tiết field hiện có:
 
 | Section | Mô tả |
 |---|---|
@@ -52,28 +48,18 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
 | vehicleData | Thông tin phương tiện |
 | callbackData | Dữ liệu chi tiết lịch hẹn |
 
-### customerData
+## 3. Bổ sung mô tả các field trong callbackData
 
-| Field | Type | Mô tả |
-|---|---|---|
-| customerIdentifier | string | Định danh khách hàng (Số điện thoại hoặc userId) |
+Thêm bảng sau vào phần "Dữ liệu callback", sau bảng section ở trên:
 
-### vehicleData
-
-| Field | Type | Mô tả |
-|---|---|---|
-| vehicleIdentity | string | Biển số xe |
-| vehiclePlateColor | string | Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới) |
-| vehicleType | number | Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới) |
-
-### callbackData
+**callbackData**
 
 | Field | Type | Mô tả |
 |---|---|---|
 | customerScheduleId | number | ID lịch hẹn |
 | licensePlates | string | Biển số xe |
-| licensePlateColor | number | Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới) |
-| vehicleType | number | Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới) |
+| licensePlateColor | number | Màu biển số xe |
+| vehicleType | number | Loại phương tiện |
 | phone | string | Số điện thoại khách hàng |
 | fullnameSchedule | string | Họ tên khách hàng |
 | email | string | Email khách hàng |
@@ -81,18 +67,18 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
 | time | string | Khung giờ hẹn |
 | scheduleSerial | number | Số thứ tự trong khung giờ |
 | scheduleCode | string | Mã lịch hẹn |
-| customerScheduleStatus | number | Trạng thái lịch hẹn (Xem bảng liệt kê trạng thái bên dưới) |
+| customerScheduleStatus | number | Trạng thái lịch hẹn |
 | scheduleNote | string | Ghi chú lịch hẹn |
-| scheduleType | number | Loại lịch hẹn (Xem bảng liệt kê trạng thái bên dưới) |
+| scheduleType | number | Loại lịch hẹn |
 | scheduleHash | string | Mã hash định danh lịch hẹn |
-| confirmStatus | number | Trạng thái xác nhận (Xem bảng liệt kê trạng thái bên dưới) |
+| confirmStatus | number | Trạng thái xác nhận (1 = đã xác nhận, 0 = chưa xác nhận) |
 | scheduleTracking | string | Mã tracking lịch hẹn |
 | createdAt | string (ISO 8601) | Thời điểm tạo lịch hẹn |
 | updatedAt | string (ISO 8601) | Thời điểm cập nhật lịch hẹn |
 
-## Bảng liệt kê trạng thái
+## 4. Bổ sung bảng liệt kê trạng thái
 
-### customerScheduleStatus - Trạng thái lịch hẹn
+**customerScheduleStatus — Trạng thái lịch hẹn**
 
 | Giá trị | Mô tả |
 |---|---|
@@ -101,7 +87,16 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
 | 20 | Đã hủy |
 | 30 | Đã đóng |
 
-### scheduleType - Loại lịch hẹn
+**licensePlateColor — Màu biển số**
+
+| Giá trị | Mô tả |
+|---|---|
+| 1 | Trắng |
+| 2 | Xanh |
+| 3 | Vàng |
+| 4 | Đỏ |
+
+**scheduleType — Loại lịch hẹn**
 
 | Giá trị | Mô tả |
 |---|---|
@@ -131,39 +126,3 @@ Chỉ truy cập những dữ liệu mà đối tác tạo ra.
 | 25 | Tư vấn bồi thường bảo hiểm |
 | 26 | Tư vấn sức khỏe lái xe |
 | 27 | Bán vé điện tử |
-
-### licensePlateColor - Màu biển số
-
-| Giá trị | Mô tả |
-|---|---|
-| 1 | Trắng |
-| 2 | Xanh |
-| 3 | Vàng |
-| 4 | Đỏ |
-
-### vehiclePlateColor - Màu biển số xe
-
-| Giá trị | Mô tả |
-|---|---|
-| WHITE | Trắng |
-| YELLOW | Vàng |
-| BLUE | Xanh |
-| RED | Đỏ |
-
-### vehicleType - Loại phương tiện
-
-| Giá trị | Mô tả |
-|---|---|
-| 1 | Ô tô |
-| 10 | Xe khác |
-| 20 | Rơ moóc |
-| 30 | Xe máy |
-| 40 | Xe điện |
-
-### confirmStatus - Trạng thái xác nhận
-
-| Giá trị | Mô tả |
-|---|---|
-| 0 | Chưa xác nhận |
-| 1 | Đã xác nhận |
-| 2 | Đã hủy |
