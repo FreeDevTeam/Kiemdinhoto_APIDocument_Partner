@@ -85,23 +85,106 @@
     <div class="card">
       <h2>Cấu trúc payload callback</h2>
       <pre>{
-  "callbackData": {
+  "customerData": {
     "customerIdentifier": "0382716917"
+  },
+  "serviceData": {
+    "appUserVehicleNotifyInfoId": 1,
+    "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
+    "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
+    "vehicleIdentity": "30A84812",
+    "vehiclePlateColor": "WHITE",
+    "vehicleType": "",
+    "allowRenew": 1,
+    "partnerRequestId": "1781585503732"
+  },
+  "callbackData": {
+    "customerIdentifier": "0382716917",
     "vehicleIdentity": "30A84812",
     "vehicleType": 1,
-    "vehicleExpiryDate": "01/01/2027",
     "vehiclePlateColor": "WHITE",
+    "vehicleExpiryDate": "01/01/2027"
   }
 }</pre>
     </div>
 
     <div class="card">
       <h2>Dữ liệu callback</h2>
+      
+      <h3 style="margin-top: 12px; margin-bottom: 8px;">customerData</h3>
       <table>
         <tr>
           <th>Field</th>
           <th>Type</th>
           <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>customerIdentifier</td>
+          <td>string</td>
+          <td>Định danh khách hàng (Số điện thoại hoặc userId).</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">serviceData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>appUserVehicleNotifyInfoId</td>
+          <td>number</td>
+          <td>ID dịch vụ (ID gói dịch vụ thông báo vi phạm tự động,...).</td>
+        </tr>
+        <tr>
+          <td>notifyStartDateTime</td>
+          <td>string</td>
+          <td>Ngày kích hoạt dịch vụ (định dạng ISO 8601).</td>
+        </tr>
+        <tr>
+          <td>notifyEndDateTime</td>
+          <td>string</td>
+          <td>Ngày kết thúc dịch vụ (định dạng ISO 8601).</td>
+        </tr>
+        <tr>
+          <td>vehicleIdentity</td>
+          <td>string</td>
+          <td>Biển số xe.</td>
+        </tr>
+        <tr>
+          <td>vehiclePlateColor</td>
+          <td>string</td>
+          <td>Màu biển số xe.</td>
+        </tr>
+        <tr>
+          <td>vehicleType</td>
+          <td>string</td>
+          <td>Loại phương tiện.</td>
+        </tr>
+        <tr>
+          <td>allowRenew</td>
+          <td>number</td>
+          <td>Trạng thái cho phép gia hạn (1: Cho phép gia hạn, 0: Không cho phép gia hạn).</td>
+        </tr>
+        <tr>
+          <td>partnerRequestId</td>
+          <td>string</td>
+          <td>ID đối tác yêu cầu đăng ký dịch vụ lúc đầu.</td>
+        </tr>
+      </table>
+
+      <h3 style="margin-top: 18px; margin-bottom: 8px;">callbackData</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>customerIdentifier</td>
+          <td>string</td>
+          <td>Định danh khách hàng (Số điện thoại hoặc userId).</td>
         </tr>
         <tr>
           <td>vehicleIdentity</td>
@@ -111,22 +194,17 @@
         <tr>
           <td>vehicleType</td>
           <td>number</td>
-          <td>Loại phương tiện.</td>
+          <td>Loại phương tiện (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
+          <td>vehiclePlateColor</td>
+          <td>string</td>
+          <td>Màu biển số xe (Xem bảng liệt kê trạng thái bên dưới).</td>
         </tr>
         <tr>
           <td>vehicleExpiryDate</td>
           <td>string</td>
           <td>Ngày hết hạn đăng kiểm (định dạng DD/MM/YYYY).</td>
-        </tr>
-        <tr>
-          <td>vehiclePlateColor</td>
-          <td>string</td>
-          <td>Màu biển số xe.</td>
-        </tr>
-        <tr>
-          <td>customerIdentifier</td>
-          <td>string</td>
-          <td>Định danh khách hàng (Số điện thoại hoặc userId).</td>
         </tr>
       </table>
     </div>
