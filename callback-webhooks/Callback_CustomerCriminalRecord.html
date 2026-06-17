@@ -49,6 +49,7 @@
     "partnerRequestId": "1781585503732"
   },
   "callbackData": {
+    "notifyType": 1,
     "fineStatus": 1,
     "refreshDate": "16/06/2026",
     "criminalRecords": [
@@ -196,6 +197,11 @@
           <th>Mô tả</th>
         </tr>
         <tr>
+          <td>notifyType</td>
+          <td>number</td>
+          <td>Loại thông báo vi phạm (Xem bảng liệt kê trạng thái bên dưới).</td>
+        </tr>
+        <tr>
           <td>fineStatus</td>
           <td>number</td>
           <td>Trạng thái vi phạm phạt nguội (1 = có vi phạm, 0 = không vi phạm).</td>
@@ -294,6 +300,14 @@
 
     <div class="card">
       <h2>Bảng liệt kê trạng thái</h2>
+      <h3>notifyType - Loại thông báo vi phạm</h3>
+      <table>
+        <tr><th>Giá trị</th><th>Mô tả</th></tr>
+        <tr><td>1</td><td>Phát hiện xe có lỗi phạt nguội.</td></tr>
+        <tr><td>2</td><td>Xe hiện không có lỗi vi phạm.</td></tr>
+        <tr><td>3</td><td>Xe phát sinh lỗi phạt nguội mới.</td></tr>
+        <tr><td>4</td><td>Xe có cập nhật mới - lỗi đã xử lý xong.</td></tr>
+      </table>
       <h3>crimeRecordStatus - Trạng thái xử lý vi phạm</h3>
       <table>
         <tr><th>Giá trị</th><th>Mô tả</th></tr>

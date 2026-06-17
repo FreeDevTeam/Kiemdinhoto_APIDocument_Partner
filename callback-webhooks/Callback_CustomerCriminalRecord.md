@@ -26,6 +26,7 @@ Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương 
         "partnerRequestId": "1781585503732"
     },
     "callbackData": {
+        "notifyType": 1,
         "fineStatus": 1,
         "refreshDate": "16/06/2026",
         "criminalRecords": [
@@ -105,6 +106,7 @@ Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương 
 
 | Field | Type | Mô tả |
 |---|---|---|
+| notifyType | number | Loại thông báo vi phạm (Xem bảng liệt kê trạng thái bên dưới) |
 | fineStatus | number | Trạng thái vi phạm phạt nguội (1 = có vi phạm, 0 = không vi phạm) |
 | refreshDate | string | Ngày cập nhật dữ liệu (định dạng DD/MM/YYYY) |
 | criminalRecords | array | Danh sách các bản ghi vi phạm (chi tiết bên dưới) |
@@ -129,6 +131,15 @@ Chỉ truy cập những dữ liệu vi phạm được ghi nhận cho phương 
 | crimeRecordAmendmentDate | string | Ngày sửa đổi bổ sung bản ghi (định dạng DD/MM/YYYY) |
 
 ## Bảng liệt kê trạng thái
+
+### notifyType - Loại thông báo vi phạm
+
+| Giá trị | Mô tả |
+|---|---|
+| 1 | Phát hiện xe có lỗi phạt nguội |
+| 2 | Xe hiện không có lỗi vi phạm |
+| 3 | Xe phát sinh lỗi phạt nguội mới |
+| 4 | Xe có cập nhật mới - lỗi đã xử lý xong |
 
 ### crimeRecordStatus - Trạng thái xử lý vi phạm
 
