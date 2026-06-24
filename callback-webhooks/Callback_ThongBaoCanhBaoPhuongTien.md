@@ -1,5 +1,7 @@
 # Callback / Webhooks - Gói dịch vụ thông báo
 
+> **⚠️ QUAN TRỌNG:** Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực. Vui lòng tham khảo hướng dẫn cấu hình và verify signature tại: [Hướng dẫn xác thực Webhook Callback](./Webhook_Authentication.md).
+
 Mô tả dữ liệu đối tác nhận được khi hệ thống gửi callback liên quan đến gói dịch vụ thông báo mà đối tác đã bán hoặc khởi tạo.
 
 ## Phạm vi dữ liệu

@@ -22,6 +22,10 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 
 ## Callback / Webhooks
 
+0. Xác thực Webhook (Authentication Guide)
+- HTML: ./callback-webhooks/Webhook_Authentication.html
+- MD: ./callback-webhooks/Webhook_Authentication.md
+
 1. Lịch hẹn
 - HTML: ./callback-webhooks/Callback_LichHen.html
 - MD: ./callback-webhooks/Callback_LichHen.md

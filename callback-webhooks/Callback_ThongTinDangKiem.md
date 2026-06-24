@@ -1,5 +1,7 @@
 # Callback / Webhooks - Thông tin đăng kiểm
 
+> **⚠️ QUAN TRỌNG:** Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực. Vui lòng tham khảo hướng dẫn cấu hình và verify signature tại: [Hướng dẫn xác thực Webhook Callback](./Webhook_Authentication.md).
+
 Mô tả dữ liệu mà đối tác nhận được khi hệ thống gửi callback liên quan đến thông tin đăng kiểm của phương tiện.
 
 ## Phạm vi dữ liệu
