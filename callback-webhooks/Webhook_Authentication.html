@@ -1,29 +1,118 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hướng dẫn xác thực Webhook Callback</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
-    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-    h1, h2, h3 { margin-top: 0; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
-    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #eef3fb; }
-    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; margin-bottom: 14px; }
-    code { font-family: Consolas, monospace; background: #f1f5f9; padding: 2px 4px; border-radius: 4px; color: #db2777; }
-    pre code { background: transparent; color: inherit; padding: 0; border-radius: 0; }
-    a { color: #0b63ce; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .alert { padding: 12px; border-radius: 8px; margin-bottom: 14px; }
-    .alert-warning { background-color: #fffbeb; border-left: 4px solid #f59e0b; color: #b45309; }
-    .alert-info { background-color: #eff6ff; border-left: 4px solid #3b82f6; color: #1e3a8a; }
-    ul { margin-top: 0; padding-left: 20px; }
-    li { margin-bottom: 6px; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dbe3ef;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5ecf6;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-bottom: 14px;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+      background: #f1f5f9;
+      padding: 2px 4px;
+      border-radius: 4px;
+      color: #db2777;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .alert {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+
+    .alert-warning {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      color: #b45309;
+    }
+
+    .alert-info {
+      background-color: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      color: #1e3a8a;
+    }
+
+    ul {
+      margin-top: 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
@@ -49,7 +138,8 @@
         <tr>
           <td>nonce</td>
           <td>string</td>
-          <td>Chuỗi ngẫu nhiên 16 ký tự, duy nhất cho mỗi request. Dùng để chống replay attack thay cho time window.</td>
+          <td>Chuỗi ngẫu nhiên 16 ký tự, duy nhất cho mỗi request. Dùng để chống replay attack thay cho time window.
+          </td>
         </tr>
         <tr>
           <td>signature</td>
@@ -61,15 +151,16 @@
 
     <div class="card">
       <h2>2. Cách tính Signature</h2>
-      
+
       <h3 style="margin-top: 18px; margin-bottom: 8px;">2.1 Công thức</h3>
       <p>Ghép 3 giá trị lại với nhau, dùng ký tự <code>|</code> làm separator:</p>
       <pre>signingString = clientId + "|" + apiKey + "|" + timestamp + "|" + nonce</pre>
       <p>Sau đó tính HMAC-SHA256 với <code>secretKey</code> làm key mã hoá, encode kết quả sang Hex lowercase:</p>
       <pre>signature = HMAC-SHA256(key = secretKey, message = signingString)   // hex lowercase</pre>
-      
+
       <div class="alert alert-warning">
-        <strong>⚠️ Lưu ý:</strong> Body KHÔNG tham gia vào <code>signingString</code>. Partner không cần đọc hay xử lý body để verify.
+        <strong>⚠️ Lưu ý:</strong> Body KHÔNG tham gia vào <code>signingString</code>. Partner không cần đọc hay xử lý
+        body để verify.
       </div>
 
       <h3 style="margin-top: 18px; margin-bottom: 8px;">2.2 Thành phần</h3>
@@ -150,9 +241,11 @@ signature = HMAC-SHA256(secretKey, signingString)
           <td>Tính lại signature ≠ signature (so sánh constant-time)</td>
         </tr>
       </table>
-      
+
       <div class="alert alert-info">
-        <strong>💡 Nonce cache:</strong> lưu <code>key = "clientId:nonce"</code>, TTL = 10 phút. Dùng Redis <code>SET NX EX</code> hoặc DB unique constraint. Nếu <code>SET NX</code> trả false (key đã tồn tại) → nonce đã dùng → 401.
+        <strong>💡 Nonce cache:</strong> lưu <code>key = "clientId:nonce"</code>, TTL = 10 phút. Dùng Redis
+        <code>SET NX EX</code> hoặc DB unique constraint. Nếu <code>SET NX</code> trả false (key đã tồn tại) → nonce đã
+        dùng → 401.
       </div>
     </div>
 
@@ -161,29 +254,83 @@ signature = HMAC-SHA256(secretKey, signingString)
       <h3 style="margin-top: 18px; margin-bottom: 8px;">4.1 Node.js</h3>
       <pre>const crypto = require('crypto');
 
-function verifyWebhook(req) {
-  const clientId  = getClientIdFromConfig();
-  const timestamp = req.headers['timestamp'];
-  const nonce     = req.headers['nonce'];
-  const signature = req.headers['signature'];
+const CREDENTIALS_STORE = {
+    MYF88APP: {
+        clientId: 'MYF88APP',
+        apiKey: '72bf2963-f1e4-4742-9089-3f08ed860325',
+        secretKey: 'c6ba90ed558f0c1b28b3d69529bcf886f5b56c85cf512f4e9aef1b65b7336ba6',
+    },
+};
 
-  // Bước 1: Timestamp anti-replay (±5 phút)
-  if (Math.abs(Date.now() - Number(timestamp)) > 300_000) return false;
+async function verifyWebhook(req) {
+    const timestamp = req.headers['timestamp'];
+    const nonce = req.headers['nonce'];
+    const signature = req.headers['signature'];
 
-  // Bước 2: Nonce chống replay
-  if (await isNonceSeen(clientId, nonce)) return false;
-  await markNonceSeen(clientId, nonce, ttlMs=600_000);
+    if (!timestamp || !nonce || !signature) {
+        console.log('[verifyWebhook] missing field');
+        return false;
+    }
 
-  // Bước 3: Lookup apiKey, secretKey và verify signature
-  const secretKey  = getSecretKeyByClientId(clientId);
-  if (!secretKey) return false;
+    // Timestamp anti-replay (±5 phút)
+    if (Math.abs(Date.now() - Number(timestamp)) > 300_000) {
+        console.log('[verifyWebhook] timestamp out of range');
+        return false;
+    }
 
-  const signingStr = clientId + '|' + apiKey + '|' + timestamp + '|' + nonce;
-  const expected   = crypto.createHmac('sha256', secretKey)
-                          .update(signingStr, 'utf8')
-                          .digest('hex');
+    // Lookup credentials theo clientId
+    const credentials = CREDENTIALS_STORE['MYF88APP'];
+    if (!credentials) {
+        console.log('[verifyWebhook] unknown clientId');
+        return false;
+    }
 
-  return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(signature));
+    // Verify signature
+    const signingString = `${credentials.clientId}|${credentials.apiKey}|${timestamp}|${nonce}`;
+    const expected = crypto.createHmac('sha256', credentials.secretKey)
+        .update(signingString, 'utf8')
+        .digest('hex');
+
+    const expectedBuf = Buffer.from(expected, 'hex');
+    const signatureBuf = Buffer.from(signature, 'hex');
+
+    if (expectedBuf.length !== signatureBuf.length) {
+        console.log('[verifyWebhook] signature length mismatch');
+        return false;
+    }
+
+    const valid = crypto.timingSafeEqual(expectedBuf, signatureBuf);
+    if (!valid) {
+        console.log('[verifyWebhook] signature mismatch, expected:', expected);
+        return false;
+    }
+
+    return true;
+}
+
+function generateWebhookAuth(credentials) {
+  if (!credentials || !credentials.clientId || !credentials.apiKey || !credentials.secretKey) {
+    return {};
+  }
+
+  const timestamp = Date.now().toString();
+  // Tạo nonce ngẫu nhiên 16 ký tự hex
+  const nonce = crypto.randomBytes(8).toString('hex');
+
+  // Tạo chuỗi ký
+  const signingString = `${credentials.clientId}|${credentials.apiKey}|${timestamp}|${nonce}`;
+
+  // Tính HMAC-SHA256 và chuyển sang dạng hex lowercase
+  const signature = crypto.createHmac('sha256', credentials.secretKey)
+    .update(signingString, 'utf8')
+    .digest('hex');
+
+  return {
+    timestamp,
+    nonce,
+    signature
+  };
+  
 }</pre>
     </div>
 
@@ -248,14 +395,23 @@ function verifyWebhook(req) {
     <div class="card">
       <h2>7. Lưu ý bảo mật</h2>
       <ul>
-        <li>🔑 <strong>secretKey server-side only</strong> — secretKey chỉ tồn tại server-side — không để lộ ra client, mobile, hay log.</li>
-        <li>⏱️ <strong>Constant-time comparison</strong> — Luôn dùng hàm so sánh constant-time (<code>timingSafeEqual</code> / <code>hash_equals</code> / <code>MessageDigest.isEqual</code>) — không dùng <code>==</code> hay <code>===</code> để tránh Timing Attack.</li>
-        <li>🔒 <strong>HTTPS bắt buộc</strong> — Callback endpoint phải dùng HTTPS. Từ chối mọi request qua HTTP thuần.</li>
-        <li>🎲 <strong>Nonce duy nhất</strong> — Nonce phải là chuỗi ngẫu nhiên đủ entropy (≥ 16 ký tự hex). Hệ thống đảm bảo mỗi request dùng nonce khác nhau — Partner lưu và kiểm tra phía mình.</li>
-        <li>🔄 <strong>Rotate secretKey</strong> — Rotate secretKey ngay khi nghi ngờ bị lộ, liên hệ để được cấp key mới.</li>
-        <li>🚫 <strong>Anti-replay</strong> — Cửa sổ 5 phút timestamp kết hợp nonce cache bảo vệ toàn diện chống replay attack — không mở rộng time window.</li>
+        <li>🔑 <strong>secretKey server-side only</strong> — secretKey chỉ tồn tại server-side — không để lộ ra client,
+          mobile, hay log.</li>
+        <li>⏱️ <strong>Constant-time comparison</strong> — Luôn dùng hàm so sánh constant-time
+          (<code>timingSafeEqual</code> / <code>hash_equals</code> / <code>MessageDigest.isEqual</code>) — không dùng
+          <code>==</code> hay <code>===</code> để tránh Timing Attack.
+        </li>
+        <li>🔒 <strong>HTTPS bắt buộc</strong> — Callback endpoint phải dùng HTTPS. Từ chối mọi request qua HTTP thuần.
+        </li>
+        <li>🎲 <strong>Nonce duy nhất</strong> — Nonce phải là chuỗi ngẫu nhiên đủ entropy (≥ 16 ký tự hex). Hệ thống
+          đảm bảo mỗi request dùng nonce khác nhau — Partner lưu và kiểm tra phía mình.</li>
+        <li>🔄 <strong>Rotate secretKey</strong> — Rotate secretKey ngay khi nghi ngờ bị lộ, liên hệ để được cấp key
+          mới.</li>
+        <li>🚫 <strong>Anti-replay</strong> — Cửa sổ 5 phút timestamp kết hợp nonce cache bảo vệ toàn diện chống replay
+          attack — không mở rộng time window.</li>
       </ul>
     </div>
   </div>
 </body>
+
 </html>
