@@ -163,8 +163,7 @@
           <td>string</td>
           <td>No</td>
           <td>xem Enum Tỉnh/Thành phố</td>
-          <td>Tỉnh / Thành phố cần lọc (ví dụ <code>"Hà Nội"</code>, <code>"Hồ Chí Minh"</code>, <code>"ALL"</code> hoặc
-            bỏ trống cho toàn quốc).</td>
+          <td>Tỉnh / Thành phố cần lọc (ví dụ <code>"Hà Nội"</code>, <code>"Hồ Chí Minh"</code>, <code>"ALL"</code> hoặc bỏ trống cho toàn quốc).</td>
         </tr>
         <tr>
           <td>filter.district</td>
@@ -236,284 +235,76 @@
       <h2>Danh sách Enum & Giá trị tham chiếu (Input / Output)</h2>
 
       <h3>1. Enum Tỉnh / Thành phố (<code>filter.city</code>)</h3>
-      <p>Trường <code>filter.city</code> nhận Tên Tỉnh / Thành phố hoặc <code>"ALL"</code> / bỏ trống để lấy toàn quốc:
-      </p>
+      <p>Trường <code>filter.city</code> nhận Tên Tỉnh / Thành phố, hoặc <code>"ALL"</code> / bỏ trống để lấy toàn quốc (sắp xếp theo thứ tự bảng chữ cái):</p>
       <table>
         <tr>
           <th>Giá trị (<code>filter.city</code>)</th>
           <th>Tên Tỉnh / Thành phố</th>
-          <th>Khu vực</th>
         </tr>
-        <tr>
-          <td><code>ALL</code></td>
-          <td>Toàn quốc (Mặc định)</td>
-          <td>Tất cả</td>
-        </tr>
-        <tr>
-          <td><code>Hà Nội</code></td>
-          <td>Hà Nội</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Hồ Chí Minh</code></td>
-          <td>Thành phố Hồ Chí Minh</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Đà Nẵng</code></td>
-          <td>Đà Nẵng</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Bình Dương</code></td>
-          <td>Bình Dương</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Đồng Nai</code></td>
-          <td>Đồng Nai</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Bà Rịa Vũng Tàu</code></td>
-          <td>Bà Rịa - Vũng Tàu</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Bắc Ninh</code></td>
-          <td>Bắc Ninh</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Bắc Giang</code></td>
-          <td>Bắc Giang</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Hải Phòng</code></td>
-          <td>Hải Phòng</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Hải Dương</code></td>
-          <td>Hải Dương</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Hưng Yên</code></td>
-          <td>Hưng Yên</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Quảng Ninh</code></td>
-          <td>Quảng Ninh</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Thái Nguyên</code></td>
-          <td>Thái Nguyên</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Phú Thọ</code></td>
-          <td>Phú Thọ</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Vĩnh Phúc</code></td>
-          <td>Vĩnh Phúc</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Nam Định</code></td>
-          <td>Nam Định</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Thái Bình</code></td>
-          <td>Thái Bình</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Ninh Bình</code></td>
-          <td>Ninh Bình</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Hà Nam</code></td>
-          <td>Hà Nam</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Hòa Bình</code></td>
-          <td>Hòa Bình</td>
-          <td>Miền Bắc</td>
-        </tr>
-        <tr>
-          <td><code>Thanh Hóa</code></td>
-          <td>Thanh Hóa</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Nghệ An</code></td>
-          <td>Nghệ An</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Hà Tĩnh</code></td>
-          <td>Hà Tĩnh</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Quảng Bình</code></td>
-          <td>Quảng Bình</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Quảng Trị</code></td>
-          <td>Quảng Trị</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Thừa Thiên - Huế</code></td>
-          <td>Thừa Thiên Huế</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Quảng Nam</code></td>
-          <td>Quảng Nam</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Quảng Ngãi</code></td>
-          <td>Quảng Ngãi</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Bình Định</code></td>
-          <td>Bình Định</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Phú Yên</code></td>
-          <td>Phú Yên</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Khánh Hòa</code></td>
-          <td>Khánh Hòa</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Ninh Thuận</code></td>
-          <td>Ninh Thuận</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Bình Thuận</code></td>
-          <td>Bình Thuận</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Lâm Đồng</code></td>
-          <td>Lâm Đồng</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Gia Lai</code></td>
-          <td>Gia Lai</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Kon Tum</code></td>
-          <td>Kon Tum</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Đắk Lắk</code></td>
-          <td>Đắk Lắk</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Đắk Nông</code></td>
-          <td>Đắk Nông</td>
-          <td>Miền Trung</td>
-        </tr>
-        <tr>
-          <td><code>Cần Thơ</code></td>
-          <td>Cần Thơ</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>An Giang</code></td>
-          <td>An Giang</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Kiên Giang</code></td>
-          <td>Kiên Giang</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Cà Mau</code></td>
-          <td>Cà Mau</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Long An</code></td>
-          <td>Long An</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Tây Ninh</code></td>
-          <td>Tây Ninh</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Bình Phước</code></td>
-          <td>Bình Phước</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Bến Tre</code></td>
-          <td>Bến Tre</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Vĩnh Long</code></td>
-          <td>Vĩnh Long</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Trà Vinh</code></td>
-          <td>Trà Vinh</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Sóc Trăng</code></td>
-          <td>Sóc Trăng</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Bạc Liêu</code></td>
-          <td>Bạc Liêu</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Tiền Giang</code></td>
-          <td>Tiền Giang</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Hậu Giang</code></td>
-          <td>Hậu Giang</td>
-          <td>Miền Nam</td>
-        </tr>
-        <tr>
-          <td><code>Đồng Tháp</code></td>
-          <td>Đồng Tháp</td>
-          <td>Miền Nam</td>
-        </tr>
+        <tr><td><code>ALL</code></td><td>Toàn quốc (Mặc định)</td></tr>
+        <tr><td><code>An Giang</code></td><td>An Giang</td></tr>
+        <tr><td><code>Bà Rịa Vũng Tàu</code></td><td>Bà Rịa - Vũng Tàu</td></tr>
+        <tr><td><code>Bắc Giang</code></td><td>Bắc Giang</td></tr>
+        <tr><td><code>Bắc Kạn</code></td><td>Bắc Kạn</td></tr>
+        <tr><td><code>Bắc Ninh</code></td><td>Bắc Ninh</td></tr>
+        <tr><td><code>Bạc Liêu</code></td><td>Bạc Liêu</td></tr>
+        <tr><td><code>Bến Tre</code></td><td>Bến Tre</td></tr>
+        <tr><td><code>Bình Định</code></td><td>Bình Định</td></tr>
+        <tr><td><code>Bình Dương</code></td><td>Bình Dương</td></tr>
+        <tr><td><code>Bình Phước</code></td><td>Bình Phước</td></tr>
+        <tr><td><code>Bình Thuận</code></td><td>Bình Thuận</td></tr>
+        <tr><td><code>Cà Mau</code></td><td>Cà Mau</td></tr>
+        <tr><td><code>Cần Thơ</code></td><td>Cần Thơ</td></tr>
+        <tr><td><code>Cao Bằng</code></td><td>Cao Bằng</td></tr>
+        <tr><td><code>Đà Nẵng</code></td><td>Đà Nẵng</td></tr>
+        <tr><td><code>Đắk Lắk</code></td><td>Đắk Lắk</td></tr>
+        <tr><td><code>Đắk Nông</code></td><td>Đắk Nông</td></tr>
+        <tr><td><code>Điện Biên</code></td><td>Điện Biên</td></tr>
+        <tr><td><code>Đồng Nai</code></td><td>Đồng Nai</td></tr>
+        <tr><td><code>Đồng Tháp</code></td><td>Đồng Tháp</td></tr>
+        <tr><td><code>Gia Lai</code></td><td>Gia Lai</td></tr>
+        <tr><td><code>Hà Giang</code></td><td>Hà Giang</td></tr>
+        <tr><td><code>Hà Nam</code></td><td>Hà Nam</td></tr>
+        <tr><td><code>Hà Nội</code></td><td>Hà Nội</td></tr>
+        <tr><td><code>Hà Tĩnh</code></td><td>Hà Tĩnh</td></tr>
+        <tr><td><code>Hải Dương</code></td><td>Hải Dương</td></tr>
+        <tr><td><code>Hải Phòng</code></td><td>Hải Phòng</td></tr>
+        <tr><td><code>Hậu Giang</code></td><td>Hậu Giang</td></tr>
+        <tr><td><code>Hồ Chí Minh</code></td><td>Thành phố Hồ Chí Minh</td></tr>
+        <tr><td><code>Hòa Bình</code></td><td>Hòa Bình</td></tr>
+        <tr><td><code>Hưng Yên</code></td><td>Hưng Yên</td></tr>
+        <tr><td><code>Khánh Hòa</code></td><td>Khánh Hòa</td></tr>
+        <tr><td><code>Kiên Giang</code></td><td>Kiên Giang</td></tr>
+        <tr><td><code>Kon Tum</code></td><td>Kon Tum</td></tr>
+        <tr><td><code>Lai Châu</code></td><td>Lai Châu</td></tr>
+        <tr><td><code>Lâm Đồng</code></td><td>Lâm Đồng</td></tr>
+        <tr><td><code>Lạng Sơn</code></td><td>Lạng Sơn</td></tr>
+        <tr><td><code>Lào Cai</code></td><td>Lào Cai</td></tr>
+        <tr><td><code>Long An</code></td><td>Long An</td></tr>
+        <tr><td><code>Nam Định</code></td><td>Nam Định</td></tr>
+        <tr><td><code>Nghệ An</code></td><td>Nghệ An</td></tr>
+        <tr><td><code>Ninh Bình</code></td><td>Ninh Bình</td></tr>
+        <tr><td><code>Ninh Thuận</code></td><td>Ninh Thuận</td></tr>
+        <tr><td><code>Phú Thọ</code></td><td>Phú Thọ</td></tr>
+        <tr><td><code>Phú Yên</code></td><td>Phú Yên</td></tr>
+        <tr><td><code>Quảng Bình</code></td><td>Quảng Bình</td></tr>
+        <tr><td><code>Quảng Nam</code></td><td>Quảng Nam</td></tr>
+        <tr><td><code>Quảng Ngãi</code></td><td>Quảng Ngãi</td></tr>
+        <tr><td><code>Quảng Ninh</code></td><td>Quảng Ninh</td></tr>
+        <tr><td><code>Quảng Trị</code></td><td>Quảng Trị</td></tr>
+        <tr><td><code>Sóc Trăng</code></td><td>Sóc Trăng</td></tr>
+        <tr><td><code>Sơn La</code></td><td>Sơn La</td></tr>
+        <tr><td><code>Tây Ninh</code></td><td>Tây Ninh</td></tr>
+        <tr><td><code>Thái Bình</code></td><td>Thái Bình</td></tr>
+        <tr><td><code>Thái Nguyên</code></td><td>Thái Nguyên</td></tr>
+        <tr><td><code>Thanh Hóa</code></td><td>Thanh Hóa</td></tr>
+        <tr><td><code>Thừa Thiên - Huế</code></td><td>Thừa Thiên Huế</td></tr>
+        <tr><td><code>Tiền Giang</code></td><td>Tiền Giang</td></tr>
+        <tr><td><code>Trà Vinh</code></td><td>Trà Vinh</td></tr>
+        <tr><td><code>Tuyên Quang</code></td><td>Tuyên Quang</td></tr>
+        <tr><td><code>Vĩnh Long</code></td><td>Vĩnh Long</td></tr>
+        <tr><td><code>Vĩnh Phúc</code></td><td>Vĩnh Phúc</td></tr>
+        <tr><td><code>Yên Bái</code></td><td>Yên Bái</td></tr>
       </table>
 
       <h3>2. Enum Trường Sắp Xếp (<code>order.key</code>)</h3>

@@ -45,64 +45,74 @@ Tài liệu API dành cho Partner - Lấy danh sách điểm nóng vi phạm gia
 ## Danh sách Enum & Giá trị tham chiếu (Input / Output)
 
 ### 1. Enum Tỉnh / Thành phố (`filter.city`)
-Trường `filter.city` nhận Tên Tỉnh / Thành phố (tương tự như giá trị trong `STATIONS_AREA`), hoặc `"ALL"` / bỏ trống để lấy danh sách toàn quốc:
+Trường `filter.city` nhận Tên Tỉnh / Thành phố, hoặc `"ALL"` / bỏ trống để lấy danh sách toàn quốc (sắp xếp theo thứ tự bảng chữ cái):
 
-| Giá trị (`filter.city`) | Tên Tỉnh / Thành phố | Khu vực |
-| ----------------------- | -------------------- | ------- |
-| `ALL` | Toàn quốc (Mặc định) | Tất cả |
-| `Hà Nội` | Hà Nội | Miền Bắc |
-| `Hồ Chí Minh` | Thành phố Hồ Chí Minh | Miền Nam |
-| `Đà Nẵng` | Đà Nẵng | Miền Trung |
-| `Bình Dương` | Bình Dương | Miền Nam |
-| `Đồng Nai` | Đồng Nai | Miền Nam |
-| `Bà Rịa Vũng Tàu` | Bà Rịa - Vũng Tàu | Miền Nam |
-| `Bắc Ninh` | Bắc Ninh | Miền Bắc |
-| `Bắc Giang` | Bắc Giang | Miền Bắc |
-| `Hải Phòng` | Hải Phòng | Miền Bắc |
-| `Hải Dương` | Hải Dương | Miền Bắc |
-| `Hưng Yên` | Hưng Yên | Miền Bắc |
-| `Quảng Ninh` | Quảng Ninh | Miền Bắc |
-| `Thái Nguyên` | Thái Nguyên | Miền Bắc |
-| `Phú Thọ` | Phú Thọ | Miền Bắc |
-| `Vĩnh Phúc` | Vĩnh Phúc | Miền Bắc |
-| `Nam Định` | Nam Định | Miền Bắc |
-| `Thái Bình` | Thái Bình | Miền Bắc |
-| `Ninh Bình` | Ninh Bình | Miền Bắc |
-| `Hà Nam` | Hà Nam | Miền Bắc |
-| `Hòa Bình` | Hòa Bình | Miền Bắc |
-| `Thanh Hóa` | Thanh Hóa | Miền Trung |
-| `Nghệ An` | Nghệ An | Miền Trung |
-| `Hà Tĩnh` | Hà Tĩnh | Miền Trung |
-| `Quảng Bình` | Quảng Bình | Miền Trung |
-| `Quảng Trị` | Quảng Trị | Miền Trung |
-| `Thừa Thiên - Huế` | Thừa Thiên Huế | Miền Trung |
-| `Quảng Nam` | Quảng Nam | Miền Trung |
-| `Quảng Ngãi` | Quảng Ngãi | Miền Trung |
-| `Bình Định` | Bình Định | Miền Trung |
-| `Phú Yên` | Phú Yên | Miền Trung |
-| `Khánh Hòa` | Khánh Hòa | Miền Trung |
-| `Ninh Thuận` | Ninh Thuận | Miền Trung |
-| `Bình Thuận` | Bình Thuận | Miền Trung |
-| `Lâm Đồng` | Lâm Đồng | Miền Trung |
-| `Gia Lai` | Gia Lai | Miền Trung |
-| `Kon Tum` | Kon Tum | Miền Trung |
-| `Đắk Lắk` | Đắk Lắk | Miền Trung |
-| `Đắk Nông` | Đắk Nông | Miền Trung |
-| `Cần Thơ` | Cần Thơ | Miền Nam |
-| `An Giang` | An Giang | Miền Nam |
-| `Kiên Giang` | Kiên Giang | Miền Nam |
-| `Cà Mau` | Cà Mau | Miền Nam |
-| `Long An` | Long An | Miền Nam |
-| `Tây Ninh` | Tây Ninh | Miền Nam |
-| `Bình Phước` | Bình Phước | Miền Nam |
-| `Bến Tre` | Bến Tre | Miền Nam |
-| `Vĩnh Long` | Vĩnh Long | Miền Nam |
-| `Trà Vinh` | Trà Vinh | Miền Nam |
-| `Sóc Trăng` | Sóc Trăng | Miền Nam |
-| `Bạc Liêu` | Bạc Liêu | Miền Nam |
-| `Tiền Giang` | Tiền Giang | Miền Nam |
-| `Hậu Giang` | Hậu Giang | Miền Nam |
-| `Đồng Tháp` | Đồng Tháp | Miền Nam |
+| Giá trị (`filter.city`) | Tên Tỉnh / Thành phố |
+| ----------------------- | -------------------- |
+| `ALL` | Toàn quốc (Mặc định) |
+| `An Giang` | An Giang |
+| `Bà Rịa Vũng Tàu` | Bà Rịa - Vũng Tàu |
+| `Bắc Giang` | Bắc Giang |
+| `Bắc Kạn` | Bắc Kạn |
+| `Bắc Ninh` | Bắc Ninh |
+| `Bạc Liêu` | Bạc Liêu |
+| `Bến Tre` | Bến Tre |
+| `Bình Định` | Bình Định |
+| `Bình Dương` | Bình Dương |
+| `Bình Phước` | Bình Phước |
+| `Bình Thuận` | Bình Thuận |
+| `Cà Mau` | Cà Mau |
+| `Cần Thơ` | Cần Thơ |
+| `Cao Bằng` | Cao Bằng |
+| `Đà Nẵng` | Đà Nẵng |
+| `Đắk Lắk` | Đắk Lắk |
+| `Đắk Nông` | Đắk Nông |
+| `Điện Biên` | Điện Biên |
+| `Đồng Nai` | Đồng Nai |
+| `Đồng Tháp` | Đồng Tháp |
+| `Gia Lai` | Gia Lai |
+| `Hà Giang` | Hà Giang |
+| `Hà Nam` | Hà Nam |
+| `Hà Nội` | Hà Nội |
+| `Hà Tĩnh` | Hà Tĩnh |
+| `Hải Dương` | Hải Dương |
+| `Hải Phòng` | Hải Phòng |
+| `Hậu Giang` | Hậu Giang |
+| `Hồ Chí Minh` | Thành phố Hồ Chí Minh |
+| `Hòa Bình` | Hòa Bình |
+| `Hưng Yên` | Hưng Yên |
+| `Khánh Hòa` | Khánh Hòa |
+| `Kiên Giang` | Kiên Giang |
+| `Kon Tum` | Kon Tum |
+| `Lai Châu` | Lai Châu |
+| `Lâm Đồng` | Lâm Đồng |
+| `Lạng Sơn` | Lạng Sơn |
+| `Lào Cai` | Lào Cai |
+| `Long An` | Long An |
+| `Nam Định` | Nam Định |
+| `Nghệ An` | Nghệ An |
+| `Ninh Bình` | Ninh Bình |
+| `Ninh Thuận` | Ninh Thuận |
+| `Phú Thọ` | Phú Thọ |
+| `Phú Yên` | Phú Yên |
+| `Quảng Bình` | Quảng Bình |
+| `Quảng Nam` | Quảng Nam |
+| `Quảng Ngãi` | Quảng Ngãi |
+| `Quảng Ninh` | Quảng Ninh |
+| `Quảng Trị` | Quảng Trị |
+| `Sóc Trăng` | Sóc Trăng |
+| `Sơn La` | Sơn La |
+| `Tây Ninh` | Tây Ninh |
+| `Thái Bình` | Thái Bình |
+| `Thái Nguyên` | Thái Nguyên |
+| `Thanh Hóa` | Thanh Hóa |
+| `Thừa Thiên - Huế` | Thừa Thiên Huế |
+| `Tiền Giang` | Tiền Giang |
+| `Trà Vinh` | Trà Vinh |
+| `Tuyên Quang` | Tuyên Quang |
+| `Vĩnh Long` | Vĩnh Long |
+| `Vĩnh Phúc` | Vĩnh Phúc |
+| `Yên Bái` | Yên Bái |
 
 ### 2. Enum Trường Sắp Xếp (`order.key`)
 
