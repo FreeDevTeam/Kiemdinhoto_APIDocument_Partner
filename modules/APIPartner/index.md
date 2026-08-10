@@ -1,4 +1,4 @@
-﻿# Partner API Module: API PartnerBooking
+# Partner API Module: API PartnerBooking
 
 ## Danh sách API đang dùng thực tế cho trang /booking
 
@@ -56,6 +56,12 @@
 
 - HTML: ./PartnerAPI_GetStationConfigByApiKey.html
 - MD: ./PartnerAPI_GetStationConfigByApiKey.md
+
+12. Get List Criminal Record Hotspot
+
+- HTML: ./PartnerAPI_GetListCriminalRecordHotspot.html
+- MD: ./PartnerAPI_GetListCriminalRecordHotspot.md
+
 
 ## Data test tham chiếu
 

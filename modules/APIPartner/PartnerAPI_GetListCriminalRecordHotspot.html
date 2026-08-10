@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Get List Criminal Record Hotspot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #dbe3ef;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5ecf6;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      border: 1px solid #0b63ce;
+      background: #fff;
+      color: #0b63ce;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 10px 14px;
+      position: fixed;
+      z-index: 9999;
+      right: 24px;
+      bottom: 24px;
+    }
+
+    #toast.show {
+      visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Get List Criminal Record Hotspot</h1>
+      <p>Tài liệu API dành cho Partner - Lấy danh sách điểm nóng vi phạm giao thông.</p>
+      <p>
+        <a href="./index.html">Về module API Partner</a>
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr>
+          <th style="width: 180px">URL</th>
+          <td>/PartnerAPI/CriminalRecordHotspot/getList</td>
+        </tr>
+        <tr>
+          <th>Method</th>
+          <td>POST</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr>
+          <th>Header</th>
+          <th>Required</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>clientId hoặc clientid</td>
+          <td>Yes</td>
+          <td>Mã định danh đối tác</td>
+        </tr>
+        <tr>
+          <td>apiKey hoặc apikey</td>
+          <td>Yes</td>
+          <td>Khóa xác thực API của đối tác</td>
+        </tr>
+        <tr>
+          <td>authorization</td>
+          <td>No</td>
+          <td>Token xác thực JWT (nếu có)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Rule</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>filter</td>
+          <td>object</td>
+          <td>No</td>
+          <td>allow null</td>
+          <td>Bộ điều kiện lọc danh sách điểm nóng.</td>
+        </tr>
+        <tr>
+          <td>filter.city</td>
+          <td>string</td>
+          <td>No</td>
+          <td>-</td>
+          <td>Tỉnh / Thành phố cần lọc (ví dụ <code>"Hà Nội"</code>, <code>"ALL"</code> hoặc bỏ trống cho toàn quốc).</td>
+        </tr>
+        <tr>
+          <td>filter.district</td>
+          <td>string</td>
+          <td>No</td>
+          <td>-</td>
+          <td>Quận / Huyện cần lọc.</td>
+        </tr>
+        <tr>
+          <td>startDate</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow "", null</td>
+          <td>Thời gian bắt đầu lọc vi phạm.</td>
+        </tr>
+        <tr>
+          <td>endDate</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow "", null</td>
+          <td>Thời gian kết thúc lọc vi phạm.</td>
+        </tr>
+        <tr>
+          <td>searchText</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow "", null</td>
+          <td>Từ khóa tìm kiếm theo tên địa điểm / tuyến đường.</td>
+        </tr>
+        <tr>
+          <td>skip</td>
+          <td>number</td>
+          <td>No</td>
+          <td>default 0, min 0</td>
+          <td>Số bản ghi bỏ qua (phân trang).</td>
+        </tr>
+        <tr>
+          <td>limit</td>
+          <td>number</td>
+          <td>No</td>
+          <td>default 20, max 9999999</td>
+          <td>Số bản ghi tối đa trả về (phân trang).</td>
+        </tr>
+        <tr>
+          <td>order</td>
+          <td>object</td>
+          <td>No</td>
+          <td>allow null</td>
+          <td>Cấu hình sắp xếp kết quả.</td>
+        </tr>
+        <tr>
+          <td>order.key</td>
+          <td>string</td>
+          <td>No</td>
+          <td>example <code>lastViolationTime</code></td>
+          <td>Trường sắp xếp (vd: <code>lastViolationTime</code>, <code>totalViolation</code>).</td>
+        </tr>
+        <tr>
+          <td>order.value</td>
+          <td>string</td>
+          <td>No</td>
+          <td>example <code>desc</code></td>
+          <td>Hướng sắp xếp (<code>asc</code> hoặc <code>desc</code>).</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 style="display: flex; align-items: center; gap: 8px">
+        Sample Request<button id="copySampleBtn" class="copy-btn" type="button" aria-label="Copy sample request">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </h2>
+      <pre id="curlText">
+curl --location '{HOST_NAME}/PartnerAPI/CriminalRecordHotspot/getList' \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: TESTCLIENT' \
+  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --data '{
+    "filter": {
+      "city": "Hà Nội"
+    },
+    "skip": 0,
+    "limit": 20,
+    "order": {
+      "key": "totalViolation",
+      "value": "desc"
+    }
+  }'</pre>
+    </div>
+
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>
+{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "data": [
+      {
+        "locationText": "Ngã tư Hàng Bài - Lý Thường Kiệt, Hoàn Kiếm, Hà Nội",
+        "addressClean": "Ngã tư Hàng Bài - Lý Thường Kiệt, Hoàn Kiếm, Hà Nội, Việt Nam",
+        "city": "Hà Nội",
+        "district": "Quận Hoàn Kiếm",
+        "latitude": 21.0254,
+        "longitude": 105.8523,
+        "totalViolation": 125,
+        "severityLevel": "High",
+        "commonViolations": "Không chấp hành hiệu lệnh của đèn tín hiệu giao thông\nĐi sai làn đường",
+        "violationPlateNumbers": "[\"29A***\",\"30F***\"]",
+        "lastViolationTime": "2024-05-20T10:30:00.000Z"
+      }
+    ],
+    "total": 1
+  }
+}</pre>
+
+      <h3 style="margin-top: 18px;">Chi tiết các trường dữ liệu trả về</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td><code>data.data</code></td>
+          <td>array</td>
+          <td>Danh sách các điểm nóng vi phạm</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].locationText</code></td>
+          <td>string</td>
+          <td>Vị trí / tên địa điểm ghi nhận vi phạm ban đầu</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].addressClean</code></td>
+          <td>string</td>
+          <td>Địa chỉ đầy đủ đã chuẩn hóa qua hệ thống Geocoding</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].city</code></td>
+          <td>string</td>
+          <td>Tỉnh / Thành phố</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].district</code></td>
+          <td>string</td>
+          <td>Quận / Huyện</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].latitude</code></td>
+          <td>number</td>
+          <td>Vĩ độ tọa độ địa lý</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].longitude</code></td>
+          <td>number</td>
+          <td>Kinh độ tọa độ địa lý</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].totalViolation</code></td>
+          <td>number</td>
+          <td>Tổng số lượt vi phạm ghi nhận tại điểm nóng</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].severityLevel</code></td>
+          <td>string</td>
+          <td>Mức độ nghiêm trọng của điểm nóng (<code>High</code>, <code>Medium</code>, <code>Low</code>)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].commonViolations</code></td>
+          <td>string</td>
+          <td>Danh sách các lỗi vi phạm phổ biến (phân cách bởi ký tự xuống dòng <code>\n</code>)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPlateNumbers</code></td>
+          <td>string (JSON)</td>
+          <td>Chuỗi JSON chứa danh sách biển số xe vi phạm đã được che mờ thông tin</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].lastViolationTime</code></td>
+          <td>string (ISO Date)</td>
+          <td>Thời gian vi phạm gần nhất được ghi nhận tại điểm nóng</td>
+        </tr>
+        <tr>
+          <td><code>data.total</code></td>
+          <td>number</td>
+          <td>Tổng số điểm nóng thỏa mãn điều kiện lọc</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr>
+          <th>HTTP</th>
+          <th>Mã lỗi</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>400</td>
+          <td>
+            <em>Validation Error</em>
+          </td>
+          <td>Payload không đúng schema.</td>
+        </tr>
+        <tr>
+          <td>429</td>
+          <td>
+            <code>QUOTA_EXCEEDED</code>
+          </td>
+          <td>apiKey không hợp lệ hoặc vượt quota.</td>
+        </tr>
+        <tr>
+          <td>500</td>
+          <td>
+            <code>UNKNOWN_ERROR</code>
+          </td>
+          <td>Lỗi không xác định.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li>
+          <a href="../../Common.html#common-error">Quy chuẩn chung -> Common Error</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li>clientId: TESTCLIENT</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+      </ul>
+      <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+    </div>
+  </div>
+
+  <div id="toast">Sao chép thành công</div>
+  <script>
+    const copySampleBtn = document.getElementById("copySampleBtn");
+    const curlText = document.getElementById("curlText").textContent;
+    copySampleBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(curlText);
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    });
+  </script>
+</body>
+
+</html>
