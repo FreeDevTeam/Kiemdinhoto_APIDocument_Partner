@@ -29,16 +29,102 @@ Tài liệu API dành cho Partner - Lấy danh sách điểm nóng vi phạm gia
 | Field           | Type   | Required | Rule                       | Mô tả                                                                   |
 | --------------- | ------ | -------- | -------------------------- | ----------------------------------------------------------------------- |
 | filter          | object | Yes      | Default: `{}`              | Bộ điều kiện lọc danh sách điểm nóng. Không được null, truyền `{}` nếu không lọc. |
-| filter.city     | string | No       | -                          | Tỉnh / Thành phố cần lọc (ví dụ `"Hà Nội"`, `"ALL"` hoặc bỏ trống cho toàn quốc). |
+| filter.city     | string | No       | xem [Enum Tỉnh/Thành phố](#1-enum-tinh--thanh-pho-filtercity) | Tỉnh / Thành phố cần lọc (ví dụ `"Hà Nội"`, `"Hồ Chí Minh"`, `"ALL"` hoặc bỏ trống cho toàn quốc). |
 | filter.district | string | No       | -                          | Quận / Huyện cần lọc.                                                   |
-| startDate       | string | No       | allow "", null             | Thời gian bắt đầu lọc vi phạm.                                          |
-| endDate         | string | No       | allow "", null             | Thời gian kết thúc lọc vi phạm.                                         |
+| startDate       | string | No       | allow "", null             | Thời gian bắt đầu lọc vi phạm (ISO String / YYYY-MM-DD).                |
+| endDate         | string | No       | allow "", null             | Thời gian kết thúc lọc vi phạm (ISO String / YYYY-MM-DD).               |
 | searchText      | string | No       | allow "", null             | Từ khóa tìm kiếm theo tên địa điểm / tuyến đường.                      |
 | skip            | number | No       | default 0, min 0           | Số bản ghi bỏ qua (phân trang).                                         |
 | limit           | number | No       | default 20, max 9999999    | Số bản ghi tối đa trả về (phân trang).                                  |
 | order           | object | No       | allow null                 | Cấu hình sắp xếp kết quả.                                              |
-| order.key       | string | No       | example `lastViolationTime`| Trường sắp xếp (vd: `lastViolationTime`, `totalViolation`).             |
-| order.value     | string | No       | example `desc`             | Hướng sắp xếp (`asc` hoặc `desc`).                                      |
+| order.key       | string | No       | xem [Enum Order Key](#2-enum-truong-sap-xep-orderkey) | Trường sắp xếp (`totalViolation`, `lastViolationTime`).                 |
+| order.value     | string | No       | xem [Enum Order Value](#3-enum-huong-sap-xep-ordervalue) | Hướng sắp xếp (`desc` hoặc `asc`).                                      |
+
+---
+
+## Danh sách Enum & Giá trị tham chiếu (Input / Output)
+
+### 1. Enum Tỉnh / Thành phố (`filter.city`)
+Trường `filter.city` nhận Tên Tỉnh / Thành phố (tương tự như giá trị trong `STATIONS_AREA`), hoặc `"ALL"` / bỏ trống để lấy danh sách toàn quốc:
+
+| Giá trị (`filter.city`) | Tên Tỉnh / Thành phố | Khu vực |
+| ----------------------- | -------------------- | ------- |
+| `ALL` | Toàn quốc (Mặc định) | Tất cả |
+| `Hà Nội` | Hà Nội | Miền Bắc |
+| `Hồ Chí Minh` | Thành phố Hồ Chí Minh | Miền Nam |
+| `Đà Nẵng` | Đà Nẵng | Miền Trung |
+| `Bình Dương` | Bình Dương | Miền Nam |
+| `Đồng Nai` | Đồng Nai | Miền Nam |
+| `Bà Rịa Vũng Tàu` | Bà Rịa - Vũng Tàu | Miền Nam |
+| `Bắc Ninh` | Bắc Ninh | Miền Bắc |
+| `Bắc Giang` | Bắc Giang | Miền Bắc |
+| `Hải Phòng` | Hải Phòng | Miền Bắc |
+| `Hải Dương` | Hải Dương | Miền Bắc |
+| `Hưng Yên` | Hưng Yên | Miền Bắc |
+| `Quảng Ninh` | Quảng Ninh | Miền Bắc |
+| `Thái Nguyên` | Thái Nguyên | Miền Bắc |
+| `Phú Thọ` | Phú Thọ | Miền Bắc |
+| `Vĩnh Phúc` | Vĩnh Phúc | Miền Bắc |
+| `Nam Định` | Nam Định | Miền Bắc |
+| `Thái Bình` | Thái Bình | Miền Bắc |
+| `Ninh Bình` | Ninh Bình | Miền Bắc |
+| `Hà Nam` | Hà Nam | Miền Bắc |
+| `Hòa Bình` | Hòa Bình | Miền Bắc |
+| `Thanh Hóa` | Thanh Hóa | Miền Trung |
+| `Nghệ An` | Nghệ An | Miền Trung |
+| `Hà Tĩnh` | Hà Tĩnh | Miền Trung |
+| `Quảng Bình` | Quảng Bình | Miền Trung |
+| `Quảng Trị` | Quảng Trị | Miền Trung |
+| `Thừa Thiên - Huế` | Thừa Thiên Huế | Miền Trung |
+| `Quảng Nam` | Quảng Nam | Miền Trung |
+| `Quảng Ngãi` | Quảng Ngãi | Miền Trung |
+| `Bình Định` | Bình Định | Miền Trung |
+| `Phú Yên` | Phú Yên | Miền Trung |
+| `Khánh Hòa` | Khánh Hòa | Miền Trung |
+| `Ninh Thuận` | Ninh Thuận | Miền Trung |
+| `Bình Thuận` | Bình Thuận | Miền Trung |
+| `Lâm Đồng` | Lâm Đồng | Miền Trung |
+| `Gia Lai` | Gia Lai | Miền Trung |
+| `Kon Tum` | Kon Tum | Miền Trung |
+| `Đắk Lắk` | Đắk Lắk | Miền Trung |
+| `Đắk Nông` | Đắk Nông | Miền Trung |
+| `Cần Thơ` | Cần Thơ | Miền Nam |
+| `An Giang` | An Giang | Miền Nam |
+| `Kiên Giang` | Kiên Giang | Miền Nam |
+| `Cà Mau` | Cà Mau | Miền Nam |
+| `Long An` | Long An | Miền Nam |
+| `Tây Ninh` | Tây Ninh | Miền Nam |
+| `Bình Phước` | Bình Phước | Miền Nam |
+| `Bến Tre` | Bến Tre | Miền Nam |
+| `Vĩnh Long` | Vĩnh Long | Miền Nam |
+| `Trà Vinh` | Trà Vinh | Miền Nam |
+| `Sóc Trăng` | Sóc Trăng | Miền Nam |
+| `Bạc Liêu` | Bạc Liêu | Miền Nam |
+| `Tiền Giang` | Tiền Giang | Miền Nam |
+| `Hậu Giang` | Hậu Giang | Miền Nam |
+| `Đồng Tháp` | Đồng Tháp | Miền Nam |
+
+### 2. Enum Trường Sắp Xếp (`order.key`)
+
+| Key | Mô tả |
+| --- | ----- |
+| `totalViolation` | Sắp xếp theo tổng số lượt vi phạm tại điểm nóng (Mặc định). |
+| `lastViolationTime` | Sắp xếp theo thời gian vi phạm mới nhất được ghi nhận. |
+
+### 3. Enum Hướng Sắp Xếp (`order.value`)
+
+| Value | Mô tả |
+| ----- | ----- |
+| `desc` | Giảm dần (Mặc định). |
+| `asc` | Tăng dần. |
+
+### 4. Enum Mức Độ Nghiêm Trọng (`severityLevel` - Trả về trong Response)
+
+| Severity Level | Điều kiện phân loại |
+| -------------- | ------------------- |
+| `High` | Nghiêm trọng cao (Tổng số lượt vi phạm ≥ 160). |
+| `Medium` | Nghiêm trọng trung bình (Tổng số lượt vi phạm từ 80 đến 159). |
+| `Low` | Nghiêm trọng thấp (Tổng số lượt vi phạm < 80). |
 
 ---
 
@@ -110,7 +196,7 @@ curl --location 'http://localhost:4001/PartnerAPI/CriminalRecordHotspot/getList'
 | `data.data[].latitude` | number | Vĩ độ tọa độ địa lý |
 | `data.data[].longitude` | number | Kinh độ tọa độ địa lý |
 | `data.data[].totalViolation` | number | Tổng số lượt vi phạm ghi nhận tại điểm nóng |
-| `data.data[].severityLevel` | string | Mức độ nghiêm trọng của điểm nóng (`High`, `Medium`, `Low`) |
+| `data.data[].severityLevel` | string | Mức độ nghiêm trọng của điểm nóng (xem [Enum Severity Level](#4-enum-muc-do-nghiem-trong-severitylevel---tra-ve-trong-response)) |
 | `data.data[].commonViolations` | string | Danh sách các lỗi vi phạm phổ biến (phân cách bởi ký tự xuống dòng `\n`) |
 | `data.data[].violationPlateNumbers` | string (JSON) | Chuỗi JSON chứa danh sách biển số xe vi phạm đã được che mờ thông tin |
 | `data.data[].lastViolationTime` | string (ISO Date) | Thời gian vi phạm gần nhất được ghi nhận tại điểm nóng |
