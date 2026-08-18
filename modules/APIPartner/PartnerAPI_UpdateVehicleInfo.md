@@ -17,11 +17,10 @@ Tài liệu API cập nhật thông tin phương tiện.
 
 ## Headers schema
 
-| Header                 | Required | Mô tả                                                        |
-| ---------------------- | -------- | ------------------------------------------------------------ |
-| clientId hoặc clientid | Yes*     | Mã định danh đối tác (bắt buộc khi dùng API Key)            |
-| apiKey hoặc apikey     | Yes*     | Khóa xác thực API của đối tác (bắt buộc khi dùng API Key)   |
-| authorization          | Optional | Bearer Token người dùng (nếu xác thực qua User Access Token) |
+| Header                 | Required | Mô tả                         |
+| ---------------------- | -------- | ----------------------------- |
+| clientId hoặc clientid | Yes      | Mã định danh đối tác          |
+| apiKey hoặc apikey     | Yes      | Khóa xác thực API của đối tác |
 
 ---
 
