@@ -1,6 +1,6 @@
 # Partner API - Update Vehicle Info
 
-Tài liệu API cập nhật thông tin phương tiện (hồ sơ xe).
+Tài liệu API cập nhật thông tin phương tiện.
 
 [Về module API Partner](./index.html)
 
@@ -27,19 +27,10 @@ Tài liệu API cập nhật thông tin phương tiện (hồ sơ xe).
 
 ## Body schema
 
-| Field           | Type   | Required | Rule         | Mô tả                                                          |
-| --------------- | ------ | -------- | ------------ | -------------------------------------------------------------- |
-| vehicleIdentity | string | Yes      | max 15 ký tự | Biển số xe cần cập nhật (ví dụ: `30A12345`).                   |
-| chassisNumber   | string | No       | string       | Số khung xe (chassis number) cần cập nhật vào hồ sơ phương tiện.|
-
----
-
-## Mô tả logic xử lý
-
-1. Hệ thống tìm kiếm hồ sơ xe trong cơ sở dữ liệu (`VehicleProfile`) theo biển số xe `vehicleIdentity`.
-2. Nếu xe đã có hồ sơ: Cập nhật các thông tin được truyền vào (ví dụ: `chassisNumber`).
-3. Nếu xe chưa có hồ sơ: Tạo mới hồ sơ xe với thông tin biển số và các thông số đi kèm.
-4. Trả về thông tin đầy đủ/chuẩn hoá (`cleanInfo`) của xe kèm theo số lỗi phạt nguội hiện tại (`violationCount`).
+| Field           | Type   | Required | Rule         | Mô tả                                      |
+| --------------- | ------ | -------- | ------------ | ------------------------------------------ |
+| vehicleIdentity | string | Yes      | max 15 ký tự | Biển số xe cần cập nhật (ví dụ: 30A12345). |
+| chassisNumber   | string | No       | string       | Số khung xe (chassis number).              |
 
 ---
 
@@ -60,8 +51,6 @@ curl --location '{HOST_NAME}/PartnerAPI/AppUserVehicle/user/updateVehicleInfo' \
 
 ## Success response
 
-### 1. Phản hồi cơ bản (mặc định)
-
 ```json
 {
   "statusCode": 200,
@@ -72,25 +61,6 @@ curl --location '{HOST_NAME}/PartnerAPI/AppUserVehicle/user/updateVehicleInfo' \
     "vehiclePlateColor": 1,
     "vehicleType": 1,
     "certificateSeries": null,
-    "violationCount": 0,
-    "refreshDate": "2026-08-18T04:40:00.000Z",
-    "vehicleExpiryDate": "31/12/2026"
-  }
-}
-```
-
-### 2. Phản hồi đầy đủ thông số kỹ thuật (đối tác được cấu hình `isFullVehicleInfo: true`)
-
-```json
-{
-  "statusCode": 200,
-  "error": null,
-  "message": "Success",
-  "data": {
-    "vehicleIdentity": "30A12345",
-    "vehiclePlateColor": 1,
-    "vehicleType": 1,
-    "certificateSeries": "KD-1234567",
     "violationCount": 0,
     "refreshDate": "2026-08-18T04:40:00.000Z",
     "vehicleExpiryDate": "31/12/2026",
@@ -131,12 +101,12 @@ curl --location '{HOST_NAME}/PartnerAPI/AppUserVehicle/user/updateVehicleInfo' \
 
 ## Mã lỗi
 
-| HTTP | Mã lỗi             | Mô tả                                       |
-| ---- | ------------------ | ------------------------------------------- |
+| HTTP | Mã lỗi             | Mô tả                                                 |
+| ---- | ------------------ | ----------------------------------------------------- |
 | 400  | _Validation Error_ | Payload không đúng schema hoặc thiếu trường bắt buộc. |
-| 400  | `UPDATE_FAILED`    | Cập nhật thông tin xe thất bại.             |
-| 429  | `QUOTA_EXCEEDED`   | apiKey không hợp lệ hoặc vượt quota giới hạn.|
-| 500  | `UNKNOWN_ERROR`    | Lỗi hệ thống không xác định.                |
+| 400  | `UPDATE_FAILED`    | Cập nhật thông tin xe thất bại.                       |
+| 429  | `QUOTA_EXCEEDED`   | apiKey không hợp lệ hoặc vượt quota giới hạn.         |
+| 500  | `UNKNOWN_ERROR`    | Lỗi hệ thống không xác định.                          |
 
 ---
 
