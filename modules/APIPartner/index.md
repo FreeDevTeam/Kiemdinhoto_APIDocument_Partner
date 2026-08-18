@@ -62,6 +62,11 @@
 - HTML: ./PartnerAPI_GetListCriminalRecordHotspot.html
 - MD: ./PartnerAPI_GetListCriminalRecordHotspot.md
 
+13. Update Vehicle Info
+
+- HTML: ./PartnerAPI_UpdateVehicleInfo.html
+- MD: ./PartnerAPI_UpdateVehicleInfo.md
+
 
 ## Data test tham chiếu
 

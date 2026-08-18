@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Update Vehicle Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #dbe3ef;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5ecf6;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      border: 1px solid #0b63ce;
+      background: #fff;
+      color: #0b63ce;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 10px 14px;
+      position: fixed;
+      z-index: 9999;
+      right: 24px;
+      bottom: 24px;
+    }
+
+    #toast.show {
+      visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Update Vehicle Info</h1>
+      <p>Tài liệu API cập nhật thông tin phương tiện (hồ sơ xe).</p>
+      <p>
+        <a href="./index.html">Về module API Partner</a>
+      </p>
+    </div>
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr>
+          <th style="width: 180px">URL</th>
+          <td>/PartnerAPI/AppUserVehicle/user/updateVehicleInfo</td>
+        </tr>
+        <tr>
+          <th>Method</th>
+          <td>POST</td>
+        </tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr>
+          <th>Header</th>
+          <th>Required</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>clientId hoặc clientid</td>
+          <td>Yes*</td>
+          <td>Mã định danh đối tác (bắt buộc khi dùng API Key)</td>
+        </tr>
+        <tr>
+          <td>apiKey hoặc apikey</td>
+          <td>Yes*</td>
+          <td>Khóa xác thực API của đối tác (bắt buộc khi dùng API Key)</td>
+        </tr>
+        <tr>
+          <td>authorization</td>
+          <td>Optional</td>
+          <td>Bearer Token người dùng (nếu xác thực qua User Access Token)</td>
+        </tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Rule</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>vehicleIdentity</td>
+          <td>string</td>
+          <td>Yes</td>
+          <td>max 15 ký tự</td>
+          <td>Biển số xe cần cập nhật (ví dụ: <code>30A12345</code>).</td>
+        </tr>
+        <tr>
+          <td>chassisNumber</td>
+          <td>string</td>
+          <td>No</td>
+          <td>string</td>
+          <td>Số khung xe (chassis number) cần cập nhật vào hồ sơ phương tiện.</td>
+        </tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Mô tả logic xử lý</h2>
+      <ol>
+        <li>Hệ thống tìm kiếm hồ sơ xe trong cơ sở dữ liệu (<code>VehicleProfile</code>) theo biển số xe <code>vehicleIdentity</code>.</li>
+        <li>Nếu xe đã có hồ sơ: Cập nhật các thông tin được truyền vào (ví dụ: <code>chassisNumber</code>).</li>
+        <li>Nếu xe chưa có hồ sơ: Tạo mới hồ sơ xe với thông tin biển số và các thông số đi kèm.</li>
+        <li>Trả về thông tin đầy đủ/chuẩn hoá (<code>cleanInfo</code>) của xe kèm theo số lỗi phạt nguội hiện tại (<code>violationCount</code>).</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h2 style="display: flex; align-items: center; gap: 8px">
+        Sample Request<button id="copySampleBtn" class="copy-btn" type="button" aria-label="Copy sample request">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </h2>
+      <pre id="curlText">
+curl --location '{HOST_NAME}/PartnerAPI/AppUserVehicle/user/updateVehicleInfo' \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: TESTCLIENT' \
+  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --data '{
+  "vehicleIdentity": "30A12345",
+  "chassisNumber": "RL4AB1234EF567890"
+}'</pre>
+    </div>
+    <div class="card">
+      <h2>Success response</h2>
+      <h3>1. Phản hồi cơ bản (mặc định)</h3>
+      <pre>
+{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "vehicleIdentity": "30A12345",
+    "vehiclePlateColor": 1,
+    "vehicleType": 1,
+    "certificateSeries": null,
+    "violationCount": 0,
+    "refreshDate": "2026-08-18T04:40:00.000Z",
+    "vehicleExpiryDate": "31/12/2026"
+  }
+}</pre>
+
+      <h3>2. Phản hồi đầy đủ thông số kỹ thuật (đối tác cấu hình <code>isFullVehicleInfo: true</code>)</h3>
+      <pre>
+{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "vehicleIdentity": "30A12345",
+    "vehiclePlateColor": 1,
+    "vehicleType": 1,
+    "certificateSeries": "KD-1234567",
+    "violationCount": 0,
+    "refreshDate": "2026-08-18T04:40:00.000Z",
+    "vehicleExpiryDate": "31/12/2026",
+    "vehicleRegistrationCode": "123456789",
+    "vehicleBrandName": "TOYOTA",
+    "vehicleBrandModel": "VIOS",
+    "vehicleWeight": 1110,
+    "vehicleTotalWeight": 1550,
+    "vehicleSeatsLimit": 5,
+    "vehicleFootholdLimit": 0,
+    "vehicleBerthLimit": 0,
+    "equipDashCam": 0,
+    "vehicleGoodsWeight": 0,
+    "vehicleCycle": 12,
+    "vehicleForBusiness": 0,
+    "vehicleCriminal": 0,
+    "engineNumber": "2NR123456",
+    "chassisNumber": "RL4AB1234EF567890",
+    "manufacturedYear": 2022,
+    "manufacturedCountry": "Việt Nam",
+    "lifeTimeLimit": null,
+    "wheelFormula": "4x2",
+    "wheelTreat": "1460/1475",
+    "overallDimension": "4425 x 1730 x 1475",
+    "truckDimension": null,
+    "wheelBase": "2550",
+    "vehicleFuelType": "Xăng",
+    "engineDisplacement": 1496,
+    "maxCapacity": "79/6000",
+    "revolutionsPerMinute": 6000,
+    "vehicleTotalMass": 1550,
+    "vehicleTires": "185/60R15"
+  }
+}</pre>
+    </div>
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr>
+          <th>HTTP</th>
+          <th>Mã lỗi</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>400</td>
+          <td>
+            <em>Validation Error</em>
+          </td>
+          <td>Payload không đúng schema hoặc thiếu trường bắt buộc.</td>
+        </tr>
+        <tr>
+          <td>400</td>
+          <td>
+            <code>UPDATE_FAILED</code>
+          </td>
+          <td>Cập nhật thông tin xe thất bại.</td>
+        </tr>
+        <tr>
+          <td>429</td>
+          <td>
+            <code>QUOTA_EXCEEDED</code>
+          </td>
+          <td>apiKey không hợp lệ hoặc vượt quota giới hạn.</td>
+        </tr>
+        <tr>
+          <td>500</td>
+          <td>
+            <code>UNKNOWN_ERROR</code>
+          </td>
+          <td>Lỗi hệ thống không xác định.</td>
+        </tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li>
+          <a href="../../Common.html#common-error">Quy chuẩn chung -> Common Error</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li>clientId: TESTCLIENT</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+      </ul>
+      <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+    </div>
+  </div>
+  <div id="toast">Sao chép thành công</div>
+  <script>
+    const copySampleBtn = document.getElementById("copySampleBtn");
+    const curlText = document.getElementById("curlText").textContent;
+    copySampleBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(curlText);
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    });
+  </script>
+</body>
+
+</html>
