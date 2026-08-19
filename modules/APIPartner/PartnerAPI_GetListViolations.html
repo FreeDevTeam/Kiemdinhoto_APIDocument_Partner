@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Get List Violations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dbe3ef;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5ecf6;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      border: 1px solid #0b63ce;
+      background: #fff;
+      color: #0b63ce;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 10px 14px;
+      position: fixed;
+      z-index: 9999;
+      right: 24px;
+      bottom: 24px;
+    }
+
+    #toast.show {
+      visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Partner API - Get List Violations</h1>
+      <p>Tài liệu API dành cho Partner - Lấy danh sách các hành vi/lỗi vi phạm giao thông và khung xử phạt tương ứng.</p>
+      <p>
+        <a href="./index.html">Về module API Partner</a>
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr>
+          <th style="width: 180px">URL</th>
+          <td>/PartnerAPI/CustomerCriminalRecord/user/getListViolations</td>
+        </tr>
+        <tr>
+          <th>Method</th>
+          <td>POST</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr>
+          <th>Header</th>
+          <th>Required</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>clientId hoặc clientid</td>
+          <td>Yes</td>
+          <td>Mã định danh đối tác</td>
+        </tr>
+        <tr>
+          <td>apiKey hoặc apikey</td>
+          <td>Yes</td>
+          <td>Khóa xác thực API của đối tác</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Rule</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>filter</td>
+          <td>object</td>
+          <td>No</td>
+          <td>allow null, default: <code>{}</code></td>
+          <td>Bộ điều kiện lọc danh sách lỗi vi phạm.</td>
+        </tr>
+        <tr>
+          <td>filter.vehicleType</td>
+          <td>number</td>
+          <td>No</td>
+          <td>xem Enum Loại phương tiện</td>
+          <td>Phân loại phương tiện giao thông (1: Ô tô, 20: Xe máy, 30: Xe máy điện, 40: Rơ moóc, 50: Khác).</td>
+        </tr>
+        <tr>
+          <td>searchText</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow "", null</td>
+          <td>Từ khóa tìm kiếm theo nội dung lỗi vi phạm (<code>crimeRecordContent</code>).</td>
+        </tr>
+        <tr>
+          <td>startDate</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow "", null, format <code>DD/MM/YYYY</code></td>
+          <td>Thời gian bắt đầu lọc vi phạm.</td>
+        </tr>
+        <tr>
+          <td>endDate</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow "", null, format <code>DD/MM/YYYY</code></td>
+          <td>Thời gian kết thúc lọc vi phạm.</td>
+        </tr>
+        <tr>
+          <td>skip</td>
+          <td>number</td>
+          <td>No</td>
+          <td>default 0, min 0</td>
+          <td>Số bản ghi bỏ qua (phân trang).</td>
+        </tr>
+        <tr>
+          <td>limit</td>
+          <td>number</td>
+          <td>No</td>
+          <td>default 20, max 100</td>
+          <td>Số bản ghi tối đa trả về trên mỗi trang (phân trang).</td>
+        </tr>
+        <tr>
+          <td>order</td>
+          <td>object</td>
+          <td>No</td>
+          <td>allow null</td>
+          <td>Cấu hình sắp xếp kết quả.</td>
+        </tr>
+        <tr>
+          <td>order.key</td>
+          <td>string</td>
+          <td>No</td>
+          <td>allow ""</td>
+          <td>Trường sắp xếp (ví dụ <code>totalViolation</code>, <code>crimeRecordContent</code>, <code>lastViolationTime</code>).</td>
+        </tr>
+        <tr>
+          <td>order.value</td>
+          <td>string</td>
+          <td>No</td>
+          <td>xem Enum Hướng sắp xếp</td>
+          <td>Hướng sắp xếp (<code>desc</code> hoặc <code>asc</code>).</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Danh sách Enum & Giá trị tham chiếu (Input / Output)</h2>
+
+      <h3>1. Enum Loại phương tiện (<code>filter.vehicleType</code>)</h3>
+      <table>
+        <tr>
+          <th>Giá trị (<code>vehicleType</code>)</th>
+          <th>Phân loại phương tiện</th>
+        </tr>
+        <tr>
+          <td><code>1</code></td>
+          <td>Ô tô</td>
+        </tr>
+        <tr>
+          <td><code>20</code></td>
+          <td>Mô tô / Xe máy</td>
+        </tr>
+        <tr>
+          <td><code>30</code></td>
+          <td>Xe máy điện</td>
+        </tr>
+        <tr>
+          <td><code>40</code></td>
+          <td>Rơ moóc / Sơ mi rơ moóc</td>
+        </tr>
+        <tr>
+          <td><code>50</code></td>
+          <td>Khác</td>
+        </tr>
+      </table>
+
+      <h3>2. Enum Hướng Sắp Xếp (<code>order.value</code>)</h3>
+      <table>
+        <tr>
+          <th>Value</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td><code>desc</code></td>
+          <td>Giảm dần (Mặc định).</td>
+        </tr>
+        <tr>
+          <td><code>asc</code></td>
+          <td>Tăng dần.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 style="display: flex; align-items: center; gap: 8px">
+        Sample Request<button id="copySampleBtn" class="copy-btn" type="button" aria-label="Copy sample request">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </h2>
+      <pre id="curlText">
+curl --location 'http://localhost:4001/PartnerAPI/CustomerCriminalRecord/user/getListViolations' \
+  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --header 'clientId: TESTCLIENT' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "filter": {
+    "vehicleType": 1
+  },
+  "searchText": "quá tốc độ",
+  "skip": 0,
+  "limit": 20,
+  "order": {
+    "key": "totalViolation",
+    "value": "desc"
+  }
+}'</pre>
+    </div>
+
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>
+{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "data": [
+      {
+        "crimeRecordContent": "Điều khiển xe chạy quá tốc độ quy định từ 05 km/h đến dưới 10 km/h",
+        "vehicleType": 1,
+        "violationPenalties": [
+          "Khung phạt: 800.000–1.000.000 VNĐ",
+          "Trừ điểm GPLX: 0"
+        ],
+        "violationPenaltyDetail": {
+          "fineMin": 800000,
+          "fineMax": 1000000,
+          "pointDeduction": 0,
+          "licenseSuspension": false,
+          "suspensionMinMonth": null,
+          "suspensionMaxMonth": null
+        }
+      },
+      {
+        "crimeRecordContent": "Điều khiển xe chạy quá tốc độ quy định trên 20 km/h đến 35 km/h",
+        "vehicleType": 1,
+        "violationPenalties": [
+          "Khung phạt: 6.000.000–8.000.000 VNĐ",
+          "Trừ điểm GPLX: 2",
+          "Tước bằng: 2–4 tháng"
+        ],
+        "violationPenaltyDetail": {
+          "fineMin": 6000000,
+          "fineMax": 8000000,
+          "pointDeduction": 2,
+          "licenseSuspension": true,
+          "suspensionMinMonth": 2,
+          "suspensionMaxMonth": 4
+        }
+      }
+    ],
+    "total": 128
+  }
+}</pre>
+
+      <h3 style="margin-top: 18px;">Chi tiết các trường dữ liệu trả về</h3>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td><code>data.data</code></td>
+          <td>array</td>
+          <td>Danh sách các lỗi vi phạm giao thông</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].crimeRecordContent</code></td>
+          <td>string</td>
+          <td>Nội dung hành vi vi phạm giao thông</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].vehicleType</code></td>
+          <td>number</td>
+          <td>Loại phương tiện vi phạm (xem Enum Loại phương tiện)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenalties</code></td>
+          <td>array of string</td>
+          <td>Danh sách các mô tả tóm tắt về mức phạt và hình thức xử phạt bổ sung</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail</code></td>
+          <td>object | null</td>
+          <td>Chi tiết khung xử phạt theo quy định pháp luật (nếu map được)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail.fineMin</code></td>
+          <td>number</td>
+          <td>Mức phạt tiền tối thiểu (VNĐ)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail.fineMax</code></td>
+          <td>number</td>
+          <td>Mức phạt tiền tối đa (VNĐ)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail.pointDeduction</code></td>
+          <td>number</td>
+          <td>Số điểm giấy phép lái xe bị trừ</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail.licenseSuspension</code></td>
+          <td>boolean</td>
+          <td>Có áp dụng hình thức tước quyền sử dụng GPLX hay không</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail.suspensionMinMonth</code></td>
+          <td>number | null</td>
+          <td>Thời gian tước giấy phép lái xe tối thiểu (tháng)</td>
+        </tr>
+        <tr>
+          <td><code>data.data[].violationPenaltyDetail.suspensionMaxMonth</code></td>
+          <td>number | null</td>
+          <td>Thời gian tước giấy phép lái xe tối đa (tháng)</td>
+        </tr>
+        <tr>
+          <td><code>data.total</code></td>
+          <td>number</td>
+          <td>Tổng số bản ghi thỏa điều kiện lọc</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr>
+          <th>HTTP</th>
+          <th>Mã lỗi</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>400</td>
+          <td>
+            <em>Validation Error</em>
+          </td>
+          <td>Payload không đúng schema hoặc sai định dạng dữ liệu.</td>
+        </tr>
+        <tr>
+          <td>429</td>
+          <td>
+            <code>QUOTA_EXCEEDED</code>
+          </td>
+          <td>apiKey không hợp lệ hoặc vượt quota.</td>
+        </tr>
+        <tr>
+          <td>500</td>
+          <td>
+            <code>UNKNOWN_ERROR</code>
+          </td>
+          <td>Lỗi hệ thống không xác định.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li>
+          <a href="../../Common.html#common-error">Quy chuẩn chung -> Common Error</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li>clientId: TESTCLIENT</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+      </ul>
+      <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+    </div>
+  </div>
+
+  <div id="toast">Sao chép thành công</div>
+  <script>
+    const copySampleBtn = document.getElementById("copySampleBtn");
+    const curlText = document.getElementById("curlText").textContent;
+    copySampleBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(curlText);
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    });
+  </script>
+</body>
+
+</html>
