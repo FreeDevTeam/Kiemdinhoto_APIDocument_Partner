@@ -26,18 +26,13 @@ Tài liệu API dành cho Partner - Lấy danh sách các hành vi/lỗi vi ph�
 
 ## Body schema
 
-| Field              | Type   | Required | Rule                                                               | Mô tả                                                                                                        |
-| ------------------ | ------ | -------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| filter             | object | No       | allow null, default: `{}`                                          | Bộ điều kiện lọc danh sách lỗi vi phạm.                                                                      |
-| filter.vehicleType | number | No       | xem [Enum Loại phương tiện](#1-enum-loai-phuong-tien-filtervehicletype) | Phân loại phương tiện giao thông (1: Ô tô, 20: Xe máy, 30: Xe máy điện, 40: Rơ moóc, 50: Khác).              |
-| searchText         | string | No       | allow "", null                                                     | Từ khóa tìm kiếm theo nội dung lỗi vi phạm (`crimeRecordContent`).                                           |
-| startDate          | string | No       | allow "", null, format `DD/MM/YYYY`                                | Thời gian bắt đầu lọc vi phạm.                                                                               |
-| endDate            | string | No       | allow "", null, format `DD/MM/YYYY`                                | Thời gian kết thúc lọc vi phạm.                                                                              |
-| skip               | number | No       | default 0, min 0                                                   | Số bản ghi bỏ qua (phân trang).                                                                              |
-| limit              | number | No       | default 20, max 100                                                | Số bản ghi tối đa trả về trên mỗi trang (phân trang).                                                        |
-| order              | object | No       | allow null                                                         | Cấu hình sắp xếp kết quả.                                                                                    |
-| order.key          | string | No       | allow ""                                                           | Trường sắp xếp (ví dụ `totalViolation`, `crimeRecordContent`, `lastViolationTime`).                          |
-| order.value        | string | No       | xem [Enum Hướng sắp xếp](#2-enum-huong-sap-xep-ordervalue)         | Hướng sắp xếp (`desc` hoặc `asc`).                                                                           |
+| Field              | Type   | Required | Rule                                                               | Mô tả                                                                                      |
+| ------------------ | ------ | -------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| filter             | object | No       | allow null, default: `{}`                                          | Bộ điều kiện lọc danh sách lỗi vi phạm.                                                    |
+| filter.vehicleType | number | No       | xem [Enum Loại phương tiện](#1-enum-loai-phuong-tien-filtervehicletype) | Phân loại phương tiện giao thông (1: Ô tô, 30: Xe máy, 40: Xe điện).                       |
+| searchText         | string | No       | allow "", null                                                     | Từ khóa tìm kiếm theo nội dung lỗi vi phạm (`crimeRecordContent`).                         |
+| skip               | number | No       | default 0, min 0                                                   | Số bản ghi bỏ qua (phân trang).                                                            |
+| limit              | number | No       | default 20, max 100                                                | Số bản ghi tối đa trả về trên mỗi trang (phân trang).                                      |
 
 ---
 
@@ -48,17 +43,8 @@ Tài liệu API dành cho Partner - Lấy danh sách các hành vi/lỗi vi ph�
 | Giá trị (`vehicleType`) | Phân loại phương tiện |
 | ----------------------- | --------------------- |
 | `1`                     | Ô tô                  |
-| `20`                    | Mô tô / Xe máy        |
-| `30`                    | Xe máy điện           |
-| `40`                    | Rơ moóc / Sơ mi rơ moóc |
-| `50`                    | Khác                  |
-
-### 2. Enum Hướng Sắp Xếp (`order.value`)
-
-| Value  | Mô tả                |
-| ------ | -------------------- |
-| `desc` | Giảm dần (Mặc định). |
-| `asc`  | Tăng dần.            |
+| `30`                    | Xe máy                |
+| `40`                    | Xe điện               |
 
 ---
 
@@ -75,11 +61,7 @@ curl --location 'http://localhost:4001/PartnerAPI/CustomerCriminalRecord/user/ge
   },
   "searchText": "quá tốc độ",
   "skip": 0,
-  "limit": 20,
-  "order": {
-    "key": "totalViolation",
-    "value": "desc"
-  }
+  "limit": 20
 }'
 ```
 

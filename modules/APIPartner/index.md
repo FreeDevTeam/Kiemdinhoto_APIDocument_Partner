@@ -67,6 +67,11 @@
 - HTML: ./PartnerAPI_UpdateVehicleInfo.html
 - MD: ./PartnerAPI_UpdateVehicleInfo.md
 
+14. Get List Violations
+
+- HTML: ./PartnerAPI_GetListViolations.html
+- MD: ./PartnerAPI_GetListViolations.md
+
 
 ## Data test tham chiếu
 

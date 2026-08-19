@@ -163,7 +163,7 @@
           <td>number</td>
           <td>No</td>
           <td>xem Enum Loại phương tiện</td>
-          <td>Phân loại phương tiện giao thông (1: Ô tô, 20: Xe máy, 30: Xe máy điện, 40: Rơ moóc, 50: Khác).</td>
+          <td>Phân loại phương tiện giao thông (1: Ô tô, 30: Xe máy, 40: Xe điện).</td>
         </tr>
         <tr>
           <td>searchText</td>
@@ -171,20 +171,6 @@
           <td>No</td>
           <td>allow "", null</td>
           <td>Từ khóa tìm kiếm theo nội dung lỗi vi phạm (<code>crimeRecordContent</code>).</td>
-        </tr>
-        <tr>
-          <td>startDate</td>
-          <td>string</td>
-          <td>No</td>
-          <td>allow "", null, format <code>DD/MM/YYYY</code></td>
-          <td>Thời gian bắt đầu lọc vi phạm.</td>
-        </tr>
-        <tr>
-          <td>endDate</td>
-          <td>string</td>
-          <td>No</td>
-          <td>allow "", null, format <code>DD/MM/YYYY</code></td>
-          <td>Thời gian kết thúc lọc vi phạm.</td>
         </tr>
         <tr>
           <td>skip</td>
@@ -199,27 +185,6 @@
           <td>No</td>
           <td>default 20, max 100</td>
           <td>Số bản ghi tối đa trả về trên mỗi trang (phân trang).</td>
-        </tr>
-        <tr>
-          <td>order</td>
-          <td>object</td>
-          <td>No</td>
-          <td>allow null</td>
-          <td>Cấu hình sắp xếp kết quả.</td>
-        </tr>
-        <tr>
-          <td>order.key</td>
-          <td>string</td>
-          <td>No</td>
-          <td>allow ""</td>
-          <td>Trường sắp xếp (ví dụ <code>totalViolation</code>, <code>crimeRecordContent</code>, <code>lastViolationTime</code>).</td>
-        </tr>
-        <tr>
-          <td>order.value</td>
-          <td>string</td>
-          <td>No</td>
-          <td>xem Enum Hướng sắp xếp</td>
-          <td>Hướng sắp xếp (<code>desc</code> hoặc <code>asc</code>).</td>
         </tr>
       </table>
     </div>
@@ -238,36 +203,12 @@
           <td>Ô tô</td>
         </tr>
         <tr>
-          <td><code>20</code></td>
-          <td>Mô tô / Xe máy</td>
-        </tr>
-        <tr>
           <td><code>30</code></td>
-          <td>Xe máy điện</td>
+          <td>Xe máy</td>
         </tr>
         <tr>
           <td><code>40</code></td>
-          <td>Rơ moóc / Sơ mi rơ moóc</td>
-        </tr>
-        <tr>
-          <td><code>50</code></td>
-          <td>Khác</td>
-        </tr>
-      </table>
-
-      <h3>2. Enum Hướng Sắp Xếp (<code>order.value</code>)</h3>
-      <table>
-        <tr>
-          <th>Value</th>
-          <th>Mô tả</th>
-        </tr>
-        <tr>
-          <td><code>desc</code></td>
-          <td>Giảm dần (Mặc định).</td>
-        </tr>
-        <tr>
-          <td><code>asc</code></td>
-          <td>Tăng dần.</td>
+          <td>Xe điện</td>
         </tr>
       </table>
     </div>
@@ -293,11 +234,7 @@ curl --location 'http://localhost:4001/PartnerAPI/CustomerCriminalRecord/user/ge
   },
   "searchText": "quá tốc độ",
   "skip": 0,
-  "limit": 20,
-  "order": {
-    "key": "totalViolation",
-    "value": "desc"
-  }
+  "limit": 20
 }'</pre>
     </div>
 
