@@ -46,6 +46,10 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - HTML: ./callback-webhooks/Callback_ThongTinDangKiem.html
 - MD: ./callback-webhooks/Callback_ThongTinDangKiem.md
 
+6. Thông báo Triệu hồi xe cơ giới
+- HTML: ./callback-webhooks/Callback_CustomerCriminalRecordVehicleRecall.html
+- MD: ./callback-webhooks/Callback_CustomerCriminalRecordVehicleRecall.md
+
 ## Quy ước tài liệu
 
 - Mỗi API có 2 file tương ứng: 1 file Markdown và 1 file HTML.
