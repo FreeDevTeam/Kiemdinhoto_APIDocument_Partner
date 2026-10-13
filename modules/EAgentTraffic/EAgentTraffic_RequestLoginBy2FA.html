@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Request Login By 2FA (EAgentTraffic)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { background: #0b63ce; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; margin-right: 8px; }
+    #toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 22px; border-radius: 8px; font-size: 0.95em; opacity: 0; pointer-events: none; transition: opacity 0.25s; z-index: 9999; }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Card 1: Header -->
+    <div class="card">
+      <h1>Partner API - Request Login By 2FA (EAgentTraffic)</h1>
+      <p>Yêu cầu đăng nhập tài khoản đại lý tra cứu thông tin vi phạm giao thông theo phương thức xác thực hai yếu tố (2FA).</p>
+      <p><a href="./index.html">Về module EAgentTraffic</a></p>
+    </div>
+
+    <!-- Card 2: Endpoint -->
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL</th><td>/ThirdParty/EAgentTraffic/user/requestLoginBy2FA</td></tr>
+        <tr><th>Method</th><td>POST</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 3: Headers schema -->
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>clientId <em>hoặc</em> clientid</td><td>Yes</td><td>Mã định danh đối tác</td></tr>
+        <tr><td>apiKey <em>hoặc</em> apikey</td><td>Yes</td><td>Khóa xác thực API của đối tác</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 4: Body schema -->
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>username</td><td>string</td><td>Yes</td><td>required, max 255, alphanum</td><td>Số CCCD / CMND của tài khoản đại lý tra cứu giao thông.</td></tr>
+        <tr><td>userDevice</td><td>object</td><td>No</td><td>-</td><td>Thông tin thiết bị di động của đại lý / ứng dụng.</td></tr>
+        <tr><td>userDevice.fingerprint</td><td>string</td><td>No</td><td>-</td><td>Chuỗi nhận dạng hệ điều hành / firmware thiết bị.</td></tr>
+        <tr><td>userDevice.hardware</td><td>string</td><td>No</td><td>-</td><td>Mã phần cứng thiết bị (ví dụ: <code>mt6878</code>).</td></tr>
+        <tr><td>userDevice.brand</td><td>string</td><td>No</td><td>-</td><td>Hãng sản xuất thiết bị (ví dụ: <code>motorola</code>).</td></tr>
+        <tr><td>userDevice.device</td><td>string</td><td>No</td><td>-</td><td>Tên thiết bị (ví dụ: <code>aito</code>).</td></tr>
+        <tr><td>userDevice.model</td><td>string</td><td>No</td><td>-</td><td>Tên model thiết bị (ví dụ: <code>XT2429-2</code>).</td></tr>
+        <tr><td>userDevice.manufacturer</td><td>string</td><td>No</td><td>-</td><td>Nhà sản xuất thiết bị (ví dụ: <code>motorola</code>).</td></tr>
+        <tr><td>userDevice.product</td><td>string</td><td>No</td><td>-</td><td>Tên sản phẩm thương mại của thiết bị (ví dụ: <code>aito_g</code>).</td></tr>
+        <tr><td>userDevice.bootloader</td><td>string</td><td>No</td><td>-</td><td>Thông tin bootloader (ví dụ: <code>unknown</code>).</td></tr>
+        <tr><td>userDevice.sdkVersion</td><td>number</td><td>No</td><td>-</td><td>Phiên bản Android SDK (ví dụ: <code>35</code>).</td></tr>
+        <tr><td>userDevice.gmsVersion</td><td>string</td><td>No</td><td>-</td><td>Phiên bản Google Mobile Services (ví dụ: <code>262033035</code>).</td></tr>
+        <tr><td>userDevice.latitude</td><td>number</td><td>No</td><td>-</td><td>Tọa độ vĩ độ GPS của thiết bị (ví dụ: <code>12.2702919</code>).</td></tr>
+        <tr><td>userDevice.longitude</td><td>number</td><td>No</td><td>-</td><td>Tọa độ kinh độ GPS của thiết bị (ví dụ: <code>109.2489062</code>).</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 5: Sample Request -->
+    <div class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;">Sample Request <button id="copySampleBtn" title="Copy sang clipboard" style="background:none;border:1px solid #dbe3ef;border-radius:6px;padding:4px 8px;cursor:pointer;display:inline-flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0b63ce" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg></button></h2>
+      <pre id="curlText">curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginBy2FA' \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: TESTCLIENT' \
+  --header 'apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08' \
+  --data '{
+    "username": "001201012345",
+    "userDevice": {
+      "fingerprint": "motorola/aito_g/aito:15/AP3A.240905.015.A2/1746894222:user/release-keys",
+      "hardware": "mt6878",
+      "brand": "motorola",
+      "device": "aito",
+      "model": "XT2429-2",
+      "manufacturer": "motorola",
+      "product": "aito_g",
+      "bootloader": "unknown",
+      "sdkVersion": 35,
+      "gmsVersion": "262033035",
+      "latitude": 12.2702919,
+      "longitude": 109.2489062
+    }
+  }'</pre>
+    </div>
+
+    <!-- Card 6: Success response -->
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": {
+    "success": true
+  }
+}</pre>
+    </div>
+
+    <!-- Card 7: Mã lỗi -->
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td><em>Validation Error</em></td><td>Payload không đúng schema (thiếu <code>username</code>, format sai).</td></tr>
+        <tr><td>429</td><td><code>QUOTA_EXCEEDED</code></td><td>apiKey không hợp lệ hoặc đã vượt quá hạn mức gọi API.</td></tr>
+        <tr><td>500</td><td><code>AGENTETRAFFIC_UNAUTHORIZED</code></td><td>Không có quyền truy cập hoặc tài khoản không được ủy quyền xác thực.</td></tr>
+        <tr><td>500</td><td><code>INVALID_USERNAME</code></td><td>Số CCCD / tài khoản đại lý không hợp lệ hoặc không tìm thấy.</td></tr>
+        <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định.</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 8: Tham khảo -->
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html#common-error">Quy chuẩn chung → Common Error</a> — danh sách mã lỗi hệ thống trả về trong trường <code>error</code>.</li>
+        <li><a href="../../Common.html#eagent-traffic-error">Quy chuẩn chung → EAgentTraffic Error Code</a> — danh sách mã lỗi nghiệp vụ đại lý tra cứu giao thông.</li>
+      </ul>
+    </div>
+
+    <!-- Card 9: Data test -->
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li>clientId: TESTCLIENT</li>
+        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
+        <li>username (CCCD đại lý): 001201012345</li>
+      </ul>
+      <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const copySampleBtn = document.getElementById('copySampleBtn');
+    const curlText = document.getElementById('curlText').textContent;
+
+    copySampleBtn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(curlText);
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    });
+  </script>
+  <div id="toast">Sao chép thành công</div>
+</body>
+</html>

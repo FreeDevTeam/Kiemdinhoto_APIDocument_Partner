@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner API - Lookup Warning For Vehicle (EAgentTraffic)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    h1, h2, h3 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; }
+    th { background: #eef3fb; }
+    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    a { color: #0b63ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { background: #0b63ce; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; margin-right: 8px; }
+    #toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 22px; border-radius: 8px; font-size: 0.95em; opacity: 0; pointer-events: none; transition: opacity 0.25s; z-index: 9999; }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Card 1: Header -->
+    <div class="card">
+      <h1>Partner API - Lookup Warning For Vehicle (EAgentTraffic)</h1>
+      <p>Tra cứu thông tin cảnh báo vi phạm giao thông / phạt nguội của phương tiện cơ giới thông qua tài khoản đại lý. Hệ thống tự động theo dõi hạn mức (quota) theo chu kỳ ngày/tuần/tháng, tích hợp cơ chế tự động chuyển đổi sang tài khoản đại lý dự phòng khi đại lý hiện tại hết quota và chuẩn hóa kết quả đầu ra theo chuẩn <code>CustomerCriminalRecord</code>.</p>
+      <p><a href="./index.html">Về module EAgentTraffic</a></p>
+    </div>
+
+    <!-- Card 2: Endpoint -->
+    <div class="card">
+      <h2>Endpoint</h2>
+      <table>
+        <tr><th>URL</th><td>/ThirdParty/EAgentTraffic/user/lookupWarningForVehicle</td></tr>
+        <tr><th>Method</th><td>POST</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 3: Headers schema -->
+    <div class="card">
+      <h2>Headers schema</h2>
+      <table>
+        <tr><th>Header</th><th>Required</th><th>Mô tả</th></tr>
+        <tr><td>Authorization</td><td>Yes</td><td>Chuỗi xác thực dạng <code>Bearer &lt;JWT_TOKEN&gt;</code>. Token nhận được sau khi đăng nhập thành công qua OTP hoặc Passcode.</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 4: Body schema -->
+    <div class="card">
+      <h2>Body schema</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
+        <tr><td>plateNumber</td><td>string</td><td>Yes</td><td>required, max 20</td><td>Biển số xe cần tra cứu phạt nguội (ví dụ: <code>30L-408.53</code>, <code>51A-123.45</code>).</td></tr>
+        <tr><td>phoneNumber</td><td>string</td><td>Yes</td><td>required, max 20</td><td>Số điện thoại khách hàng thực hiện tra cứu.</td></tr>
+        <tr><td>vehicleType</td><td>number | string</td><td>Yes</td><td>required, valid: <code>1</code>, <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code></td><td>Phân loại phương tiện giao thông theo danh mục chuẩn.</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 4.1: Danh mục Enum & Giá trị tham chiếu -->
+    <div class="card">
+      <h2>Danh mục Enum tham chiếu</h2>
+      <h3>1. Phân loại loại phương tiện (<code>vehicleType</code>)</h3>
+      <table>
+        <tr><th style="width:120px">Giá trị</th><th style="width:250px">Tên loại</th><th>Mô tả</th></tr>
+        <tr><td><code>1</code></td><td>Ô tô con (CAR)</td><td>Xe ô tô du lịch, xe cá nhân, xe dưới 9 chỗ</td></tr>
+        <tr><td><code>10</code></td><td>Khác (OTHER)</td><td>Xe bán tải, ô tô tải, ô tô khách, xe chuyên dùng</td></tr>
+        <tr><td><code>20</code></td><td>Rơ moóc (RO_MOOC)</td><td>Rơ moóc và sơ mi rơ moóc</td></tr>
+        <tr><td><code>30</code></td><td>Xe máy (MOTOBIKE)</td><td>Xe mô tô 2 bánh, xe gắn máy</td></tr>
+        <tr><td><code>40</code></td><td>Xe máy điện (ELECTRIC_MOTORBIKE)</td><td>Xe mô tô, xe gắn máy chạy điện</td></tr>
+      </table>
+
+      <h3>2. Mã màu biển số chuẩn hóa (<code>customerRecordPlateColor</code>)</h3>
+      <table>
+        <tr><th style="width:120px">Mã số</th><th style="width:150px">Màu sắc</th><th>Mô tả</th></tr>
+        <tr><td><code>1</code></td><td>Trắng</td><td>Biển trắng chữ đen (phương tiện cá nhân, doanh nghiệp)</td></tr>
+        <tr><td><code>2</code></td><td>Xanh</td><td>Biển xanh chữ trắng (cơ quan nhà nước, hành chính)</td></tr>
+        <tr><td><code>3</code></td><td>Vàng</td><td>Biển vàng chữ đen (phương tiện hoạt động kinh doanh vận tải)</td></tr>
+        <tr><td><code>4</code></td><td>Đỏ</td><td>Biển đỏ chữ trắng (xe quân sự / quốc phòng)</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 5: Sample Request -->
+    <div class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;">Sample Request <button id="copySampleBtn" title="Copy sang clipboard" style="background:none;border:1px solid #dbe3ef;border-radius:6px;padding:4px 8px;cursor:pointer;display:inline-flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0b63ce" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg></button></h2>
+      <pre id="curlText">curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/lookupWarningForVehicle' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' \
+  --data '{
+    "plateNumber": "30L-408.53",
+    "phoneNumber": "0987654321",
+    "vehicleType": 1
+  }'</pre>
+    </div>
+
+    <!-- Card 6: Success response -->
+    <div class="card">
+      <h2>Success response</h2>
+      <pre>{
+  "statusCode": 200,
+  "error": null,
+  "message": "Success",
+  "data": [
+    {
+      "customerRecordPlatenumber": "30L-408.53",
+      "customerRecordPlateColor": 1,
+      "customerRecordPlateColorDesc": "Nền màu trắng, chữ và số màu đen",
+      "crimeRecordContent": "16824.6.5.đ.01 Điều khiển xe chạy quá tốc độ quy định từ 10 km/h đến 20 km/h",
+      "crimeRecordTime": "19:38 24/07/2026",
+      "crimeRecordLocation": "Km278+400, cao tốc Pháp Vân - Cao Bồ - Mai Sơn - QL45 - Nghi Sơn",
+      "crimeRecordAddressAgency": "Số 20 Phố Trần Bình, Phường Từ Liêm,Thành phố Hà Nội",
+      "crimeRecordPIC": "Đội Cảnh sát giao thông đường bộ cao tốc số 3 - Phòng Hướng dẫn Tuần tra kiểm soát giao thông đường bộ đường sắt - Cục Cảnh sát giao thông",
+      "crimeRecordStatus": "Đã xử phạt",
+      "crimeRecordAgency": "Đội Cảnh sát giao thông đường bộ cao tốc số 3 - Cục Cảnh sát giao thông",
+      "crimeRecordContact": "0243.xxx.xxx",
+      "criminalRecordNote": "1. Đội Cảnh sát giao thông đường bộ cao tốc số 3 - Cục CSGT&lt;br&gt;Địa chỉ: Thôn Hoàng Nê, Xã Ý Yên, Ninh Bình&lt;br&gt;&lt;br&gt;2. Đội CSGT ĐB số 6 - CATP Hà Nội&lt;br&gt;Địa chỉ: Số 20 Phố Trần Bình, Phường Từ Liêm,Thành phố Hà Nội&lt;br&gt;",
+      "vehicleTypeText": "Ô tô con"
+    }
+  ]
+}</pre>
+    </div>
+
+    <!-- Card 7: Mã lỗi -->
+    <div class="card">
+      <h2>Mã lỗi</h2>
+      <table>
+        <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
+        <tr><td>400</td><td><em>Validation Error</em></td><td>Payload không đúng schema (thiếu <code>plateNumber</code>, <code>phoneNumber</code> hoặc <code>vehicleType</code> không hợp lệ).</td></tr>
+        <tr><td>401</td><td><code>UNAUTHORIZED</code></td><td>Token JWT không hợp lệ hoặc đã hết hạn phiên làm việc.</td></tr>
+        <tr><td>500</td><td><code>VEHICLE_WARNING_NOT_FOUND</code></td><td>Không tìm thấy cảnh báo vi phạm của phương tiện hoặc cổng dữ liệu CSGT không phản hồi.</td></tr>
+        <tr><td>500</td><td><code>AGENT_QUOTA_EXCEEDED</code></td><td>Hạn mức (quota) tra cứu của tất cả tài khoản đại lý đã vượt quá giới hạn trong ngày.</td></tr>
+        <tr><td>500</td><td><code>INVALID_USERNAME</code></td><td>Thông tin tài khoản đại lý gắn với phiên làm việc không hợp lệ.</td></tr>
+        <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định.</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 8: Tham khảo -->
+    <div class="card">
+      <h2>Tham khảo</h2>
+      <ul>
+        <li><a href="../../Common.html#common-error">Quy chuẩn chung → Common Error</a> — danh sách mã lỗi hệ thống trả về trong trường <code>error</code>.</li>
+        <li><a href="../../Common.html#eagent-traffic-error">Quy chuẩn chung → EAgentTraffic Error Code</a> — danh sách mã lỗi nghiệp vụ đại lý tra cứu giao thông.</li>
+      </ul>
+    </div>
+
+    <!-- Card 9: Data test -->
+    <div class="card">
+      <h2>Data test cho developer</h2>
+      <ul>
+        <li>Header Authorization: <code>Bearer &lt;JWT_TOKEN&gt;</code> (Lấy từ kết quả của API <code>requestLoginByOTP</code> hoặc <code>confirmPasscode</code>)</li>
+        <li>plateNumber: <code>30L-408.53</code></li>
+        <li>phoneNumber: <code>0987654321</code></li>
+        <li>vehicleType: <code>1</code></li>
+      </ul>
+      <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const copySampleBtn = document.getElementById('copySampleBtn');
+    const curlText = document.getElementById('curlText').textContent;
+
+    copySampleBtn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(curlText);
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    });
+  </script>
+  <div id="toast">Sao chép thành công</div>
+</body>
+</html>
