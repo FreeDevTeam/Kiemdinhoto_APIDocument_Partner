@@ -158,18 +158,17 @@
     <!-- EAgentTraffic Error Code -->
     <div class="card" id="eagent-traffic-error">
       <h2>EAgentTraffic Error Code</h2>
-      <p>Bảng mã lỗi trả về trong trường <code>error</code> khi sử dụng các API thuộc module <strong>EAgentTraffic</strong> (Đại lý tra cứu vi phạm giao thông / phạt nguội).</p>
+      <p>Bảng mã lỗi trả về trong trường <code>error</code> khi sử dụng các API thuộc module <strong>EAgentTraffic</strong> (Đối tác tra cứu thông tin giao thông).</p>
       <table>
         <tr>
           <th style="width:35%">Mã lỗi (error)</th>
           <th>Mô tả</th>
         </tr>
-        <tr><td><code>VEHICLE_WARNING_NOT_FOUND</code></td><td>Không tìm thấy dữ liệu cảnh báo vi phạm của phương tiện hoặc cổng dữ liệu không phản hồi.</td></tr>
-        <tr><td><code>AGENT_QUOTA_EXCEEDED</code></td><td>Đã vượt quá hạn mức (quota) tra cứu vi phạm của đại lý trong chu kỳ hiện tại.</td></tr>
-        <tr><td><code>INCORRECT_PASSWORD</code></td><td>Mật khẩu hoặc mã Passcode/PIN của tài khoản đại lý không chính xác.</td></tr>
+        <tr><td><code>AGENT_QUOTA_EXCEEDED</code></td><td>Đã vượt quá hạn mức (quota) của đối tác trong chu kỳ hiện tại.</td></tr>
+        <tr><td><code>INCORRECT_PASSWORD</code></td><td>Mật khẩu hoặc mã Passcode/PIN của tài khoản đối tác không chính xác.</td></tr>
         <tr><td><code>INCORRECT_OTP</code></td><td>Mã OTP xác thực không chính xác hoặc đã hết thời gian hiệu lực.</td></tr>
-        <tr><td><code>INVALID_USERNAME</code></td><td>Tài khoản đại lý (số CCCD/CMND) không hợp lệ hoặc không tồn tại trong hệ thống.</td></tr>
-        <tr><td><code>AGENTETRAFFIC_UNAUTHORIZED</code></td><td>Không có quyền truy cập, xác thực thiết bị thất bại hoặc tài khoản đại lý chưa được kích hoạt.</td></tr>
+        <tr><td><code>INVALID_USERNAME</code></td><td>Tài khoản đối tác (số CCCD/CMND) không hợp lệ hoặc không tồn tại trong hệ thống.</td></tr>
+        <tr><td><code>AGENTETRAFFIC_UNAUTHORIZED</code></td><td>Không có quyền truy cập, xác thực thiết bị thất bại hoặc tài khoản đối tác chưa được kích hoạt.</td></tr>
         <tr><td><code>AGENTETRAFFIC_OTP_REQUEST_ERROR</code></td><td>Gặp sự cố khi gửi yêu cầu nhận mã OTP đến cổng dịch vụ xác thực giao thông.</td></tr>
         <tr><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định trong quá trình xử lý.</td></tr>
       </table>

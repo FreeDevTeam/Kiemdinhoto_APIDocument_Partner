@@ -1,6 +1,6 @@
 # Partner API - Request Login By OTP (EAgentTraffic)
 
-Tài liệu API yêu cầu đăng nhập đại lý tra cứu thông tin vi phạm giao thông bằng mã OTP. Hệ thống sẽ tự động đồng bộ tài khoản nội bộ và gửi mã OTP về số điện thoại đăng ký của đại lý qua cổng dịch vụ CSGT.
+Tài liệu API yêu cầu đăng nhập đối tác tra cứu thông tin vi phạm giao thông bằng mã OTP. Hệ thống sẽ tự động đồng bộ tài khoản nội bộ và gửi mã OTP về số điện thoại đăng ký của đối tác qua cổng dịch vụ CSGT.
 
 [Về module EAgentTraffic](./index.html)
 
@@ -26,22 +26,22 @@ Tài liệu API yêu cầu đăng nhập đại lý tra cứu thông tin vi ph�
 
 ## Body schema
 
-| Field                   | Type   | Required | Rule                        | Mô tả                                                      |
-| ----------------------- | ------ | -------- | --------------------------- | ---------------------------------------------------------- |
-| username                | string | Yes      | required, max 255, alphanum | Số CCCD / CMND của tài khoản đại lý tra cứu giao thông.    |
-| userDevice              | object | No       | -                           | Thông tin thiết bị di động của đại lý / ứng dụng.          |
-| userDevice.fingerprint  | string | No       | -                           | Chuỗi nhận dạng hệ điều hành / firmware thiết bị.          |
-| userDevice.hardware     | string | No       | -                           | Mã phần cứng thiết bị (ví dụ: `mt6878`).                   |
-| userDevice.brand        | string | No       | -                           | Hãng sản xuất thiết bị (ví dụ: `motorola`).                |
-| userDevice.device       | string | No       | -                           | Tên thiết bị (ví dụ: `aito`).                              |
-| userDevice.model        | string | No       | -                           | Tên model thiết bị (ví dụ: `XT2429-2`).                    |
-| userDevice.manufacturer | string | No       | -                           | Nhà sản xuất thiết bị (ví dụ: `motorola`).                 |
-| userDevice.product      | string | No       | -                           | Tên sản phẩm thương mại của thiết bị (ví dụ: `aito_g`).    |
-| userDevice.bootloader   | string | No       | -                           | Thông tin bootloader (ví dụ: `unknown`).                   |
-| userDevice.sdkVersion   | number | No       | -                           | Phiên bản Android SDK (ví dụ: `35`).                       |
-| userDevice.gmsVersion   | string | No       | -                           | Phiên bản Google Mobile Services (ví dụ: `262033035`).     |
-| userDevice.latitude     | number | No       | -                           | Tọa độ vĩ độ GPS của thiết bị (ví dụ: `12.2702919`).       |
-| userDevice.longitude    | number | No       | -                           | Tọa độ kinh độ GPS của thiết bị (ví dụ: `109.2489062`).    |
+| Field                   | Type   | Required | Rule                        | Mô tả                                                                    |
+| ----------------------- | ------ | -------- | --------------------------- | ------------------------------------------------------------------------ |
+| username                | string | Yes      | required, max 255, alphanum | **Dữ liệu thật** — Số CCCD / CMND thật của tài khoản đối tác tra cứu thông tin giao thông. |
+| userDevice              | object | No       | -                           | Thông tin thiết bị di động của đối tác / ứng dụng.                        |
+| userDevice.fingerprint  | string | No       | -                           | Chuỗi nhận dạng hệ điều hành / firmware thiết bị.                        |
+| userDevice.hardware     | string | No       | -                           | Mã phần cứng thiết bị (ví dụ: `mt6878`).                                 |
+| userDevice.brand        | string | No       | -                           | Hãng sản xuất thiết bị (ví dụ: `motorola`).                              |
+| userDevice.device       | string | No       | -                           | Tên thiết bị (ví dụ: `aito`).                                            |
+| userDevice.model        | string | No       | -                           | Tên model thiết bị (ví dụ: `XT2429-2`).                                  |
+| userDevice.manufacturer | string | No       | -                           | Nhà sản xuất thiết bị (ví dụ: `motorola`).                               |
+| userDevice.product      | string | No       | -                           | Tên sản phẩm thương mại của thiết bị (ví dụ: `aito_g`).                  |
+| userDevice.bootloader   | string | No       | -                           | Thông tin bootloader (ví dụ: `unknown`).                                 |
+| userDevice.sdkVersion   | number | No       | -                           | Phiên bản Android SDK (ví dụ: `35`).                                     |
+| userDevice.gmsVersion   | string | No       | -                           | Phiên bản Google Mobile Services (ví dụ: `262033035`).                   |
+| userDevice.latitude     | number | No       | -                           | Tọa độ vĩ độ GPS của thiết bị (ví dụ: `12.2702919`).                     |
+| userDevice.longitude    | number | No       | -                           | Tọa độ kinh độ GPS của thiết bị (ví dụ: `109.2489062`).                  |
 
 ---
 
@@ -94,8 +94,8 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginByOTP' \
 | ---- | --------------------------------- | ------------------------------------------------------------------------ |
 | 400  | _Validation Error_                | Payload không đúng schema (thiếu `username`, sai kiểu dữ liệu).          |
 | 429  | `QUOTA_EXCEEDED`                  | apiKey không hợp lệ hoặc đã vượt quá hạn mức gọi API.                    |
-| 500  | `AGENTETRAFFIC_UNAUTHORIZED`      | Không có quyền truy cập hoặc đăng nhập đại lý thất bại.                  |
-| 500  | `INVALID_USERNAME`                | Số CCCD / tài khoản đại lý không hợp lệ hoặc không tìm thấy.             |
+| 500  | `AGENTETRAFFIC_UNAUTHORIZED`      | Không có quyền truy cập hoặc đăng nhập đối tác thất bại.                  |
+| 500  | `INVALID_USERNAME`                | Số CCCD / tài khoản đối tác không hợp lệ hoặc không tìm thấy.             |
 | 500  | `AGENTETRAFFIC_OTP_REQUEST_ERROR` | Gặp lỗi trong quá trình gửi yêu cầu OTP tới cổng dịch vụ xác thực CSGT.  |
 | 500  | `UNKNOWN_ERROR`                   | Lỗi không xác định.                                                      |
 
@@ -104,14 +104,15 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginByOTP' \
 ## Tham khảo
 
 - [Quy chuẩn chung -> Common Error](../../Common.html#common-error) — danh sách mã lỗi hệ thống trả về trong trường `error`.
-- [Quy chuẩn chung -> EAgentTraffic Error Code](../../Common.html#eagent-traffic-error) — danh sách mã lỗi nghiệp vụ đại lý tra cứu giao thông.
+- [Quy chuẩn chung -> EAgentTraffic Error Code](../../Common.html#eagent-traffic-error) — danh sách mã lỗi nghiệp vụ đối tác tra cứu giao thông.
 
 ---
 
-## Data test cho developer
+## Dữ liệu và Lưu ý quan trọng cho Developer
 
 - clientId: TESTCLIENT
 - apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
-- username (CCCD đại lý): 001201012345
+- **username**: **Dữ liệu thật** — Số CCCD / CMND thật của tài khoản đối tác.
 
-Cần thay bằng dữ liệu môi trường thật khi tích hợp.
+> **Lưu ý:** Bắt buộc sử dụng số CCCD thật của tài khoản đối tác để hệ thống gửi mã OTP thật về số điện thoại đăng ký qua cổng dịch vụ CSGT.
+

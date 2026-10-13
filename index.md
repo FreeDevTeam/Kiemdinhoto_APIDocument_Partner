@@ -20,7 +20,7 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 - Module index HTML: ./modules/APIPartner/index.html
 - Module index MD: ./modules/APIPartner/index.md
 
-5. EAgentTraffic (Đại lý Tra cứu Phạt nguội)
+5. EAgentTraffic (Đối tác Tra cứu Giao thông)
 - Module index HTML: ./modules/EAgentTraffic/index.html
 - Module index MD: ./modules/EAgentTraffic/index.md
 

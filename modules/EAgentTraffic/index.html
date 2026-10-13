@@ -14,13 +14,14 @@
     ul { margin: 0; padding-left: 18px; }
     li { margin-bottom: 12px; }
     .desc { color: #4b5563; font-size: 0.92em; margin-top: 4px; }
+    .alert-box { margin-top: 12px; padding: 12px 16px; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 6px; font-size: 0.95em; color: #92400e; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
       <h1>Partner API Module: EAgentTraffic</h1>
-      <p>Module cung cấp các API kết nối tài khoản đại lý tra cứu giao thông (EAgentTraffic) và tra cứu thông tin phạt nguội phương tiện có hỗ trợ xoay vòng Quota tự động.</p>
+      <p>Module cung cấp các API xác thực tài khoản đối tác tra cứu thông tin giao thông (<code>EAgentTraffic</code>). Hệ thống hỗ trợ quy trình đăng nhập và xác thực tài khoản đối tác thông qua mã OTP thật gửi về SMS, mã bảo mật Passcode/PIN hoặc phương thức xác thực hai yếu tố (2FA).</p>
       <p><a href="../../index.html">Quay về trang chủ</a> | <a href="./index.md">Mở bản Markdown module</a></p>
     </div>
 
@@ -29,49 +30,43 @@
       <ul>
         <li>
           <strong>1. Request Login By OTP</strong><br/>
-          <span class="desc">Yêu cầu đăng nhập hoặc gửi mã OTP cho tài khoản đại lý tra cứu giao thông.</span><br/>
+          <span class="desc">Yêu cầu đăng nhập hoặc gửi mã OTP cho tài khoản đối tác tra cứu giao thông.</span><br/>
           <a href="./EAgentTraffic_RequestLoginByOTP.html">HTML</a> |
           <a href="./EAgentTraffic_RequestLoginByOTP.md">MD</a>
         </li>
         <li>
           <strong>2. Confirm OTP</strong><br/>
-          <span class="desc">Xác nhận mã OTP để hoàn tất đăng nhập đại lý.</span><br/>
+          <span class="desc">Xác nhận mã OTP để hoàn tất đăng nhập đối tác.</span><br/>
           <a href="./EAgentTraffic_ConfirmOTP.html">HTML</a> |
           <a href="./EAgentTraffic_ConfirmOTP.md">MD</a>
         </li>
         <li>
           <strong>3. Request Login By 2FA</strong><br/>
-          <span class="desc">Yêu cầu đăng nhập tài khoản đại lý qua phương thức xác thực hai yếu tố (2FA).</span><br/>
+          <span class="desc">Yêu cầu đăng nhập tài khoản đối tác qua phương thức xác thực hai yếu tố (2FA).</span><br/>
           <a href="./EAgentTraffic_RequestLoginBy2FA.html">HTML</a> |
           <a href="./EAgentTraffic_RequestLoginBy2FA.md">MD</a>
         </li>
         <li>
           <strong>4. Confirm Passcode</strong><br/>
-          <span class="desc">Xác nhận mã bảo mật Passcode/PIN của đại lý để cấp token truy cập.</span><br/>
+          <span class="desc">Xác nhận mã bảo mật Passcode/PIN của đối tác để cấp token truy cập.</span><br/>
           <a href="./EAgentTraffic_ConfirmPasscode.html">HTML</a> |
           <a href="./EAgentTraffic_ConfirmPasscode.md">MD</a>
-        </li>
-        <li>
-          <strong>5. Lookup Warning For Vehicle</strong><br/>
-          <span class="desc">Tra cứu chi tiết cảnh báo phạt nguội của phương tiện theo biển số và loại phương tiện.</span><br/>
-          <a href="./EAgentTraffic_LookupWarningForVehicle.html">HTML</a> |
-          <a href="./EAgentTraffic_LookupWarningForVehicle.md">MD</a>
         </li>
       </ul>
     </div>
 
     <div class="card">
-      <h2>Data test tham chiếu</h2>
+      <h2>Dữ liệu và Lưu ý quan trọng cho Developer</h2>
       <ul>
-        <li>clientId: TESTCLIENT</li>
-        <li>apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08</li>
-        <li>username test (CCCD đại lý): 001201012345</li>
-        <li>OTP test: 123456</li>
-        <li>plateNumber test: 30L-408.53</li>
-        <li>vehicleType test: 1 (Ô tô con)</li>
-        <li>phoneNumber test: 0987654321</li>
+        <li><strong>clientId</strong>: <code>TESTCLIENT</code></li>
+        <li><strong>apiKey</strong>: <code>07e73e61-0dce-4b39-8ecf-06ef70b35c08</code></li>
+        <li><strong>username</strong>: <strong>Dữ liệu thật</strong> — Số CCCD / CMND thật của tài khoản đối tác.</li>
+        <li><strong>otp</strong>: <strong>Dữ liệu thật</strong> — Mã OTP thật do hệ thống dịch vụ giao thông gửi về số điện thoại đăng ký qua SMS khi gọi API <code>requestLoginByOTP</code>.</li>
+        <li><strong>passcode</strong>: <strong>Dữ liệu thật</strong> — Mã Passcode / PIN thật của tài khoản đối tác.</li>
       </ul>
-      <p style="font-size: 0.9em; color: #6b7280; margin-top: 10px;">Lưu ý: Dữ liệu trên dùng cho môi trường kiểm thử (UAT/Dev). Cần thay thế bằng tài khoản và dữ liệu thực tế khi vận hành chính thức.</p>
+      <div class="alert-box">
+        <strong>Lưu ý quan trọng:</strong> Hệ thống kết nối trực tiếp đến cổng dịch vụ xác thực giao thông bên thứ ba, do đó trường <code>username</code> (số CCCD/CMND) và <code>otp</code> (mã OTP qua SMS) <strong>bắt buộc phải là dữ liệu thật</strong>, không dùng dữ liệu mock/giả lập.
+      </div>
     </div>
   </div>
 </body>
