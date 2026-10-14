@@ -23,6 +23,7 @@ Tài liệu này là trang chủ cho toàn bộ API dành cho đối tác.
 5. EAgentTraffic (Đối tác Tra cứu Giao thông)
 - Module index HTML: ./modules/EAgentTraffic/index.html
 - Module index MD: ./modules/EAgentTraffic/index.md
+- Tài liệu dữ liệu giả lập Mock Data (Google Docs): https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true
 
 ## Callback / Webhooks
 

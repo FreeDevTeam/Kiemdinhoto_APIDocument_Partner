@@ -97,6 +97,7 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginByOTP' \
 | 500  | `AGENTETRAFFIC_UNAUTHORIZED`      | Không có quyền truy cập hoặc đăng nhập đối tác thất bại.                  |
 | 500  | `INVALID_USERNAME`                | Số CCCD / tài khoản đối tác không hợp lệ hoặc không tìm thấy.             |
 | 500  | `AGENTETRAFFIC_OTP_REQUEST_ERROR` | Gặp lỗi trong quá trình gửi yêu cầu OTP tới cổng dịch vụ xác thực CSGT.  |
+| 500  | `AGENT_QUOTA_EXCEEDED`            | Đã vượt quá hạn mức (quota) tra cứu của đối tác.                         |
 | 500  | `UNKNOWN_ERROR`                   | Lỗi không xác định.                                                      |
 
 ---
@@ -105,6 +106,7 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginByOTP' \
 
 - [Quy chuẩn chung -> Common Error](../../Common.html#common-error) — danh sách mã lỗi hệ thống trả về trong trường `error`.
 - [Quy chuẩn chung -> EAgentTraffic Error Code](../../Common.html#eagent-traffic-error) — danh sách mã lỗi nghiệp vụ đối tác tra cứu giao thông.
+- [Tài liệu Mock Data & Test Cases (Google Docs)](https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true)
 
 ---
 
@@ -112,7 +114,20 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginByOTP' \
 
 - clientId: TESTCLIENT
 - apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
-- **username**: **Dữ liệu thật** — Số CCCD / CMND thật của tài khoản đối tác.
 
-> **Lưu ý:** Bắt buộc sử dụng số CCCD thật của tài khoản đối tác để hệ thống gửi mã OTP thật về số điện thoại đăng ký qua cổng dịch vụ CSGT.
+### Dữ liệu giả lập kiểm thử (Mock Test Data):
+Tham khảo kịch bản giả lập từ [Google Docs](https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true):
+
+| Username / CCCD | Kịch bản | Kết quả giả lập |
+| :--- | :--- | :--- |
+| `001200000001` | Gửi OTP thành công | Thành công – trả về token giả lập và thông báo mã OTP đã được gửi. |
+| `999000000001` | Tên đăng nhập không hợp lệ | Thất bại – `INVALID_USERNAME`. |
+| `999000000002` | Không được xác thực | Thất bại – `AGENTETRAFFIC_UNAUTHORIZED`. |
+| `999000000003` | Lỗi gửi yêu cầu OTP | Thất bại – `AGENTETRAFFIC_OTP_REQUEST_ERROR`. |
+| `999000000004` | Vượt hạn mức tra cứu | Thất bại – `AGENT_QUOTA_EXCEEDED`. |
+
+> **Lưu ý phân biệt môi trường:**
+> - **Môi trường Test / Sandbox (Mock):** Dùng các số CCCD giả lập trên để kiểm thử đầy đủ các kịch bản thành công và lỗi.
+> - **Môi trường Thật (Production):** Bắt buộc sử dụng số CCCD thật của tài khoản đối tác để hệ thống gửi mã OTP thật về số điện thoại đăng ký qua cổng dịch vụ CSGT.
+
 

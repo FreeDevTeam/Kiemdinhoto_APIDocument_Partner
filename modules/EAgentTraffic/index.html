@@ -15,6 +15,11 @@
     li { margin-bottom: 12px; }
     .desc { color: #4b5563; font-size: 0.92em; margin-top: 4px; }
     .alert-box { margin-top: 12px; padding: 12px 16px; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 6px; font-size: 0.95em; color: #92400e; }
+    .info-box { margin-top: 12px; padding: 12px 16px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 6px; font-size: 0.95em; color: #1e40af; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 16px; }
+    th, td { border: 1px solid #dbe3ef; padding: 8px 12px; text-align: left; font-size: 0.92em; }
+    th { background: #eef3fb; }
+    h3 { margin: 14px 0 8px; font-size: 1.05em; color: #111827; }
   </style>
 </head>
 <body>
@@ -55,17 +60,130 @@
       </ul>
     </div>
 
+    <!-- Thông tin dữ liệu giả lập (Mock Data & Test Cases) -->
+    <div class="card">
+      <h2>Thông tin giả lập (Mock Data & Test Cases)</h2>
+      <p>Dữ liệu giả lập phục vụ kiểm thử tích hợp API (sandbox / test environment). Giúp đối tác kiểm thử các kịch bản thành công và lỗi mô phỏng mà không cần tài khoản thực tế.</p>
+      
+      <div class="info-box">
+        📄 <strong>Tài liệu chi tiết Google Docs:</strong> <a href="https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">EAgentTraffic – Mock Data & Test Cases (Google Docs)</a>
+      </div>
+
+      <h3>1. Yêu cầu đăng nhập bằng OTP (<code>requestLoginByOTP</code>)</h3>
+      <table>
+        <tr>
+          <th style="width: 170px;">Username / CCCD</th>
+          <th style="width: 220px;">Kịch bản</th>
+          <th>Kết quả giả lập</th>
+        </tr>
+        <tr>
+          <td><code>001200000001</code></td>
+          <td>Gửi OTP thành công</td>
+          <td>Thành công – trả về token giả lập và thông báo mã OTP đã được gửi.</td>
+        </tr>
+        <tr>
+          <td><code>999000000001</code></td>
+          <td>Tên đăng nhập không hợp lệ</td>
+          <td>Thất bại – <code>INVALID_USERNAME</code>.</td>
+        </tr>
+        <tr>
+          <td><code>999000000002</code></td>
+          <td>Không được xác thực</td>
+          <td>Thất bại – <code>AGENTETRAFFIC_UNAUTHORIZED</code>.</td>
+        </tr>
+        <tr>
+          <td><code>999000000003</code></td>
+          <td>Lỗi gửi yêu cầu OTP</td>
+          <td>Thất bại – <code>AGENTETRAFFIC_OTP_REQUEST_ERROR</code>.</td>
+        </tr>
+        <tr>
+          <td><code>999000000004</code></td>
+          <td>Vượt hạn mức tra cứu</td>
+          <td>Thất bại – <code>AGENT_QUOTA_EXCEEDED</code>.</td>
+        </tr>
+      </table>
+
+      <h3>2. Yêu cầu đăng nhập bằng 2FA (<code>requestLoginBy2FA</code>)</h3>
+      <table>
+        <tr>
+          <th style="width: 170px;">Username / CCCD</th>
+          <th style="width: 220px;">Kịch bản</th>
+          <th>Kết quả giả lập</th>
+        </tr>
+        <tr>
+          <td><code>001200000001</code></td>
+          <td>Yêu cầu 2FA thành công</td>
+          <td>Thành công – <code>success = true</code>, <code>requireOtp = true</code>, có session giả lập.</td>
+        </tr>
+        <tr>
+          <td><code>999000000005</code></td>
+          <td>Xác thực thất bại</td>
+          <td>Thất bại – <code>AGENTETRAFFIC_AUTHENTICATION_FAILED</code>.</td>
+        </tr>
+      </table>
+
+      <h3>3. Xác nhận OTP (<code>confirmOTP</code>)</h3>
+      <table>
+        <tr>
+          <th style="width: 170px;">OTP</th>
+          <th style="width: 220px;">Kịch bản</th>
+          <th>Kết quả giả lập</th>
+        </tr>
+        <tr>
+          <td><code>123456</code></td>
+          <td>OTP hợp lệ</td>
+          <td>Thành công – <code>success = true</code>; trả về token giả lập và thông tin người dùng mẫu.</td>
+        </tr>
+        <tr>
+          <td><code>000000</code></td>
+          <td>OTP không chính xác</td>
+          <td>Thất bại – <code>INCORRECT_OTP</code>.</td>
+        </tr>
+        <tr>
+          <td><code>999999</code></td>
+          <td>Lỗi xác nhận OTP</td>
+          <td>Thất bại – <code>AGENTETRAFFIC_CONFIRM_OTP_FAILED</code>.</td>
+        </tr>
+      </table>
+
+      <h3>4. Xác nhận Passcode (<code>confirmPasscode</code>)</h3>
+      <table>
+        <tr>
+          <th style="width: 170px;">Passcode</th>
+          <th style="width: 220px;">Kịch bản</th>
+          <th>Kết quả giả lập</th>
+        </tr>
+        <tr>
+          <td><code>123456</code></td>
+          <td>Passcode hợp lệ</td>
+          <td>Thành công – <code>success = true</code>; trả về token giả lập và thông tin người dùng mẫu.</td>
+        </tr>
+        <tr>
+          <td><code>000000</code></td>
+          <td>Passcode không chính xác</td>
+          <td>Thất bại – <code>INCORRECT_PASSWORD</code>.</td>
+        </tr>
+        <tr>
+          <td><code>999999</code></td>
+          <td>Lỗi xác nhận Passcode</td>
+          <td>Thất bại – <code>AGENTETRAFFIC_CONFIRM_PASSCODE_FAILED</code>.</td>
+        </tr>
+      </table>
+    </div>
+
     <div class="card">
       <h2>Dữ liệu và Lưu ý quan trọng cho Developer</h2>
       <ul>
         <li><strong>clientId</strong>: <code>TESTCLIENT</code></li>
         <li><strong>apiKey</strong>: <code>07e73e61-0dce-4b39-8ecf-06ef70b35c08</code></li>
-        <li><strong>username</strong>: <strong>Dữ liệu thật</strong> — Số CCCD / CMND thật của tài khoản đối tác.</li>
-        <li><strong>otp</strong>: <strong>Dữ liệu thật</strong> — Mã OTP thật do hệ thống dịch vụ giao thông gửi về số điện thoại đăng ký qua SMS khi gọi API <code>requestLoginByOTP</code>.</li>
-        <li><strong>passcode</strong>: <strong>Dữ liệu thật</strong> — Mã Passcode / PIN thật của tài khoản đối tác.</li>
       </ul>
       <div class="alert-box">
-        <strong>Lưu ý quan trọng:</strong> Hệ thống kết nối trực tiếp đến cổng dịch vụ xác thực giao thông bên thứ ba, do đó trường <code>username</code> (số CCCD/CMND) và <code>otp</code> (mã OTP qua SMS) <strong>bắt buộc phải là dữ liệu thật</strong>, không dùng dữ liệu mock/giả lập.
+        <strong>Lưu ý phân biệt môi trường:</strong>
+        <ul style="margin-top: 6px; padding-left: 18px;">
+          <li><strong>Môi trường Test / Sandbox (Mock):</strong> Có thể sử dụng các bộ dữ liệu mẫu (CCCD/Username, OTP, Passcode) được mô tả trong mục thông tin giả lập phía trên hoặc xem tài liệu <a href="https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">Google Docs</a> để kiểm thử tích hợp đầy đủ các kịch bản thành công và lỗi.</li>
+          <li><strong>Môi trường Thật (Production):</strong> Hệ thống kết nối trực tiếp đến cổng dịch vụ xác thực giao thông bên thứ ba, do đó trường <code>username</code> (số CCCD/CMND) và <code>otp</code> (mã OTP qua SMS) / <code>passcode</code> <strong>bắt buộc phải là dữ liệu thật</strong> của tài khoản đối tác.</li>
+          <li>Sau khi xác thực thành công (qua OTP hoặc Passcode), API sẽ trả về <code>token</code> (JWT Token) của phiên làm việc.</li>
+        </ul>
       </div>
     </div>
   </div>

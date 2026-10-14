@@ -90,13 +90,14 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginBy2FA' \
 
 ## Mã lỗi
 
-| HTTP | Mã lỗi                       | Mô tả                                                                        |
-| ---- | ---------------------------- | ---------------------------------------------------------------------------- |
-| 400  | _Validation Error_           | Payload không đúng schema (thiếu `username`, format sai).                    |
-| 429  | `QUOTA_EXCEEDED`             | apiKey không hợp lệ hoặc đã vượt quá hạn mức gọi API.                        |
-| 500  | `AGENTETRAFFIC_UNAUTHORIZED` | Không có quyền truy cập hoặc tài khoản đối tác không được ủy quyền xác thực. |
-| 500  | `INVALID_USERNAME`           | Số CCCD / tài khoản đối tác không hợp lệ hoặc không tìm thấy.                |
-| 500  | `UNKNOWN_ERROR`              | Lỗi không xác định.                                                          |
+| HTTP | Mã lỗi                              | Mô tả                                                                        |
+| ---- | ----------------------------------- | ---------------------------------------------------------------------------- |
+| 400  | _Validation Error_                  | Payload không đúng schema (thiếu `username`, format sai).                    |
+| 429  | `QUOTA_EXCEEDED`                    | apiKey không hợp lệ hoặc đã vượt quá hạn mức gọi API.                        |
+| 500  | `AGENTETRAFFIC_UNAUTHORIZED`        | Không có quyền truy cập hoặc tài khoản đối tác không được ủy quyền xác thực. |
+| 500  | `AGENTETRAFFIC_AUTHENTICATION_FAILED`| Xác thực đối tác thất bại trong quy trình đăng nhập 2FA.                    |
+| 500  | `INVALID_USERNAME`                  | Số CCCD / tài khoản đối tác không hợp lệ hoặc không tìm thấy.                |
+| 500  | `UNKNOWN_ERROR`                     | Lỗi không xác định.                                                          |
 
 ---
 
@@ -104,6 +105,7 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginBy2FA' \
 
 - [Quy chuẩn chung -> Common Error](../../Common.html#common-error) — danh sách mã lỗi hệ thống trả về trong trường `error`.
 - [Quy chuẩn chung -> EAgentTraffic Error Code](../../Common.html#eagent-traffic-error) — danh sách mã lỗi nghiệp vụ đối tác tra cứu giao thông.
+- [Tài liệu Mock Data & Test Cases (Google Docs)](https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true)
 
 ---
 
@@ -111,6 +113,16 @@ curl --location '{HOST_NAME}/ThirdParty/EAgentTraffic/user/requestLoginBy2FA' \
 
 - clientId: TESTCLIENT
 - apiKey: 07e73e61-0dce-4b39-8ecf-06ef70b35c08
-- **username**: **Dữ liệu thật** — Số CCCD / CMND thật của tài khoản đối tác.
 
-> **Lưu ý:** Bắt buộc sử dụng số CCCD thật của tài khoản đối tác đã được ủy quyền trên hệ thống dịch vụ giao thông.
+### Dữ liệu giả lập kiểm thử (Mock Test Data):
+Tham khảo kịch bản giả lập từ [Google Docs](https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true):
+
+| Username / CCCD | Kịch bản | Kết quả giả lập |
+| :--- | :--- | :--- |
+| `001200000001` | Yêu cầu 2FA thành công | Thành công – `success = true`, `requireOtp = true`, có session giả lập. |
+| `999000000005` | Xác thực thất bại | Thất bại – `AGENTETRAFFIC_AUTHENTICATION_FAILED`. |
+
+> **Lưu ý phân biệt môi trường:**
+> - **Môi trường Test / Sandbox (Mock):** Dùng các số CCCD giả lập trong bảng trên để kiểm thử kịch bản thành công và lỗi mô phỏng.
+> - **Môi trường Thật (Production):** Bắt buộc sử dụng số CCCD thật của tài khoản đối tác đã được ủy quyền trên hệ thống dịch vụ giao thông.
+

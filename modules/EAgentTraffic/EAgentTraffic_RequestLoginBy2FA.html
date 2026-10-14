@@ -118,6 +118,7 @@
         <tr><td>400</td><td><em>Validation Error</em></td><td>Payload không đúng schema (thiếu <code>username</code>, format sai).</td></tr>
         <tr><td>429</td><td><code>QUOTA_EXCEEDED</code></td><td>apiKey không hợp lệ hoặc đã vượt quá hạn mức gọi API.</td></tr>
         <tr><td>500</td><td><code>AGENTETRAFFIC_UNAUTHORIZED</code></td><td>Không có quyền truy cập hoặc tài khoản đối tác không được ủy quyền xác thực.</td></tr>
+        <tr><td>500</td><td><code>AGENTETRAFFIC_AUTHENTICATION_FAILED</code></td><td>Xác thực đối tác thất bại trong quy trình đăng nhập 2FA.</td></tr>
         <tr><td>500</td><td><code>INVALID_USERNAME</code></td><td>Số CCCD / tài khoản đối tác không hợp lệ hoặc không tìm thấy.</td></tr>
         <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định.</td></tr>
       </table>
@@ -129,6 +130,7 @@
       <ul>
         <li><a href="../../Common.html#common-error">Quy chuẩn chung → Common Error</a> — danh sách mã lỗi hệ thống trả về trong trường <code>error</code>.</li>
         <li><a href="../../Common.html#eagent-traffic-error">Quy chuẩn chung → EAgentTraffic Error Code</a> — danh sách mã lỗi nghiệp vụ đối tác tra cứu giao thông.</li>
+        <li><a href="https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">Tài liệu chi tiết Mock Data & Test Cases (Google Docs)</a></li>
       </ul>
     </div>
 
@@ -138,9 +140,35 @@
       <ul>
         <li><strong>clientId</strong>: <code>TESTCLIENT</code></li>
         <li><strong>apiKey</strong>: <code>07e73e61-0dce-4b39-8ecf-06ef70b35c08</code></li>
-        <li><strong>username</strong>: <strong>Dữ liệu thật</strong> — Số CCCD / CMND thật của tài khoản đối tác.</li>
       </ul>
-      <p style="margin-top: 10px; color: #b45309; font-size: 0.92em;"><strong>Lưu ý:</strong> Bắt buộc sử dụng số CCCD thật của tài khoản đối tác đã được ủy quyền trên hệ thống dịch vụ giao thông.</p>
+
+      <h3 style="margin-top: 14px; font-size: 1.05em; color: #111827;">Dữ liệu giả lập kiểm thử (Mock Test Data)</h3>
+      <p style="font-size: 0.9em; color: #4b5563;">Tham khảo kịch bản giả lập từ <a href="https://docs.google.com/document/d/1rH_bplN7X_u5w-9LmSPz6N0gxKE_PrBh/edit?usp=drive_link&ouid=107206561223621806562&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">Google Docs</a>:</p>
+      <table>
+        <tr>
+          <th style="width: 170px;">Username / CCCD</th>
+          <th style="width: 220px;">Kịch bản</th>
+          <th>Kết quả giả lập</th>
+        </tr>
+        <tr>
+          <td><code>001200000001</code></td>
+          <td>Yêu cầu 2FA thành công</td>
+          <td>Thành công – <code>success = true</code>, <code>requireOtp = true</code>, có session giả lập.</td>
+        </tr>
+        <tr>
+          <td><code>999000000005</code></td>
+          <td>Xác thực thất bại</td>
+          <td>Thất bại – <code>AGENTETRAFFIC_AUTHENTICATION_FAILED</code>.</td>
+        </tr>
+      </table>
+
+      <div style="margin-top: 12px; padding: 12px 16px; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 6px; font-size: 0.95em; color: #92400e;">
+        <strong>Lưu ý phân biệt môi trường:</strong>
+        <ul style="margin-top: 6px; padding-left: 18px;">
+          <li><strong>Môi trường Test / Sandbox (Mock):</strong> Dùng các số CCCD giả lập trong bảng trên để kiểm thử kịch bản thành công và lỗi mô phỏng.</li>
+          <li><strong>Môi trường Thật (Production):</strong> Bắt buộc sử dụng số CCCD thật của tài khoản đối tác đã được ủy quyền trên hệ thống dịch vụ giao thông.</li>
+        </ul>
+      </div>
     </div>
 
   </div>
