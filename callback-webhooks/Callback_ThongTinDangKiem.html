@@ -80,9 +80,11 @@
     <div class="card" style="border-left: 4px solid #f59e0b; background-color: #fffbeb;">
       <h3 style="margin-top: 0; color: #b45309;">⚠️ Yêu cầu xác thực Webhook (Authentication Required)</h3>
       <p style="margin-bottom: 0; font-size: 14px;">
-        Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực để đảm bảo tính an toàn và bảo mật. 
-        Vui lòng đọc kỹ hướng dẫn cấu hình và kiểm tra chữ ký số tại trang: 
-        <strong><a href="./Webhook_Authentication.html" style="color: #b45309; text-decoration: underline;">Hướng dẫn xác thực Webhook Callback</a></strong>.
+        Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực để đảm bảo tính an toàn và bảo
+        mật.
+        Vui lòng đọc kỹ hướng dẫn cấu hình và kiểm tra chữ ký số tại trang:
+        <strong><a href="./Webhook_Authentication.html" style="color: #b45309; text-decoration: underline;">Hướng dẫn
+            xác thực Webhook Callback</a></strong>.
       </p>
     </div>
 
@@ -114,14 +116,29 @@
     "vehicleIdentity": "30A84812",
     "vehicleType": 1,
     "vehiclePlateColor": "WHITE",
-    "vehicleExpiryDate": "01/01/2027"
+    "vehicleExpiryDate": "01/01/2027",
+      "customerData": {
+      "customerIdentifier": "0382716917"
+      },
+      "vehicleData": {
+      "vehicleIdentity": "30A84812",
+      "vehiclePlateColor": "WHITE",
+      "vehicleType": 1
+      },
+      "serviceData": {
+      "appUserVehicleNotifyInfoId": 1,
+      "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
+      "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
+      "allowRenew": 1,
+      "partnerRequestId": "1781585503732"
+      }
   }
 }</pre>
     </div>
 
     <div class="card">
       <h2>Dữ liệu callback</h2>
-      
+
       <h3 style="margin-top: 12px; margin-bottom: 8px;">customerData</h3>
       <table>
         <tr>

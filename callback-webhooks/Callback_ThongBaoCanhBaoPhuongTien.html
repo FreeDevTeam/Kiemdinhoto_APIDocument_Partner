@@ -1,36 +1,90 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Callback / Webhooks - Gói dịch vụ thông báo</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
-    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-    h1, h2 { margin-top: 0; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #eef3fb; }
-    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
-    a { color: #0b63ce; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #dbe3ef;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5ecf6;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
       <h1>Callback / Webhooks - Gói dịch vụ thông báo</h1>
-      <p>Mô tả dữ liệu đối tác nhận được khi hệ thống gửi callback liên quan đến gói dịch vụ thông báo mà đối tác đã bán hoặc khởi tạo.</p>
+      <p>Mô tả dữ liệu đối tác nhận được khi hệ thống gửi callback liên quan đến gói dịch vụ thông báo mà đối tác đã bán
+        hoặc khởi tạo.</p>
       <p><a href="../index.html">Về trang chủ Partner API Documentation</a></p>
     </div>
 
     <div class="card" style="border-left: 4px solid #f59e0b; background-color: #fffbeb;">
       <h3 style="margin-top: 0; color: #b45309;">⚠️ Yêu cầu xác thực Webhook (Authentication Required)</h3>
       <p style="margin-bottom: 0; font-size: 14px;">
-        Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực để đảm bảo tính an toàn và bảo mật. 
-        Vui lòng đọc kỹ hướng dẫn cấu hình và kiểm tra chữ ký số tại trang: 
-        <strong><a href="./Webhook_Authentication.html" style="color: #b45309; text-decoration: underline;">Hướng dẫn xác thực Webhook Callback</a></strong>.
+        Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực để đảm bảo tính an toàn và bảo
+        mật.
+        Vui lòng đọc kỹ hướng dẫn cấu hình và kiểm tra chữ ký số tại trang:
+        <strong><a href="./Webhook_Authentication.html" style="color: #b45309; text-decoration: underline;">Hướng dẫn
+            xác thực Webhook Callback</a></strong>.
       </p>
     </div>
 
@@ -67,7 +121,22 @@
     "allowRenew": 1,
     "isAvailable": 1,
     "intervalViolation": 1,
-    "intervalNoViolation": 7
+    "intervalNoViolation": 7,
+      "customerData": {
+      "customerIdentifier": "0382716917"
+      },
+      "vehicleData": {
+      "vehicleIdentity": "30A84812",
+      "vehiclePlateColor": "WHITE",
+      "vehicleType": 1
+      },
+      "serviceData": {
+      "appUserVehicleNotifyInfoId": 1,
+      "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
+      "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
+      "allowRenew": 1,
+      "partnerRequestId": "1781585503732"
+      }
   }
 }</pre>
     </div>
@@ -235,34 +304,86 @@
       <h2>Bảng liệt kê trạng thái</h2>
       <h3>isAvailable - Trạng thái hiệu lực gói</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Còn hiệu lực.</td></tr>
-        <tr><td>0</td><td>Hết hiệu lực.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Còn hiệu lực.</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>Hết hiệu lực.</td>
+        </tr>
       </table>
       <h3>allowRenew - Trạng thái cho phép gia hạn</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Cho phép gia hạn.</td></tr>
-        <tr><td>0</td><td>Không cho phép gia hạn.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Cho phép gia hạn.</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>Không cho phép gia hạn.</td>
+        </tr>
       </table>
       <h3>vehiclePlateColor - Màu biển số xe</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>WHITE</td><td>Trắng.</td></tr>
-        <tr><td>YELLOW</td><td>Vàng.</td></tr>
-        <tr><td>BLUE</td><td>Xanh.</td></tr>
-        <tr><td>RED</td><td>Đỏ.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>WHITE</td>
+          <td>Trắng.</td>
+        </tr>
+        <tr>
+          <td>YELLOW</td>
+          <td>Vàng.</td>
+        </tr>
+        <tr>
+          <td>BLUE</td>
+          <td>Xanh.</td>
+        </tr>
+        <tr>
+          <td>RED</td>
+          <td>Đỏ.</td>
+        </tr>
       </table>
       <h3>vehicleType - Loại phương tiện</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Ô tô.</td></tr>
-        <tr><td>10</td><td>Xe khác.</td></tr>
-        <tr><td>20</td><td>Rơ moóc.</td></tr>
-        <tr><td>30</td><td>Xe máy.</td></tr>
-        <tr><td>40</td><td>Xe điện.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Ô tô.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Xe khác.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Rơ moóc.</td>
+        </tr>
+        <tr>
+          <td>30</td>
+          <td>Xe máy.</td>
+        </tr>
+        <tr>
+          <td>40</td>
+          <td>Xe điện.</td>
+        </tr>
       </table>
     </div>
   </div>
 </body>
+
 </html>

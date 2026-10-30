@@ -1,22 +1,73 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Callback / Webhooks - Lịch hẹn</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
-    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-    .card { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-    h1, h2 { margin-top: 0; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { border: 1px solid #dbe3ef; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #eef3fb; }
-    pre { background: #0f172a; color: #e5ecf6; padding: 12px; border-radius: 10px; overflow-x: auto; }
-    a { color: #0b63ce; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #dbe3ef;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5ecf6;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
@@ -28,9 +79,11 @@
     <div class="card" style="border-left: 4px solid #f59e0b; background-color: #fffbeb;">
       <h3 style="margin-top: 0; color: #b45309;">⚠️ Yêu cầu xác thực Webhook (Authentication Required)</h3>
       <p style="margin-bottom: 0; font-size: 14px;">
-        Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực để đảm bảo tính an toàn và bảo mật. 
-        Vui lòng đọc kỹ hướng dẫn cấu hình và kiểm tra chữ ký số tại trang: 
-        <strong><a href="./Webhook_Authentication.html" style="color: #b45309; text-decoration: underline;">Hướng dẫn xác thực Webhook Callback</a></strong>.
+        Tất cả các callback POST từ hệ thống đến đối tác đều bắt buộc phải được xác thực để đảm bảo tính an toàn và bảo
+        mật.
+        Vui lòng đọc kỹ hướng dẫn cấu hình và kiểm tra chữ ký số tại trang:
+        <strong><a href="./Webhook_Authentication.html" style="color: #b45309; text-decoration: underline;">Hướng dẫn
+            xác thực Webhook Callback</a></strong>.
       </p>
     </div>
 
@@ -42,14 +95,6 @@
     <div class="card">
       <h2>Cấu trúc payload callback</h2>
       <pre>{
-  "customerData": {
-    "customerIdentifier": "0382716917"
-  },
-  "vehicleData": {
-    "vehicleIdentity": "30A84812",
-    "vehiclePlateColor": "WHITE",
-    "vehicleType": 1
-  },
   "callbackData": {
     "customerScheduleId": 100001,
     "licensePlates": "30A84812",
@@ -69,7 +114,15 @@
     "confirmStatus": 1,
     "scheduleTracking": "TRK-20260619-100001",
     "createdAt": "2026-06-16T08:30:00.000Z",
-    "updatedAt": "2026-06-16T08:30:15.000Z"
+    "updatedAt": "2026-06-16T08:30:15.000Z",
+      "customerData": {
+      "customerIdentifier": "0382716917"
+      },
+      "vehicleData": {
+      "vehicleIdentity": "30A84812",
+      "vehiclePlateColor": "WHITE",
+      "vehicleType": 1
+      }
   }
 }</pre>
     </div>
@@ -244,75 +297,232 @@
       <h2>Bảng liệt kê trạng thái</h2>
       <h3>customerScheduleStatus - Trạng thái lịch hẹn</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>0</td><td>Chưa xác nhận.</td></tr>
-        <tr><td>10</td><td>Đã xác nhận.</td></tr>
-        <tr><td>20</td><td>Đã hủy.</td></tr>
-        <tr><td>30</td><td>Đã đóng.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>Chưa xác nhận.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Đã xác nhận.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Đã hủy.</td>
+        </tr>
+        <tr>
+          <td>30</td>
+          <td>Đã đóng.</td>
+        </tr>
       </table>
       <h3>scheduleType - Loại lịch hẹn</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Đăng kiểm xe cũ.</td></tr>
-        <tr><td>2</td><td>Đăng ký dán thẻ EPASS.</td></tr>
-        <tr><td>3</td><td>Nộp hồ sơ xe mới.</td></tr>
-        <tr><td>4</td><td>Đổi mục đích sử dụng, đổi chủ, đổi thông tin hồ sơ.</td></tr>
-        <tr><td>5</td><td>Thanh toán phí đường bộ.</td></tr>
-        <tr><td>7</td><td>Đặt lịch tư vấn bảo dưỡng.</td></tr>
-        <tr><td>8</td><td>Đặt lịch tư vấn bảo hiểm.</td></tr>
-        <tr><td>9</td><td>Đặt lịch tư vấn hoán cải.</td></tr>
-        <tr><td>10</td><td>Mất giấy đăng kiểm.</td></tr>
-        <tr><td>11</td><td>Cấp lại tem đăng kiểm.</td></tr>
-        <tr><td>12</td><td>Tư vấn đăng kiểm xe.</td></tr>
-        <tr><td>13</td><td>Tư vấn xử lý phạt nguội.</td></tr>
-        <tr><td>14</td><td>Tư vấn bảo hiểm TNDS xe ô tô.</td></tr>
-        <tr><td>15</td><td>Tra cứu cảnh báo đăng kiểm.</td></tr>
-        <tr><td>16</td><td>Hỗ trợ xử lý phạt nguội.</td></tr>
-        <tr><td>17</td><td>Gia hạn định vị.</td></tr>
-        <tr><td>18</td><td>Gia hạn phù hiệu xe kinh doanh.</td></tr>
-        <tr><td>19</td><td>Gia hạn giấy tập huấn.</td></tr>
-        <tr><td>20</td><td>Gia hạn camera hành trình.</td></tr>
-        <tr><td>21</td><td>Đăng ký dán thẻ VETC.</td></tr>
-        <tr><td>22</td><td>Gia hạn BH TNDS.</td></tr>
-        <tr><td>23</td><td>Nộp hồ sơ xe mới (ngoài giờ hành chính).</td></tr>
-        <tr><td>24</td><td>Đăng kiểm xe (ngoài giờ hành chính).</td></tr>
-        <tr><td>25</td><td>Tư vấn bồi thường bảo hiểm.</td></tr>
-        <tr><td>26</td><td>Tư vấn sức khỏe lái xe.</td></tr>
-        <tr><td>27</td><td>Bán vé điện tử.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Đăng kiểm xe cũ.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Đăng ký dán thẻ EPASS.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Nộp hồ sơ xe mới.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Đổi mục đích sử dụng, đổi chủ, đổi thông tin hồ sơ.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Thanh toán phí đường bộ.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Đặt lịch tư vấn bảo dưỡng.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Đặt lịch tư vấn bảo hiểm.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Đặt lịch tư vấn hoán cải.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Mất giấy đăng kiểm.</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Cấp lại tem đăng kiểm.</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Tư vấn đăng kiểm xe.</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Tư vấn xử lý phạt nguội.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Tư vấn bảo hiểm TNDS xe ô tô.</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Tra cứu cảnh báo đăng kiểm.</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Hỗ trợ xử lý phạt nguội.</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Gia hạn định vị.</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Gia hạn phù hiệu xe kinh doanh.</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Gia hạn giấy tập huấn.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Gia hạn camera hành trình.</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>Đăng ký dán thẻ VETC.</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td>Gia hạn BH TNDS.</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td>Nộp hồ sơ xe mới (ngoài giờ hành chính).</td>
+        </tr>
+        <tr>
+          <td>24</td>
+          <td>Đăng kiểm xe (ngoài giờ hành chính).</td>
+        </tr>
+        <tr>
+          <td>25</td>
+          <td>Tư vấn bồi thường bảo hiểm.</td>
+        </tr>
+        <tr>
+          <td>26</td>
+          <td>Tư vấn sức khỏe lái xe.</td>
+        </tr>
+        <tr>
+          <td>27</td>
+          <td>Bán vé điện tử.</td>
+        </tr>
       </table>
       <h3>licensePlateColor - Màu biển số</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Trắng.</td></tr>
-        <tr><td>2</td><td>Xanh.</td></tr>
-        <tr><td>3</td><td>Vàng.</td></tr>
-        <tr><td>4</td><td>Đỏ.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Trắng.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Xanh.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Vàng.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Đỏ.</td>
+        </tr>
       </table>
       <h3>vehiclePlateColor - Màu biển số xe</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>WHITE</td><td>Trắng.</td></tr>
-        <tr><td>YELLOW</td><td>Vàng.</td></tr>
-        <tr><td>BLUE</td><td>Xanh.</td></tr>
-        <tr><td>RED</td><td>Đỏ.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>WHITE</td>
+          <td>Trắng.</td>
+        </tr>
+        <tr>
+          <td>YELLOW</td>
+          <td>Vàng.</td>
+        </tr>
+        <tr>
+          <td>BLUE</td>
+          <td>Xanh.</td>
+        </tr>
+        <tr>
+          <td>RED</td>
+          <td>Đỏ.</td>
+        </tr>
       </table>
       <h3>vehicleType - Loại phương tiện</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>1</td><td>Ô tô.</td></tr>
-        <tr><td>10</td><td>Xe khác.</td></tr>
-        <tr><td>20</td><td>Rơ moóc.</td></tr>
-        <tr><td>30</td><td>Xe máy.</td></tr>
-        <tr><td>40</td><td>Xe điện.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Ô tô.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Xe khác.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Rơ moóc.</td>
+        </tr>
+        <tr>
+          <td>30</td>
+          <td>Xe máy.</td>
+        </tr>
+        <tr>
+          <td>40</td>
+          <td>Xe điện.</td>
+        </tr>
       </table>
       <h3>confirmStatus - Trạng thái xác nhận</h3>
       <table>
-        <tr><th>Giá trị</th><th>Mô tả</th></tr>
-        <tr><td>0</td><td>Chưa xác nhận.</td></tr>
-        <tr><td>1</td><td>Đã xác nhận.</td></tr>
-        <tr><td>2</td><td>Đã hủy.</td></tr>
+        <tr>
+          <th>Giá trị</th>
+          <th>Mô tả</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>Chưa xác nhận.</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Đã xác nhận.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Đã hủy.</td>
+        </tr>
       </table>
     </div>
   </div>
 </body>
+
 </html>
