@@ -12,21 +12,6 @@ Chỉ truy cập những dữ liệu thông tin đăng kiểm được ghi nhậ
 
 ```json
 {
-  "customerData": {
-    "customerIdentifier": "0382716917"
-  },
-  "vehicleData": {
-    "vehicleIdentity": "30A84812",
-    "vehiclePlateColor": "WHITE",
-    "vehicleType": 1
-  },
-  "serviceData": {
-    "appUserVehicleNotifyInfoId": 1,
-    "notifyStartDateTime": "2026-06-19T17:00:00.000Z",
-    "notifyEndDateTime": "2026-07-20T16:59:59.000Z",
-    "allowRenew": 1,
-    "partnerRequestId": "1781585503732"
-  },
   "callbackData": {
     "customerIdentifier": "0382716917",
     "vehicleIdentity": "30A84812",
